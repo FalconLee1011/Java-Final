@@ -21,7 +21,7 @@ public class GameFrame extends JFrame {
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
     public int[][] map = (new Map()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human= new PkbHuman(this);// player
-
+    public TimeTest test=new TimeTest(this);
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
     public ArrayList<Integer> rockList2 = new ArrayList<Integer>();// 裝石頭的數字
@@ -145,6 +145,16 @@ public class GameFrame extends JFrame {
             big.fillOval(b.x += b.speed, b.y, b.width, b.width);//填充椭圆的
             big.setColor(c);
         }
+        big.setColor(Color.BLUE);
+        int fontSize = 50;
+        long kkk;
+        String s;
+        test.TimeGame();
+        s="Time: "+ test.hh+":"+test.mm+":"+test.ss;
+        Font font = new Font("楷体",Font.BOLD,fontSize);
+        big.setFont(font);
+        big.drawString(s,150,100); 
+        big.drawImage(human.img, human.x, human.y, human.width, human.height, null);  
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
