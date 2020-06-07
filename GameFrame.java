@@ -48,7 +48,7 @@ public class GameFrame extends JFrame {
                     // checkBoom();// 檢查子彈是否出界
                     if(ghost.pursue(human)){
                         System.out.println("GAME OVER");
-                        break;
+                        // break;
                     }
                     try {
                         Thread.sleep(10);
