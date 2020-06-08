@@ -9,25 +9,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import com.huaxin.enery.*;
-import com.huaxin.Map;
+import com.huaxin.initMap;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Map;
+import java.util.HashMap;
 
 
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
-    public int[][] map = (new Map()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
+    public int[][] map = (new initMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human = new PkbHuman(this);// player
     public TimeTest test=new TimeTest(this);
+    public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     // 直接追隨
     // public PkbGhost ghost = new PkbGhost();
     // 距離追隨
-    public PkbGhost ghost = new PkbGhost(360, 360, 2, true, 300);
+    // public PkbGhost ghost = new PkbGhost(360, 360, 1, true, 300);
     // 距離追隨、會巡邏
-    // public PkbGhost ghost = new PkbGhost(360, 360, 1, true, 300, true, 100);
+    public PkbGhost ghost = new PkbGhost(360, 360, 1, true, 300, true, 100);
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -65,6 +68,11 @@ public class GameFrame extends JFrame {
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
             for (int j = 0; j < map[0].length; j++) {
+                String x_key = String.valueOf(i * 30);
+                String y_key = String.valueOf(j * 30);
+                Map <String, Enery> map_row = new HashMap<String, Enery>();
+                map_row = mapEneryByPos.get(x_key);
+                if(map_row == null) { map_row = new HashMap<String, Enery>(); }
                 switch(map[i][j]) { 
                     case 0: // 畫磚頭                   
                         Back back = new Back(j * 30, i * 30, 30, 30, new ImageIcon("img/Back.png").getImage());//(x軸，y軸，寬，高)
@@ -73,48 +81,57 @@ public class GameFrame extends JFrame {
                         toolList2.add(0);
                         rockList.add(back);
                         rockList2.add(0);
+                        // map_row.put(y_key, back);
                         break;
                     case 1: // 畫磚頭
                         Brick brick = new Brick(j * 30, i * 30, 30, 30, new ImageIcon("img/wm.jpg").getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
+                        // map_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
                         Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/skates.jpg").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
                         toolList2.add(2);
+                        map_row.put(y_key, skates);
                         break; 
                     case 3: // 畫烏龜
                         Turtle turtle = new Turtle(j * 30, i * 30, 30, 30, new ImageIcon("img/turtle.jpg").getImage());
                         eneryList.add(turtle);
                         toolList.add(turtle);  
                         toolList2.add(3);  
+                        map_row.put(y_key, turtle);
                         break; 
                     case 4: 
                         Door door = new Door(j * 30, i * 30, 30, 30, new ImageIcon("img/door.jpg").getImage());
                         eneryList.add(door);
                         toolList.add(door);  
                         toolList2.add(4);   
+                        map_row.put(y_key, door);
                         break; 
                     case 5: 
                         Bewitch bewitch = new Bewitch(j * 30, i * 30, 30, 30, new ImageIcon("img/bewitch.jpg").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         toolList2.add(5);
+                        map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
                         Enery rock = new Pipe(j * 30, i * 30, 30, 30, new ImageIcon("img/rock.jpg").getImage());
                         eneryList.add(rock);
                         rockList.add(rock);
                         rockList2.add(6);
+                        map_row.put(y_key, rock);
                         break; 
                     case 7: 
                         Dig dig = new Dig(j * 30, i * 30, 30, 30, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
                         rockList2.add(7);
+                        map_row.put(y_key, dig);
                         break; 
                }
+               mapEneryByPos.put(x_key, map_row);
             }
         }
         // 設置背景音樂

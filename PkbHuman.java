@@ -11,8 +11,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
 import java.awt.Toolkit;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
 
-public class PkbHuman extends Thread {
+public class PkbHuman extends Thread{
     // ArrayList<Integer> arrlist = new ArrayList<Integer<(8);
     public KeyListener key;
 
@@ -69,7 +72,8 @@ public class PkbHuman extends Thread {
         //pp.y; //int y座標
         //System.out.println("point:" +  pp.x);
         while (true) {           
-            int j = bump(gameFrame.toolList, "Left");//觸碰到
+            // int j = bump(gameFrame.toolList, "Left");//觸碰到
+            /*
             if (j != 0) {//道具類
                 int temp = gameFrame.toolList2.get(j);
                 Enery enery = gameFrame.toolList.get(j);
@@ -86,8 +90,8 @@ public class PkbHuman extends Thread {
                     //enery.y = 360 - this.y;
                     Time(10000);
                    // System.out.println(enery.x-30+" "+enery.y-30+" "+gameFrame.map[enery.x/30][enery.y/30]);
-                    gameFrame.map[enery.x][enery.y]=0;
-                    ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
+                    // gameFrame.map[enery.x][enery.y] = 0;
+                    // ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
 
                 } else if (bagList2.get(bagList2.size() - 1) == 3) {
                     xspeed = 2;
@@ -96,8 +100,6 @@ public class PkbHuman extends Thread {
                     //enery.x = 360 - this.x;
                     //enery.y = 360 - this.y;
                     Time(10000);
-
-                    
                 }
                 else if (bagList2.get(bagList2.size() - 1) == 4) {//門
                     enery.img=new ImageIcon("img/back.png").getImage();
@@ -110,7 +112,7 @@ public class PkbHuman extends Thread {
             }
             
             if (pick) {// 撿起來(石頭類)
-                int i = bump(gameFrame.rockList, "Left");
+                // int i = bump(gameFrame.rockList, "Left");
                 
                 if (i != 0) {// 若有
                     Enery enery = gameFrame.rockList.get(i);
@@ -127,8 +129,7 @@ public class PkbHuman extends Thread {
                 }
             }
             if (use) {// 用起來石頭區
-                    if (num>0)
-                    {
+                    if (num>0){
                         Enery enery=this.bageneryList.get(bageneryList.size() - 1);
                         enery.x=this.x;
                         enery.y=this.y+30;
@@ -140,9 +141,9 @@ public class PkbHuman extends Thread {
                         System.out.println("沒石頭了 ");
                     }
                 } 
-                
+                */
             move();
-                 
+            bump();
             try {
                 this.sleep(20);
             } catch (InterruptedException e) {
@@ -155,9 +156,8 @@ public class PkbHuman extends Thread {
         // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         //while (true) {
             if(up){
-                System.out.printf("tyring right at %d, %d%n", this.x, this.y);
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-                this.img = new ImageIcon("img/humanUp.jpg").getImage();
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 if (this.y >= 0 && this.y < 300) { this.y -= this.yspeed; }
                 else if (this.y > 300) {
                     gameFrame.bg.y += this.yspeed;// 背景向下移動
@@ -172,7 +172,7 @@ public class PkbHuman extends Thread {
             }
             if(down){
                 // if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){ this.yspeed = 0; }
-                this.img = new ImageIcon("img/humanDown.jpg").getImage();
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 if (this.y < 300) { this.y += this.yspeed; }
                 else if (this.y >= 300) {
                     gameFrame.bg.y -= this.yspeed;// 背景向上移動
@@ -188,7 +188,7 @@ public class PkbHuman extends Thread {
             }
             if (left) {// 向左走
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/humanLeft.jpg").getImage();
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 if (this.x > 30) { this.x -= this.xspeed; }
                 else if (this.x < 650) {
                     gameFrame.bg.x += this.xspeed;// 背景向右移動
@@ -204,7 +204,7 @@ public class PkbHuman extends Thread {
             }
             if (right) {// 向右走
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/humanRight.png").getImage();
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 if (this.x < 650) { this.x += this.xspeed; }
                 else if (this.x > 650) {
                     gameFrame.bg.x -= this.xspeed;// 背景向左移動
@@ -226,19 +226,72 @@ public class PkbHuman extends Thread {
        // }
     }
 
-    public int bump(ArrayList<Enery>somethings,String dir) {
+    // public int bump(ArrayList<Enery>somethings,String dir) {
 
-        Rectangle myrect = new Rectangle((this.x - (width / 2)), (this.y - (height / 2)), width, height);//(左上角,)
-        Rectangle rect = null;
+    //     Rectangle myrect = new Rectangle((this.x - (width / 2)), (this.y - (height / 2)), width, height);//(左上角,)
+    //     Rectangle rect = null;
 
-        for (int i = 0; i < somethings.size(); i++) {
-            Enery enery = somethings.get(i);//障礙物
-            rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
-            if (myrect.intersects(rect)) {// 碰撞檢測
-                return i;
+    //     for (int i = 0; i < somethings.size(); i++) {
+    //         Enery enery = somethings.get(i);//障礙物
+    //         rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
+    //         if (myrect.intersects(rect)) {// 碰撞檢測
+    //             return i;
+    //         }
+    //     }
+    //     return 0;
+    // }
+
+    // public int bump(PkbHuman player, Enery e) {
+    //     Rectangle playerPoly = new Rectangle((player.x - (width / 2)), (player.y - (height / 2)), width, height);
+    //     Rectangle eneryPoly = new Rectangle((e.x - (width / 2)), (e.y - (height / 2)), width, height);
+    //     if (ghostPoly.intersects(playerPoly)) { return true; }
+    //     return false;    
+    // }
+
+    public Enery bump(){
+        Rectangle playerScanPoly = new Rectangle( this.x - width,  this.y - height, width * 2, height * 2 );
+        Rectangle playerPoly = new Rectangle( this.x - (width / 2),  this.y - (height / 2), width, height);
+        Map <String, Map<String, Enery>> mapEneryByPos = this.gameFrame.mapEneryByPos;
+        Set<String> keys = mapEneryByPos.keySet();
+        // for (String k : keys) {
+        //     int int_k = Integer.parseInt(k);
+        //     if(int_k < this.x - 30){ continue; }
+        //     else if(int_k > this.x + 30){ break; }
+        //     else{;
+        //         for (String y_l : mapEneryByPos.get(k).keySet()) {
+        //             Enery e = mapEneryByPos.get(k).get(y_l);
+        //             Rectangle eneryPoly = new Rectangle(e.x - (e.width / 2), e.y - (e.height / 2), e.width, e.height);
+        //             if(playerPoly.intersects(eneryPoly)){ 
+        //                 System.out.println("Bump!");
+        //                 return e; 
+        //             }
+        //             // int int_y_l = Integer.parseInt(y_l);
+        //             // if(int_y_l < this.y - 30){ continue; }
+        //             // else if(int_y_l > this.y + 30){ break; }
+        //             // else{
+        //             //     Enery e = mapEneryByPos.get(k).get(y_l);
+        //             //     Rectangle eneryPoly = new Rectangle(e.x - (e.width / 2), e.y - (e.height / 2), e.width, e.height);
+        //             //     if(playerPoly.intersects(eneryPoly)){ 
+        //             //         System.out.println("Bump!");
+        //             //         return e; 
+        //             //     }
+        //             // }
+        //         }
+        //     }
+        // }
+        for (String k : keys) {
+            for (String y_l : mapEneryByPos.get(k).keySet()) {
+                Enery e = mapEneryByPos.get(k).get(y_l);
+                Rectangle eneryPoly = new Rectangle(e.x - (e.width / 2), e.y - (e.height / 2), e.width, e.height);
+                if(playerPoly.intersects(eneryPoly)){ 
+                    System.out.println("Bump!");
+                    System.out.println(e.getClass());
+                    return e; 
+                }
             }
         }
-        return 0;
+        return null;
     }
+
 
 }
