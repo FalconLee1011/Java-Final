@@ -59,6 +59,7 @@ public class PkbHuman extends Thread {
                         
     public void run() {
         this.bagList.add(0);
+        
         //this.bagList2.add(0);
         //pp.add(event.getPoint());//如果是滑鼠event，他的(x,y)
         //pp.x=super.x; //int x座標
@@ -152,10 +153,8 @@ public class PkbHuman extends Thread {
             if(up){
                 System.out.printf("tyring right at %d, %d%n", this.x, this.y);
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-                if (this.y >= 0 && this.y < 300) {
-                    this.y -= this.yspeed;
-                    this.img = new ImageIcon("img/humanUp.jpg").getImage();
-                }
+                this.img = new ImageIcon("img/humanUp.jpg").getImage();
+                if (this.y >= 0 && this.y < 300) { this.y -= this.yspeed; }
                 else if (this.y > 300) {
                     gameFrame.bg.y += this.yspeed;// 背景向下移動
                     // 障礙物項左移動
@@ -165,15 +164,12 @@ public class PkbHuman extends Thread {
                     }
                     PkbGhost ghost = gameFrame.ghost;
                     ghost.y += this.yspeed;
-                    this.img = new ImageIcon("img/humanUp.jpg").getImage();
                 }
             }
             if(down){
                 // if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){ this.yspeed = 0; }
-                if (this.y < 300) {
-                    this.y += this.yspeed;
-                    this.img = new ImageIcon("img/humanDown.jpg").getImage();
-                }
+                this.img = new ImageIcon("img/humanDown.jpg").getImage();
+                if (this.y < 300) { this.y += this.yspeed; }
                 else if (this.y >= 300) {
                     gameFrame.bg.y -= this.yspeed;// 背景向上移動
                     // 障礙物項左移動
@@ -183,16 +179,13 @@ public class PkbHuman extends Thread {
                     }
                     PkbGhost ghost = gameFrame.ghost;
                     ghost.y -= this.yspeed;
-                    this.img = new ImageIcon("img/humanDown.jpg").getImage();
                 }
                 //this.yspeed = 5;
             }
             if (left) {// 向左走
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
-                if (this.x > 30) {
-                    this.x -= this.xspeed;
-                    this.img = new ImageIcon("img/humanLeft.jpg").getImage();
-                }
+                this.img = new ImageIcon("img/humanLeft.jpg").getImage();
+                if (this.x > 30) { this.x -= this.xspeed; }
                 else if (this.x < 650) {
                     gameFrame.bg.x += this.xspeed;// 背景向右移動
                     // 障礙物項右移動
@@ -202,16 +195,13 @@ public class PkbHuman extends Thread {
                     }
                     PkbGhost ghost = gameFrame.ghost;
                     ghost.x += this.xspeed;
-                    this.img = new ImageIcon("img/humanLeft.jpg").getImage();
                 }
                 //this.xspeed = 5;
             }
             if (right) {// 向右走
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
-                if (this.x < 650) { // 任人物向右移動
-                    this.x += this.xspeed;
-                    this.img = new ImageIcon("img/humanRight.png").getImage();
-                }
+                this.img = new ImageIcon("img/humanRight.png").getImage();
+                if (this.x < 650) { this.x += this.xspeed; }
                 else if (this.x > 650) {
                     gameFrame.bg.x -= this.xspeed;// 背景向左移動
                     // 障礙物項左移動
@@ -221,7 +211,6 @@ public class PkbHuman extends Thread {
                     }
                     PkbGhost ghost = gameFrame.ghost;
                     ghost.x -= this.xspeed;
-                    this.img = new ImageIcon("img/humanRight.png").getImage();
                 }
                 //this.xspeed = 5;
             }
@@ -240,18 +229,7 @@ public class PkbHuman extends Thread {
 
         for (int i = 0; i < somethings.size(); i++) {
             Enery enery = somethings.get(i);//障礙物
-            // if (dir.equals("Left")) {
             rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
-            // }
-            // else if (dir.equals("Right")) {
-            //     rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
-            // }
-            // else if (dir.equals("Up")) {
-            //     rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
-            // } 
-            // else if (dir.equals("Down")) {
-            //     rect = new Rectangle(enery.x - (width / 2), enery.y - (height / 2), enery.width, enery.height);
-            // }
             if (myrect.intersects(rect)) {// 碰撞檢測
                 return i;
             }
