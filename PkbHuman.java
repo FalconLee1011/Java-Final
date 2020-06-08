@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import com.huaxin.enery.*;
+import com.huaxin.*;
 import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,6 +14,7 @@ import java.awt.Toolkit;
 
 public class PkbHuman extends Mario {
     // ArrayList<Integer> arrlist = new ArrayList<Integer<(8);
+    public KeyListener key;
     Timer timer = new Timer();
     private static boolean run = true;
     ArrayList<Integer> bagList = new ArrayList<Integer>(0);
@@ -25,6 +27,7 @@ public class PkbHuman extends Mario {
     public PkbHuman(GameFrame g) {
         super(g);
     }
+    
     public void Time(int t) {
         
         TimerTask test = new TimerTask() {
@@ -74,6 +77,9 @@ public class PkbHuman extends Mario {
                     //enery.x = 360 - this.x;
                     //enery.y = 360 - this.y;
                     Time(10000);
+                   // System.out.println(enery.x-30+" "+enery.y-30+" "+gameFrame.map[enery.x/30][enery.y/30]);
+                    gameFrame.map[enery.x][enery.y]=0;
+                    ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
 
                 } else if (bagList2.get(bagList2.size() - 1) == 3) {
                     super.xspeed = 2;
@@ -91,8 +97,6 @@ public class PkbHuman extends Mario {
                 }
                 else if (bagList2.get(bagList2.size() - 1) == 5) {//迷失
                     enery.img=new ImageIcon("img/back.png").getImage();
-                    //enery.x = 360 - this.x;
-                    //enery.y = 360 - this.y;
                     
                 }
             }
