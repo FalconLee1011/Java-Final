@@ -26,7 +26,7 @@ public class PkbGhost extends Thread{
   private int patrolRange = 0;
   public int speed = 1;
   public static final int width = 30, height = 30;// 角色的寬高
-  public Image img = new ImageIcon("img/moonmoon.png").getImage();// 角色圖片
+  public Image img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();// 角色圖片
   public static SecureRandom rnd = new SecureRandom();
   private boolean isMoving = false;
   private boolean isRangedTrigger = false;
@@ -70,10 +70,22 @@ public class PkbGhost extends Thread{
 
   private void pursueIsNotRangedTrigger(PkbHuman player){
     if(isMoving){
-      if(this.x < this.rndx){ this.x += speed; }
-      else if(this.x > this.rndx){ this.x -= speed; }
-      if(this.y < this.rndy){ this.y += speed; }
-      else if(this.y > this.rndy){ this.y -= speed; }
+      if(this.x < this.rndx){ 
+        this.x += speed;
+        // TODO: Change pic
+      }
+      else if(this.x > this.rndx){ 
+        this.x -= speed;
+        // TODO: Change pic
+      }
+      if(this.y < this.rndy){ 
+        this.y += speed;
+        // TODO: Change pic
+      }
+      else if(this.y > this.rndy){ 
+        this.y -= speed;
+        // TODO: Change pic
+      }
 
       if( (this.x + 30 >= this.rndx || this.x - 30 <= this.rndx) && (this.y + 30 >= this.rndy || this.y - 30 <= this.rndy) ){ 
         this.isMoving = false; 
