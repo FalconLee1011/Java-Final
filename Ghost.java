@@ -45,7 +45,7 @@ public class Ghost extends Thread{
 
       }else{
         // this.rndx = rnd.nextInt(30);
-        this.rndx = player.getX();
+        //this.rndx = player.getX();
         this.rndy = rnd.nextInt(360);
         // this.rndy = player.getY();
         this.isMoving = true;
