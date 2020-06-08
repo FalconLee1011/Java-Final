@@ -38,8 +38,6 @@ public class PkbHuman extends Thread {
     public PkbHuman(GameFrame g) {
         this.gameFrame = g;
     }
-    
-    public void Time(int t) {
         
 
     public int getX(){ return this.x; }
