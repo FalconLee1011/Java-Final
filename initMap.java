@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 import java.util.ArrayList;
 
-public class Map {
+public class initMap {
 
     // 數據容器
     public ArrayList<String> list = new ArrayList<String>();

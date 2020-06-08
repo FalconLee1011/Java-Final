@@ -25,6 +25,8 @@ public class GameFrame extends JFrame {
     public PkbHuman human = new PkbHuman(this);// player
     public TimeTest test=new TimeTest(this);
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
+    public Map <String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
+    public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
     // 直接追隨
     // public PkbGhost ghost = new PkbGhost();
     // 距離追隨
@@ -71,22 +73,28 @@ public class GameFrame extends JFrame {
                 String x_key = String.valueOf(i * 30);
                 String y_key = String.valueOf(j * 30);
                 Map <String, Enery> map_row = new HashMap<String, Enery>();
+                Map <String, Enery> rock_row = new HashMap<String, Enery>();
+                Map <String, Enery> brick_row = new HashMap<String, Enery>();
                 map_row = mapEneryByPos.get(x_key);
+                rock_row = backEneryByPos.get(x_key);
+                brick_row = rockEneryByPos.get(x_key);
                 if(map_row == null) { map_row = new HashMap<String, Enery>(); }
+                if(rock_row == null) { rock_row = new HashMap<String, Enery>(); }
+                if(brick_row == null) { brick_row = new HashMap<String, Enery>(); }
                 switch(map[i][j]) { 
-                    case 0: // 畫磚頭                   
+                    case 0: // 畫地板                
                         Back back = new Back(j * 30, i * 30, 30, 30, new ImageIcon("img/Back.png").getImage());//(x軸，y軸，寬，高)
                         eneryList.add(back);                       
                         toolList.add(back);
                         toolList2.add(0);
                         rockList.add(back);
                         rockList2.add(0);
-                        // map_row.put(y_key, back);
+                        rock_row.put(y_key, back);
                         break;
-                    case 1: // 畫磚頭
+                    case 1: // 畫邊界
                         Brick brick = new Brick(j * 30, i * 30, 30, 30, new ImageIcon("img/wm.jpg").getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
-                        // map_row.put(y_key, brick);
+                        brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
                         Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/skates.jpg").getImage());
@@ -117,7 +125,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
-                        Enery rock = new Pipe(j * 30, i * 30, 30, 30, new ImageIcon("img/rock.jpg").getImage());
+                        Pipe rock = new Pipe(j * 30, i * 30, 30, 30, new ImageIcon("img/rock.jpg").getImage());
                         eneryList.add(rock);
                         rockList.add(rock);
                         rockList2.add(6);
@@ -132,6 +140,8 @@ public class GameFrame extends JFrame {
                         break; 
                }
                mapEneryByPos.put(x_key, map_row);
+               backEneryByPos.put(x_key, rock_row);
+               rockEneryByPos.put(x_key, brick_row);
             }
         }
         // 設置背景音樂
