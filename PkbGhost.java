@@ -131,7 +131,6 @@ public class PkbGhost extends Thread{
   private boolean isInRange(PkbHuman player){
     Rectangle ghostPoly = new Rectangle(this.x - ((width + this.range) / 2) , this.y  - ((height + this.range) / 2), width + range, height + range);
     Rectangle playerPoly = new Rectangle(player.x, player.y, player.width, player.height);
-    
     if (ghostPoly.intersects(playerPoly)) { return true; }
     return false;
   }
@@ -139,9 +138,7 @@ public class PkbGhost extends Thread{
   private boolean hasCapturedPlayer(PkbHuman player){
     Rectangle ghostPoly = new Rectangle(this.x - ((width - tolerance) / 2), this.y - ((height - tolerance) / 2), width - tolerance, height - tolerance);
     Rectangle playerPoly = new Rectangle(player.x - ((player.width - tolerance) / 2), player.y - ((player.height - tolerance) / 2), player.width - tolerance, player.height - tolerance);
-    if (ghostPoly.intersects(playerPoly)) { 
-      return true; 
-    }
+    if (ghostPoly.intersects(playerPoly)) { return true; }
     return false;
   }
 

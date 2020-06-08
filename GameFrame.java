@@ -167,13 +167,10 @@ public class GameFrame extends JFrame {
         long kkk;
         String s;
         
-        s="Time: "+ test.hh+":"+test.mm+":"+test.ss;
+        s = "Time: " + test.hh + ":" + test.mm + ":" + test.ss;
         Font font = new Font("楷体",Font.BOLD,fontSize);
         big.setFont(font);
-        big.drawString(s,150,100); 
-        big.drawImage(human.img, human.x, human.y, human.width, human.height, null);  
-        g.drawImage(bi, 0, 0, null);
-        
+        big.drawString(s,150,100);         
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
         big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         // Ghost
@@ -184,9 +181,7 @@ public class GameFrame extends JFrame {
     public void checkBoom() {
         for (int i = 0; i < boomList.size(); i++) {
             Boom b = boomList.get(i);
-            if (b.x < 0 || b.x > 800) {
-                boomList.remove(i);
-            }
+            if (b.x < 0 || b.x > 800) { boomList.remove(i); }
         }
     }
 }

@@ -27,19 +27,16 @@ public abstract class Mario extends Thread {
     public int getY(){ return this.y; }
     
     public void run() {
-            // System.out.printf("x: %d, y: %d%n", this.x, this.y);
+        // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         //while (true) {
             if(up){
                 System.out.printf("tyring right at %d, %d%n", this.x, this.y);
-
-                if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0
-                    this.yspeed = 0;
-                }
+                // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
                 if (this.y >= 0 && this.y < 300) {
                     this.y -= this.yspeed;
                     this.img = new ImageIcon("img/humanUp.jpg").getImage();
                 }
-                if (this.y > 300) {
+                else if (this.y > 300) {
                     gameFrame.bg.y += this.yspeed;// 背景向下移動
                     // 障礙物項左移動
                     for (int i = 0; i < gameFrame.eneryList.size(); i++) {
@@ -50,17 +47,14 @@ public abstract class Mario extends Thread {
                     ghost.y += this.yspeed;
                     this.img = new ImageIcon("img/humanUp.jpg").getImage();
                 }
-                //this.yspeed = 5;//註解速度因為會影響碰觸事件每次返回預設速度，加入計時器可恢復
             }
             if(down){
-                if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
-                    this.yspeed = 0;
-                }
+                // if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){ this.yspeed = 0; }
                 if (this.y < 300) {
                     this.y += this.yspeed;
                     this.img = new ImageIcon("img/humanDown.jpg").getImage();
                 }
-                if (this.y >= 300) {
+                else if (this.y >= 300) {
                     gameFrame.bg.y -= this.yspeed;// 背景向上移動
                     // 障礙物項左移動
                     for (int i = 0; i < gameFrame.eneryList.size(); i++) {
@@ -74,14 +68,12 @@ public abstract class Mario extends Thread {
                 //this.yspeed = 5;
             }
             if (left) {// 向左走
-                if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物
-                    this.xspeed = 0;
-                }
+                // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
                 if (this.x > 30) {
                     this.x -= this.xspeed;
                     this.img = new ImageIcon("img/humanLeft.jpg").getImage();
                 }
-                else if (this.x > 650) {
+                else if (this.x < 650) {
                     gameFrame.bg.x += this.xspeed;// 背景向右移動
                     // 障礙物項右移動
                     for (int i = 0; i < gameFrame.eneryList.size(); i++) {
@@ -95,14 +87,12 @@ public abstract class Mario extends Thread {
                 //this.xspeed = 5;
             }
             if (right) {// 向右走
-                if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物
-                    this.xspeed = 0;
-                }
+                // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
                 if (this.x < 650) { // 任人物向右移動
                     this.x += this.xspeed;
                     this.img = new ImageIcon("img/humanRight.png").getImage();
                 }
-                if (this.x >= 650) {
+                else if (this.x > 650) {
                     gameFrame.bg.x -= this.xspeed;// 背景向左移動
                     // 障礙物項左移動
                     for (int i = 0; i < gameFrame.eneryList.size(); i++) {
@@ -154,21 +144,21 @@ public abstract class Mario extends Thread {
     // 檢測碰撞
     public int bump(ArrayList<Enery>somethings,String dir) {
 
-        Rectangle myrect = new Rectangle(this.x, this.y, this.width, this.height);//(左上角,)
+        Rectangle myrect = new Rectangle((this.x - (width / 2)), (this.y - (height / 2)), this.width, this.height);//(左上角,)
         Rectangle rect = null;
 
         for (int i = 0; i < somethings.size(); i++) {
             Enery enery = somethings.get(i);//障礙物
             if (dir.equals("Left")) {
-                rect = new Rectangle(enery.x + 2, enery.y, enery.width, enery.height);
+                rect = new Rectangle(enery.x - (width), enery.y - (height), enery.width, enery.height);
             }
             else if (dir.equals("Right")) {
-                rect = new Rectangle(enery.x - 2, enery.y, enery.width, enery.height);
+                rect = new Rectangle(enery.x - (width), enery.y - (height), enery.width, enery.height);
             }
             else if (dir.equals("Up")) {
-                rect = new Rectangle(enery.x, enery.y + 2, enery.width, enery.height);
+                rect = new Rectangle(enery.x - (width), enery.y - (height), enery.width, enery.height);
             } else if (dir.equals("Down")) {
-                rect = new Rectangle(enery.x, enery.y-2, enery.width, enery.height);
+                rect = new Rectangle(enery.x - (width), enery.y - (height), enery.width, enery.height);
             }
             if (myrect.intersects(rect)) {// 碰撞檢測
                 return i;
