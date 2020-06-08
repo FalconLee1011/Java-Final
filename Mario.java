@@ -13,7 +13,7 @@ public abstract class Mario extends Thread {
     public int x = 0, y = 360;// 角色的坐標(一開始在左下角)
     public int xspeed = 8, yspeed = 8;// 角色的坐標(一開始在左下角)
     public static final int width = 30, height = 30;// 角色的寬高
-    public Image img = new ImageIcon("img/human.png").getImage();// 角色圖片
+    public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
 
     public boolean up = false, down = false,left = false, right = false ;
     private static final String Str_Up = "Up",Str_Down ="Down", Str_Left = "Left", Str_Right = "Right";
