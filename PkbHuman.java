@@ -27,7 +27,7 @@ public class PkbHuman extends Mario {
         //this.bagList2.add(0);
         //pp.add(event.getPoint());//如果是滑鼠event，他的(x,y)
         //pp.x=super.x; //int x座標
-       //pp.y; //int y座標
+        //pp.y; //int y座標
         //System.out.println("point:" +  pp.x);
         while (true) {           
             int j = bump(gameFrame.toolList, "Left");//觸碰到
@@ -106,8 +106,7 @@ public class PkbHuman extends Mario {
                 } 
                 
 
-
-            super.run();   
+            super.run();
                  
             try {
                 this.sleep(20);

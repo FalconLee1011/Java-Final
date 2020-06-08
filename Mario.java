@@ -22,7 +22,9 @@ public abstract class Mario extends Thread {
         this.gameFrame = g;
         // this.touchFloor();
     }
-    
+
+    public int getX(){ return this.x; }
+    public int getY(){ return this.y; }
     
     public void run() {
             // System.out.printf("x: %d, y: %d%n", this.x, this.y);
@@ -33,7 +35,7 @@ public abstract class Mario extends Thread {
                 if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0
                     this.yspeed = 0;
                 }
-                if (this.y - this.yspeed  >= 0 && this.y - this.yspeed  < 300) {
+                if (this.y >= 0 && this.y < 300) {
                     this.y -= this.yspeed;
                     this.img = new ImageIcon("img/humanUp.jpg").getImage();
                 }
@@ -44,6 +46,8 @@ public abstract class Mario extends Thread {
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y += this.yspeed;
                     }
+                    PkbGhost ghost = gameFrame.ghost;
+                    ghost.y += this.yspeed;
                     this.img = new ImageIcon("img/humanUp.jpg").getImage();
                 }
                 //this.yspeed = 5;//註解速度因為會影響碰觸事件每次返回預設速度，加入計時器可恢復
@@ -52,7 +56,7 @@ public abstract class Mario extends Thread {
                 if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
                     this.yspeed = 0;
                 }
-                if (this.y + this.yspeed < 300) {
+                if (this.y < 300) {
                     this.y += this.yspeed;
                     this.img = new ImageIcon("img/humanDown.jpg").getImage();
                 }
@@ -63,6 +67,8 @@ public abstract class Mario extends Thread {
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y -= this.yspeed;
                     }
+                    PkbGhost ghost = gameFrame.ghost;
+                    ghost.y -= this.yspeed;
                     this.img = new ImageIcon("img/humanDown.jpg").getImage();
                 }
                 //this.yspeed = 5;
@@ -71,7 +77,7 @@ public abstract class Mario extends Thread {
                 if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物
                     this.xspeed = 0;
                 }
-                if (this.x - this.xspeed > 30) {
+                if (this.x > 30) {
                     this.x -= this.xspeed;
                     this.img = new ImageIcon("img/humanLeft.jpg").getImage();
                 }
@@ -82,6 +88,8 @@ public abstract class Mario extends Thread {
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x += this.xspeed;
                     }
+                    PkbGhost ghost = gameFrame.ghost;
+                    ghost.x += this.xspeed;
                     this.img = new ImageIcon("img/humanLeft.jpg").getImage();
                 }
                 //this.xspeed = 5;
@@ -90,7 +98,7 @@ public abstract class Mario extends Thread {
                 if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物
                     this.xspeed = 0;
                 }
-                if (this.x + this.xspeed < 650) { // 任人物向右移動
+                if (this.x < 650) { // 任人物向右移動
                     this.x += this.xspeed;
                     this.img = new ImageIcon("img/humanRight.png").getImage();
                 }
@@ -101,6 +109,8 @@ public abstract class Mario extends Thread {
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x -= this.xspeed;
                     }
+                    PkbGhost ghost = gameFrame.ghost;
+                    ghost.x -= this.xspeed;
                     this.img = new ImageIcon("img/humanRight.png").getImage();
                 }
                 //this.xspeed = 5;

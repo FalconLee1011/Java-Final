@@ -18,13 +18,14 @@ public class Ghost extends Thread{
     public GameFrame gameFrame;
     public int x = 360, y = 360;
     public int rndx = 0, rndy = 360;
-    public int xspeed = 1, yspeed = 1;
+    public int xspeed = 2, yspeed = 2;
     public static final int width = 30, height = 30;// 角色的寬高
     public Image img = new ImageIcon("img/moonmoon.png").getImage();// 角色圖片
     public static SecureRandom rnd = new SecureRandom();
     private boolean isMoving = false;
+    private boolean isRangedTrigger = false;
 
-    public Ghost() {
+    public Ghost(int x, int y, int isRangedTrigger, int range) {
         // this.gameFrame = g;
     }
     
@@ -45,9 +46,9 @@ public class Ghost extends Thread{
 
       }else{
         // this.rndx = rnd.nextInt(30);
-        //this.rndx = player.getX();
-        this.rndy = rnd.nextInt(360);
-        // this.rndy = player.getY();
+        this.rndx = player.getX();
+        // this.rndy = rnd.nextInt(360);
+        this.rndy = player.getY();
         this.isMoving = true;
       }
     }

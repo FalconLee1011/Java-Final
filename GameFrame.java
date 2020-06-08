@@ -20,7 +20,13 @@ public class GameFrame extends JFrame {
 
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
     public int[][] map = (new Map()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
-    public PkbHuman human= new PkbHuman(this);// player
+    public PkbHuman human = new PkbHuman(this);// player
+    // 直接追隨
+    // public PkbGhost ghost = new PkbGhost();
+    // 距離追隨
+    public PkbGhost ghost = new PkbGhost(360, 360, 2, true, 300);
+    // 距離追隨、會巡邏
+    // public PkbGhost ghost = new PkbGhost(360, 360, 1, true, 300, true, 100);
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -33,12 +39,17 @@ public class GameFrame extends JFrame {
     public GameFrame() throws Exception {// 初始化bgImg和player
 
         human.start();
+        // ghost.start();
         // 視窗重繪線程
         new Thread() {//。thread以外的一個子thread則是指程式人員自行在主thread裡再定義一個「程式區塊」，並請cpu同步的去執行那個區塊。
             public void run() {
                 while (true) {
                     repaint();// 重繪視窗
-                    checkBoom();// 檢查子彈是否出界
+                    // checkBoom();// 檢查子彈是否出界
+                    if(ghost.pursue(human)){
+                        System.out.println("GAME OVER");
+                        // break;
+                    }
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
@@ -127,6 +138,7 @@ public class GameFrame extends JFrame {
         // 利用雙緩衝畫背景圖片和馬里奧
         BufferedImage bi = (BufferedImage) this.createImage(this.getSize().width, this.getSize().height);
         Graphics big = bi.getGraphics();
+
         big.drawImage(bg.img, bg.x, bg.y, null);
         for (int i = 0; i < eneryList.size(); i++) {
             Enery e = eneryList.get(i);
@@ -148,9 +160,11 @@ public class GameFrame extends JFrame {
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
-        big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
-        g.drawImage(bi, 0, 0, null);
 
+        big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
+        big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
+        // Ghost
+        g.drawImage(bi, 0, 0, null);
     }
 
     // 檢查子彈是否出界，出界則從容器中移除，不移除的話，內存會泄漏
