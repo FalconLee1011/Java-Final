@@ -6,9 +6,15 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import com.huaxin.enery.*;
 import java.awt.Point;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Date;
+import java.awt.Toolkit;
 
 public class PkbHuman extends Mario {
     // ArrayList<Integer> arrlist = new ArrayList<Integer<(8);
+    Timer timer = new Timer();
+    private static boolean run = true;
     ArrayList<Integer> bagList = new ArrayList<Integer>(0);
     ArrayList<Enery> bageneryList = new ArrayList<Enery>(0);
     ArrayList<Integer> bagList2 = new ArrayList<Integer>(0);
@@ -19,7 +25,25 @@ public class PkbHuman extends Mario {
     public PkbHuman(GameFrame g) {
         super(g);
     }
-    
+    public void Time(int t) {
+        
+        TimerTask test = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("10秒到了");
+                xspeed=8;
+                yspeed=8;
+                Toolkit.getDefaultToolkit().beep();
+                //timer.cancel();
+                timer.purge();
+
+            }
+            
+        };
+
+        timer.schedule(test, t);
+        run = false;
+    }
                         
     public void run() {
         this.bagList.add(0);
@@ -49,7 +73,7 @@ public class PkbHuman extends Mario {
                     enery.img=new ImageIcon("img/back.png").getImage();
                     //enery.x = 360 - this.x;
                     //enery.y = 360 - this.y;
-                    
+                    Time(10000);
 
                 } else if (bagList2.get(bagList2.size() - 1) == 3) {
                     super.xspeed = 2;
@@ -57,7 +81,7 @@ public class PkbHuman extends Mario {
                     enery.img=new ImageIcon("img/back.png").getImage();
                     //enery.x = 360 - this.x;
                     //enery.y = 360 - this.y;
-                    
+                    Time(10000);
 
                     
                 }

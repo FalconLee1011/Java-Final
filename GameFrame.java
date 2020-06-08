@@ -21,6 +21,7 @@ public class GameFrame extends JFrame {
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
     public int[][] map = (new Map()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human = new PkbHuman(this);// player
+    public TimeTest test=new TimeTest(this);
     // 直接追隨
     // public PkbGhost ghost = new PkbGhost();
     // 距離追隨
@@ -160,7 +161,19 @@ public class GameFrame extends JFrame {
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
-
+        test.TimeGame();
+        big.setColor(Color.BLUE);
+        int fontSize = 50;
+        long kkk;
+        String s;
+        
+        s="Time: "+ test.hh+":"+test.mm+":"+test.ss;
+        Font font = new Font("楷体",Font.BOLD,fontSize);
+        big.setFont(font);
+        big.drawString(s,150,100); 
+        big.drawImage(human.img, human.x, human.y, human.width, human.height, null);  
+        g.drawImage(bi, 0, 0, null);
+        
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
         big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         // Ghost
