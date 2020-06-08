@@ -32,8 +32,8 @@ public class TimeTest  {
             public void run() {
                 //System.out.println("跑Time");
                 midTime--;
-                hh = midTime / 90 / 60 % 60;
-                mm = midTime / 90 % 60;
+                hh = midTime / 60 / 60 % 60;
+                mm = midTime / 60 % 60;
                 ss = midTime % 60;
                 Toolkit.getDefaultToolkit().beep();
                 //timer.cancel();
