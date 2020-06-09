@@ -1,11 +1,11 @@
-package peekaboo.huaxin.mario;
+package peekaboo.role;
 
 import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-import peekaboo.huaxin.enery.*;
-import peekaboo.huaxin.*;
+import peekaboo.props.*;
+import peekaboo.*;
 import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -165,8 +165,8 @@ public class PkbHuman extends Thread{
                     yspeed = 2;
                     Time(10000);
                 }
-                else if(bumpedEnery instanceof Pipe){
-                    // 若道具是 rock (pipe) 則放入背包
+                else if(bumpedEnery instanceof Stone){
+                    // 若道具是 Stone (pipe) 則放入背包
                     backpack.add(bumpedEnery);
                 }
                 // TODO: 其他道具

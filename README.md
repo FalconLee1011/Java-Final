@@ -1,38 +1,44 @@
 # Java-Final
 
-* ShowGUI ------- package peekaboo;
-* ModifyMap ----- package peekaboo.huaxin;
-* Test ---------- package peekaboo.huaxin.mario;
-* PkbMenuFrame -- package peekaboo.huaxin.mario;
-* PkbMenuButton - package peekaboo.huaxin.mario;
-* PkbMenu__Test - package peekaboo.huaxin.mario;
-* TimeTest ------ package peekaboo.huaxin.mario;
-    + import peekaboo.huaxin.enery.*;
-* PkbHuman ------ package peekaboo.huaxin.mario;
-    + import peekaboo.huaxin.enery.*;
-    + import peekaboo.huaxin.*;
-* PkbGhost ------ package peekaboo.huaxin.mario;
-    + import peekaboo.huaxin.enery.*;
-    + import peekaboo.huaxin.mario.PkbHuman;
-* PkbFlyingRock - package peekaboo.huaxin.mario;
-    + import peekaboo.huaxin.enery.*;
-    + import peekaboo.huaxin.mario.PkbHuman;
-* KeyListener --- package peekaboo.huaxin.mario;
-* initMap ------- package peekaboo.huaxin;
-* GameFrame ----- package peekaboo.huaxin.mario;
-    + import peekaboo.huaxin.enery.*;
-    + import peekaboo.huaxin.initMap;
-* BackgroundImage package peekaboo.huaxin.mario;
-* Boom ---------- package peekaboo.huaxin.mario;
-* Enery --------- package peekaboo.huaxin.enery;
-* Door ---------- package peekaboo.huaxin.enery;
-* Dig ----------- package peekaboo.huaxin.enery;
-* Coin ---------- package peekaboo.huaxin.enery;
-* Brick --------- package peekaboo.huaxin.enery;
-* Bewitch ------- package peekaboo.huaxin.enery;
-* Back ---------- package peekaboo.huaxin.enery;
-* Turtle -------- package peekaboo.huaxin.enery;
-* Shoe ---------- package peekaboo.huaxin.enery;
-* rock ---------- package peekaboo.huaxin.enery;
-* red_rock ------ package peekaboo.huaxin.enery;
-* Pipe ---------- package peekaboo.huaxin.enery;
+* Test ---------- package peekaboo;
+
+## 選單介面 package peekaboo.menu;
+* PkbMenuFrame -- 
+* PkbMenuButton -
+* PkbMenu__Test -
+
+## 角色 package peekaboo.role;
+* PkbHuman ------
+    + import peekaboo.props.*;
+    + import peekaboo.*;
+* PkbGhost ------
+    + import peekaboo.props.*;
+    + import peekaboo.*;
+
+## package peekaboo;
+* ModifyMap -----
+* initMap -------
+* BackgroundImage 
+* KeyListener --- 
+* PkbTimer ------ 倒數計時
+    + import peekaboo.props.*;
+* GameFrame ----- 
+    + import peekaboo.props.*;
+    + import peekaboo.role.*;
+
+## 道具 package peekaboo.props;
+* Boom ---------- 
+    - 馬力歐的子彈
+    - 可以參考
+* PkbFlyingRock - 撿起來的地板
+    + import peekaboo.props.*;
+    + import peekaboo.role.PkbHuman;
+    
+* Enery --------- 以下class的父類
+* Door ---------- 任意門
+* Hole ---------- 坑洞
+* Barrier ------- 障礙物
+* Bewitch ------- 迷惑
+* Turtle -------- 烏龜
+* Shoe ---------- 跑鞋
+* Stone --------- 地板

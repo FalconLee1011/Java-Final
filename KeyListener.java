@@ -1,4 +1,4 @@
-package peekaboo.huaxin.mario;
+package peekaboo;
 
 import java.awt.event.KeyAdapter;
 
