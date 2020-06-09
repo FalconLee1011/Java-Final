@@ -72,18 +72,22 @@ public class PkbGhost extends Thread{
     if(isMoving){
       if(this.x < this.rndx){ 
         this.x += speed;
+        this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage();
         // TODO: Change pic
       }
       else if(this.x > this.rndx){ 
-        this.x -= speed;
+        this.x -= speed;       
+        this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage();
         // TODO: Change pic
       }
       if(this.y < this.rndy){ 
         this.y += speed;
+        this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
         // TODO: Change pic
       }
       else if(this.y > this.rndy){ 
         this.y -= speed;
+        this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage();
         // TODO: Change pic
       }
 
@@ -100,10 +104,19 @@ public class PkbGhost extends Thread{
 
   private void pursueIsRangedTrigger(PkbHuman player){
     if(isMoving){
-      if(this.x < this.rndx){ this.x += speed; }
-      else if(this.x > this.rndx){ this.x -= speed; }
-      if(this.y < this.rndy){ this.y += speed; }
-      else if(this.y > this.rndy){ this.y -= speed; }
+      if(this.x < this.rndx){
+         this.x += speed;
+         this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage();
+       }
+      else if(this.x > this.rndx){ 
+        this.x -= speed;
+        this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage(); }
+      if(this.y < this.rndy){ 
+        this.y += speed; 
+        this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();}
+      else if(this.y > this.rndy){ 
+        this.y -= speed;
+        this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage(); }
 
       if( (this.x + 30 >= this.rndx || this.x - 30 <= this.rndx) && (this.y + 30 >= this.rndy || this.y - 30 <= this.rndy) ){ 
         this.isMoving = false;
