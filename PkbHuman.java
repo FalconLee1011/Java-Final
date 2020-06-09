@@ -69,106 +69,34 @@ public class PkbHuman extends Thread{
                         
     public void run() {
         this.bagList.add(0);
-        
-        //this.bagList2.add(0);
-        //pp.add(event.getPoint());//如果是滑鼠event，他的(x,y)
-        //pp.x=super.x; //int x座標
-        //pp.y; //int y座標
-        //System.out.println("point:" +  pp.x);
         while (true) {           
-            // int j = bump(gameFrame.toolList, "Left");//觸碰到
-            /*
-            if (j != 0) {//道具類
-                int temp = gameFrame.toolList2.get(j);
-                Enery enery = gameFrame.toolList.get(j);
-                this.bagList2.add(temp);// 放入
-                if (bagList2.get(bagList2.size() - 1) == 0) {
-                    //System.out.println("222222222 ");
-                }
-                if (bagList2.get(bagList2.size() - 1) == 2) {
-
-                    xspeed = 20;
-                    yspeed = 20;
-                    enery.img=new ImageIcon("img/back.png").getImage();
-                    //enery.x = 360 - this.x;
-                    //enery.y = 360 - this.y;
-                    Time(10000);
-                   // System.out.println(enery.x-120+" "+enery.y-120+" "+gameFrame.map[enery.x/120][enery.y/120]);
-                    // gameFrame.map[enery.x][enery.y] = 0;
-                    // ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
-
-                } else if (bagList2.get(bagList2.size() - 1) == 3) {
-                    xspeed = 2;
-                    yspeed = 2;
-                    enery.img=new ImageIcon("img/back.png").getImage();
-                    //enery.x = 360 - this.x;
-                    //enery.y = 360 - this.y;
-                    Time(10000);
-                }
-                else if (bagList2.get(bagList2.size() - 1) == 4) {//門
-                    enery.img=new ImageIcon("img/back.png").getImage();
-
-                }
-                else if (bagList2.get(bagList2.size() - 1) == 5) {//迷失
-                    enery.img=new ImageIcon("img/back.png").getImage();
-                    
-                }
-            }
-            
-            if (pick) {// 撿起來(石頭類)
-                // int i = bump(gameFrame.rockList, "Left");
-                
-                if (i != 0) {// 若有
-                    Enery enery = gameFrame.rockList.get(i);
-                    int tooltemp = gameFrame.rockList2.get(i);
-                    this.bagList.add(tooltemp);// 放入
-                    this.bageneryList.add(enery);// 放入bageneryList
-                    //enery.x = 360 - this.x;
-                    //enery.y = 360 - this.y;
-                    enery.img=new ImageIcon("img/dig.png").getImage();
-                    num++;
-                    for (int A : bagList) {
-                        System.out.println("Number = " + A+" "+num);
-                    }
-                }
-            }
-            if (use) {// 用起來石頭區
-                    if (num>0){
-                        Enery enery=this.bageneryList.get(bageneryList.size() - 1);
-                        enery.x=this.x;
-                        enery.y=this.y+120;
-                        num=num-1;
-                        System.out.println("use num= "+num);
-                    }
-                    else
-                    {
-                        System.out.println("沒石頭了 ");
-                    }
-                } 
-                */
             move();
 
             // 檢查是否碰撞到道具
-            Enery bumpedEnery = bump();
+            Enery bumpedEnery = bump(this.gameFrame.mapEneryByPos);
             if(bumpedEnery != null){
                 System.out.println(bumpedEnery.getClass());
-                bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 // 從 bump 判定的字典中將碰撞到的物件移除
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 if(bumpedEnery instanceof Shoe){
                     xspeed = 20;
                     yspeed = 20;
                     Time(10000);
+                    bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                    this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 }
                 else if(bumpedEnery instanceof Turtle){
                     xspeed = 2;
                     yspeed = 2;
                     Time(10000);
+                    bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                    this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 }
-                else if(bumpedEnery instanceof Stone){
-                    // 若道具是 Stone (pipe) 則放入背包
-                    backpack.add(bumpedEnery);
-                }
+                // else if(bumpedEnery instanceof Stone){
+                //     // 若道具是 Stone (pipe) 則放入背包
+                //     bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                //     this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
+                //     backpack.add(bumpedEnery);
+                // }
                 // TODO: 其他道具
 
             }else{
@@ -199,8 +127,13 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y += this.yspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.y += this.yspeed;
+                    ArrayList<PkbGhost> ghosts = this.gameFrame.ghosts;
+                    for(PkbGhost ghost : ghosts){
+                        ghost.y += this.yspeed;
+                    }
+                    for (PkbFlyingRock Fock : this.gameFrame.flyingRocks){
+                        Fock.y += this.yspeed;
+                    }
                 }
             }
             if(down){
@@ -215,8 +148,13 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y -= this.yspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.y -= this.yspeed;
+                    ArrayList<PkbGhost> ghosts = this.gameFrame.ghosts;
+                    for(PkbGhost ghost : ghosts){
+                        ghost.y -= this.yspeed;
+                    }
+                    for (PkbFlyingRock Fock : this.gameFrame.flyingRocks){
+                        Fock.y -= this.yspeed;
+                    }
                 }
                 //this.yspeed = 5;
             }
@@ -232,8 +170,13 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x += this.xspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.x += this.xspeed;
+                    ArrayList<PkbGhost> ghosts = this.gameFrame.ghosts;
+                    for(PkbGhost ghost : ghosts){
+                        ghost.x += this.xspeed;
+                    }
+                    for (PkbFlyingRock Fock : this.gameFrame.flyingRocks){
+                        Fock.x += this.xspeed;
+                    }
                 }
                 //this.xspeed = 5;
             }
@@ -249,10 +192,29 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x -= this.xspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.x -= this.xspeed;
+                    ArrayList<PkbGhost> ghosts = this.gameFrame.ghosts;
+                    for(PkbGhost ghost : ghosts){
+                        ghost.x -= this.xspeed;
+                    }
+                    for (PkbFlyingRock Fock : this.gameFrame.flyingRocks){
+                        Fock.x -= this.xspeed;
+                    }
                 }
                 //this.xspeed = 5;
+            }
+            if (this.use){
+                if(this.backpack.size() != 0){
+                    this.backpack.remove(this.backpack.size() - 1);
+                    PkbFlyingRock fr = new PkbFlyingRock(this, this.lastDirection);
+                    this.gameFrame.flyingRocks.add(fr);
+                    fr.start();
+                }
+            }
+            if (this.pick && isDiggable()){
+                Enery diggableEnery = bump(this.gameFrame.backEneryByPos);
+                diggableEnery.img = new ImageIcon("img/dig.png").getImage();
+                this.gameFrame.backEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120)).remove(String.valueOf(diggableEnery.raw_y * 120));
+                this.backpack.add(diggableEnery);
             }
             try {
                 this.sleep(20); 
@@ -262,10 +224,10 @@ public class PkbHuman extends Thread{
        // }
     }
 
-    public Enery bump(){
+    public Enery bump(Map <String, Map<String, Enery>> eneryByPos){
         // Rectangle playerScanPoly = new Rectangle( this.x - width,  this.y - height, width * 2, height * 2 );
         Rectangle playerPoly = new Rectangle( this.x - (width / 2),  this.y - (height / 2), width, height);
-        Map <String, Map<String, Enery>> mapEneryByPos = this.gameFrame.mapEneryByPos;
+        Map <String, Map<String, Enery>> mapEneryByPos = eneryByPos;
         Set<String> keys = mapEneryByPos.keySet();
         for (String k : keys) {
             for (String y_l : mapEneryByPos.get(k).keySet()) {

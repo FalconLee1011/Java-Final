@@ -39,11 +39,12 @@ public class KeyListener extends KeyAdapter {
                 gf.human.down = true;
                 break;
             case 65:
-                
+                // Pick
                 System.out.println("按keyboard: A");
                 gf.human.pick=true;
                 break;
             case 87:
+                // Throw
                 System.out.println("按keyboard: W");
                 gf.human.use=true;
                 break;
@@ -85,7 +86,6 @@ public class KeyListener extends KeyAdapter {
              case 87:
                 System.out.println("按keyboard: W");
                  gf.human.use = false;
-        
              break;
         }
     }

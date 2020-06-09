@@ -28,13 +28,34 @@ public class PkbFlyingRock extends Thread{
   public int x = 0, y = 0;
   public int speed = 2;
   public static final int width = 120, height = 120;
-  public Image img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
+  public Image img = new ImageIcon("img/rock.jpg").getImage();
+  private String direction;
+  private int hasMoved;
 
   private int tolerance = 20;
 
-  public PkbFlyingRock(PkbHuman player) { 
+  public PkbFlyingRock(PkbHuman player, String direction) { 
     this.x = player.x;
     this.y = player.y;
+    this.direction = direction;
+  }
+
+  public void run(){
+
+    try {
+      Thread.sleep(1000);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+
+    while (true) {
+      if (this.direction == "Up") { this.y -= this.speed; }
+      else if (this.direction == "Down") { this.y += this.speed; }
+      else if (this.direction == "Left") { this.x -= this.speed; }
+      else if (this.direction == "Right") { this.x += this.speed; }
+      if(this.hasMoved > 500) break;
+      this.hasMoved += this.speed;
+    }
   }
 
 }
