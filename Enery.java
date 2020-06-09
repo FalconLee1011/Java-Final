@@ -7,8 +7,8 @@ import java.awt.Image;
  */
 public abstract class Enery {
 
-    public int x, y;//位置
-    public int raw_x, raw_y;//分別對應到map[i][j]的i,j
+    public int x, y;// 位置
+    public int raw_x, raw_y;// 分別對應到map[i][j]的i,j
     public int width, height;
     public Image img;
 

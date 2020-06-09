@@ -3,8 +3,7 @@ package peekaboo.props;
 import java.awt.Image;
 
 /**
- * 跑鞋
- * 速度變10，維持10秒
+ * 跑鞋 速度變10，維持10秒
  */
 
 public class Shoe extends Enery {

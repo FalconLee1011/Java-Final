@@ -3,8 +3,7 @@ package peekaboo.props;
 import java.awt.Image;
 
 /**
- * 任意門
- * 從某地順移到某地 
+ * 任意門 從某地順移到某地
  */
 public class Door extends Enery {
 
