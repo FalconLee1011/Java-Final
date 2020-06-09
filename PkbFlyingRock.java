@@ -28,7 +28,7 @@ public class PkbFlyingRock extends Thread{
   public int x = 0, y = 0;
   public int speed = 2;
   public static final int width = 120, height = 120;
-  public Image img = new ImageIcon("img/rock.jpg").getImage();
+  public Image img = new ImageIcon("img/rock.png").getImage();
   private String direction;
   private int hasMoved;
 
@@ -38,6 +38,7 @@ public class PkbFlyingRock extends Thread{
     this.x = player.x;
     this.y = player.y;
     this.direction = direction;
+    System.out.println("ROCK Created");
   }
 
   public void run(){
@@ -49,6 +50,7 @@ public class PkbFlyingRock extends Thread{
     }
 
     while (true) {
+      System.out.printf("ROCK MOVING <%d, %d>", this.x, this.y);
       if (this.direction == "Up") { this.y -= this.speed; }
       else if (this.direction == "Down") { this.y += this.speed; }
       else if (this.direction == "Left") { this.x -= this.speed; }

@@ -26,7 +26,7 @@ public class GameFrame extends JFrame {
     public int[][] map = (new initMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human = new PkbHuman(this);// player
     public PkbTimer test=new PkbTimer(this);
-    
+
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
