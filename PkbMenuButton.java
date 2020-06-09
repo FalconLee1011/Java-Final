@@ -1,4 +1,4 @@
-package com.huaxin.mario;
+package peekaboo.huaxin.mario;
 
 import java.awt.*;
 import javax.swing.*;

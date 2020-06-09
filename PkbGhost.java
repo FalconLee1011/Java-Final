@@ -1,4 +1,4 @@
-package com.huaxin.mario;
+package peekaboo.huaxin.mario;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,16 +6,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
-import com.huaxin.enery.*;
-import com.huaxin.mario.PkbHuman;
+import peekaboo.huaxin.enery.*;
+import peekaboo.huaxin.mario.PkbHuman;
 import java.security.SecureRandom;
 import java.util.Calendar;
 
 import java.awt.Point;
 
-/**
- * PkbGhost
- */
 public class PkbGhost extends Thread{
 
   public GameFrame gameFrame;

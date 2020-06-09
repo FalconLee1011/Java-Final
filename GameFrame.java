@@ -1,5 +1,5 @@
 // 遊戲起始
-package com.huaxin.mario;
+package peekaboo.huaxin.mario;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import com.huaxin.enery.*;
-import com.huaxin.initMap;
+import peekaboo.huaxin.enery.*;
+import peekaboo.huaxin.initMap;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -145,7 +145,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        //com.huaxin.music.Util.startMusic("/startmusic.wav");
+        //peekaboo.huaxin.music.Util.startMusic("/startmusic.wav");
     }
 
     public void initFrame() {
