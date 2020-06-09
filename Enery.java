@@ -2,10 +2,13 @@ package peekaboo.props;
 
 import java.awt.Image;
 
-public abstract class Enery {//障礙物的抽象父類
+/**
+ * 物品的抽象父類
+ */
+public abstract class Enery {
 
-    public int x, y;
-    public int raw_x, raw_y;
+    public int x, y;//位置
+    public int raw_x, raw_y;//分別對應到map[i][j]的i,j
     public int width, height;
     public Image img;
 
