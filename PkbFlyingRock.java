@@ -21,7 +21,7 @@ public class PkbFlyingRock extends Thread{
   public GameFrame gameFrame;
   public int x = 0, y = 0;
   public int speed = 2;
-  public static final int width = 30, height = 30;
+  public static final int width = 120, height = 120;
   public Image img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
 
   private int tolerance = 20;

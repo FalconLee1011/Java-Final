@@ -10,8 +10,8 @@ public abstract class Enery {//障礙物的抽象父類
     public Image img;
 
     public Enery(int x, int y, int width, int height, Image img) {
-        this.raw_x = y / 30;
-        this.raw_y = x / 30;
+        this.raw_x = y / 120;
+        this.raw_y = x / 120;
         this.x = x;
         this.y = y;
         this.width = width;

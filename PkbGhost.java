@@ -22,7 +22,7 @@ public class PkbGhost extends Thread{
   private int range = 1; // Will pursue if player within range, only when isRangedTrigger is set true
   private int patrolRange = 0;
   public int speed = 1;
-  public static final int width = 30, height = 30;// 角色的寬高
+  public static final int width = 120, height = 120;// 角色的寬高
   public Image img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();// 角色圖片
   public static SecureRandom rnd = new SecureRandom();
   private boolean isMoving = false;
@@ -88,7 +88,7 @@ public class PkbGhost extends Thread{
         this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage();
       }
 
-      if( (this.x + 30 >= this.rndx || this.x - 30 <= this.rndx) && (this.y + 30 >= this.rndy || this.y - 30 <= this.rndy) ){ 
+      if( (this.x + 120 >= this.rndx || this.x - 120 <= this.rndx) && (this.y + 120 >= this.rndy || this.y - 120 <= this.rndy) ){ 
         this.isMoving = false; 
       }
 
@@ -114,7 +114,7 @@ public class PkbGhost extends Thread{
         this.y -= speed;
         this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage(); }
 
-      if( (this.x + 30 >= this.rndx || this.x - 30 <= this.rndx) && (this.y + 30 >= this.rndy || this.y - 30 <= this.rndy) ){ 
+      if( (this.x + 120 >= this.rndx || this.x - 120 <= this.rndx) && (this.y + 120 >= this.rndy || this.y - 120 <= this.rndy) ){ 
         this.isMoving = false;
       }
     }else{

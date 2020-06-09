@@ -20,9 +20,9 @@ public class PkbHuman extends Thread{
     public KeyListener key;
 
     public GameFrame gameFrame;//遊戲地圖
-    public int x = 0, y = 360;// 角色的坐標(一開始在左下角)
+    public int x = 120, y = 360;// 角色的坐標(一開始在左下角)
     public int xspeed = 8, yspeed = 8;// 角色的坐標(一開始在左下角)
-    public static final int width = 30, height = 30;// 角色的寬高
+    public static final int width = 120, height = 120;// 角色的寬高
     public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
 
     public boolean up = false, down = false,left = false, right = false ;
@@ -93,7 +93,7 @@ public class PkbHuman extends Thread{
                     //enery.x = 360 - this.x;
                     //enery.y = 360 - this.y;
                     Time(10000);
-                   // System.out.println(enery.x-30+" "+enery.y-30+" "+gameFrame.map[enery.x/30][enery.y/30]);
+                   // System.out.println(enery.x-120+" "+enery.y-120+" "+gameFrame.map[enery.x/120][enery.y/120]);
                     // gameFrame.map[enery.x][enery.y] = 0;
                     // ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
 
@@ -136,7 +136,7 @@ public class PkbHuman extends Thread{
                     if (num>0){
                         Enery enery=this.bageneryList.get(bageneryList.size() - 1);
                         enery.x=this.x;
-                        enery.y=this.y+30;
+                        enery.y=this.y+120;
                         num=num-1;
                         System.out.println("use num= "+num);
                     }
@@ -154,7 +154,7 @@ public class PkbHuman extends Thread{
                 System.out.println(bumpedEnery.getClass());
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 // 從 bump 判定的字典中將碰撞到的物件移除
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 30)).remove(String.valueOf(bumpedEnery.raw_y * 30));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 if(bumpedEnery instanceof Shoe){
                     xspeed = 20;
                     yspeed = 20;
@@ -191,7 +191,7 @@ public class PkbHuman extends Thread{
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
                 this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
                 this.lastDirection = Str_Up;
-                if (this.y >= 0 && this.y < 300) { this.y -= this.yspeed; }
+                if (this.y >= 0 && this.y <= 300) { this.y -= this.yspeed; }
                 else if (this.y > 300) {
                     gameFrame.bg.y += this.yspeed;// 背景向下移動
                     // 障礙物項左移動
@@ -224,7 +224,7 @@ public class PkbHuman extends Thread{
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
                 this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
                 lastDirection = Str_Left;
-                if (this.x > 30) { this.x -= this.xspeed; }
+                if (this.x >= 650) { this.x -= this.xspeed; }
                 else if (this.x < 650) {
                     gameFrame.bg.x += this.xspeed;// 背景向右移動
                     // 障礙物項右移動
@@ -241,7 +241,7 @@ public class PkbHuman extends Thread{
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
                 this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
                 lastDirection = Str_Right;
-                if (this.x < 650) { this.x += this.xspeed; }
+                if (this.x <= 650) { this.x += this.xspeed; }
                 else if (this.x > 650) {
                     gameFrame.bg.x -= this.xspeed;// 背景向左移動
                     // 障礙物項左移動
