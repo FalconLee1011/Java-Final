@@ -61,15 +61,15 @@ public class PkbMenuFrame extends JFrame{
         startPanel= new JPanel();
         startPanel.setOpaque(false);
         startBtn= new PkbMenuButton("   Start    ");//3 4
-        musicBtn= new PkbMenuButton("  music   ");//2 3
+        //musicBtn= new PkbMenuButton("  music   ");//2 3
         
         startBtn.addActionListener(btnClick);
-        musicBtn.addActionListener(btnClick);
+       //musicBtn.addActionListener(btnClick);
         
         startPanel.setLayout(new BoxLayout(startPanel, BoxLayout.Y_AXIS));
         startPanel.add(startBtn);
         startPanel.add(Box.createRigidArea(new Dimension(15, 25))); 
-        startPanel.add(musicBtn);
+        //startPanel.add(musicBtn);
 
         setModePanel();
         add(modePanel, btnPlace);
@@ -78,9 +78,9 @@ public class PkbMenuFrame extends JFrame{
     private void setModePanel(){
         modePanel= new JPanel();
         modePanel.setOpaque(false);
-        humanModeBtn= new PkbMenuButton(" Human Mode ");//1 1
-        ghostModeBtn= new PkbMenuButton("  Ghost Mode  ");//2 2
-        backToStartBtn= new PkbMenuButton("        Back        ");//8 8
+        humanModeBtn= new PkbMenuButton("  Normal Mode  ");//1 1
+        ghostModeBtn= new PkbMenuButton("  Special Mode  ");//2 2
+        backToStartBtn= new PkbMenuButton("         Back         ");//8 8
 
         humanModeBtn.addActionListener(btnClick);
         ghostModeBtn.addActionListener(btnClick);
@@ -103,9 +103,9 @@ public class PkbMenuFrame extends JFrame{
     private void setGhostModePanel(){
         ghostModePanel= new JPanel();
         ghostModePanel.setOpaque(false);
-        oneThreeBtn= new PkbMenuButton("  1 vs 3   ");//2 3
-        twoTwoBtn= new PkbMenuButton("  2 vs 2   ");//2 3
-        ghostBackToModeBtn= new PkbMenuButton("   Back   ");//3 3
+        oneThreeBtn= new PkbMenuButton("    Time Trial   ");//可存活的時間
+        twoTwoBtn= new PkbMenuButton("        Maze       ");//2 3
+        ghostBackToModeBtn= new PkbMenuButton("        Back       ");//3 3
 
         oneThreeBtn.addActionListener(btnClick);
         twoTwoBtn.addActionListener(btnClick);
@@ -121,11 +121,11 @@ public class PkbMenuFrame extends JFrame{
     private void setHumanModePanel(){
         humanModePanel= new JPanel();
         humanModePanel.setOpaque(false);
-        onePBtn= new PkbMenuButton("  1 player  ");//2 2
-        twoPBtn= new PkbMenuButton(" 2 players ");//1 1
-        threePBtn= new PkbMenuButton(" 3 players ");//1 1
-        fivePBtn= new PkbMenuButton(" 5 players ");//1 1
-        humanBackToModeBtn= new PkbMenuButton("    Back     ");//4 5
+        onePBtn= new PkbMenuButton("  Level 1  ");//2 2
+        twoPBtn= new PkbMenuButton("  Level 2  ");//1 1
+        threePBtn= new PkbMenuButton("  Level 3  ");//1 1
+        fivePBtn= new PkbMenuButton("  Level 4  ");//1 1
+        humanBackToModeBtn= new PkbMenuButton("    Back    ");//4 5
 
         onePBtn.addActionListener(btnClick);
         twoPBtn.addActionListener(btnClick);
