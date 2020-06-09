@@ -30,12 +30,9 @@ public class GameFrame extends JFrame {
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
-    // 直接追隨
-    // public PkbGhost ghost = new PkbGhost();
-    // 距離追隨
-    // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
-    // 距離追隨、會巡邏
-    public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
+    public ArrayList <PkbFlyingRock> flyingRocks = new ArrayList<PkbFlyingRock>();
+    public ArrayList <PkbGhost> ghosts = new ArrayList<PkbGhost>();
+
     public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -45,7 +42,15 @@ public class GameFrame extends JFrame {
     public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
+
     public GameFrame() throws Exception {// 初始化bgImg和player
+        // 直接追隨
+        // public PkbGhost ghost = new PkbGhost();
+        // 距離追隨
+        // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
+        // 距離追隨、會巡邏
+        PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
+        this.ghosts.add(ghost);
         
         human.start();
         // ghost.start();
@@ -180,14 +185,8 @@ public class GameFrame extends JFrame {
             Enery e = toolList.get(i);
             big.drawImage(e.img, e.x, e.y, e.width, e.height, null);//null不備擋住
         }
-
-        // 畫子彈
-        for (int i = 0; i < boomList.size(); i++) {
-            Boom b = boomList.get(i);
-            Color c = big.getColor();
-            big.setColor(Color.red);
-            big.fillOval(b.x += b.speed, b.y, b.width, b.width);//填充椭圆的
-            big.setColor(c);
+        for (PkbFlyingRock fock : this.flyingRocks) {
+            big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
@@ -203,7 +202,9 @@ public class GameFrame extends JFrame {
         big.setFont(font);
         big.drawString(s,500,200);         
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
-        big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
+        for (PkbGhost ghost : ghosts) {
+            big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
+        }
         // Ghost
         g.drawImage(bi, 0, 0, null);
     }

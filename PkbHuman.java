@@ -142,8 +142,8 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y += this.yspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.y += this.yspeed;
+                    for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.y += this.yspeed; }
+                    for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.y += this.yspeed; }
                 }
             }
             if(down){
@@ -161,8 +161,8 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.y -= this.yspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.y -= this.yspeed;
+                    for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.y -= this.yspeed; }
+                    for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.y -= this.yspeed; }
                 }
                 //this.yspeed = 5;
             }
@@ -181,8 +181,8 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x += this.xspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.x += this.xspeed;
+                    for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.x += this.xspeed; }
+                    for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.x += this.xspeed; }
                 }
                 //this.xspeed = 5;
             }
@@ -201,8 +201,8 @@ public class PkbHuman extends Thread{
                         Enery enery = gameFrame.eneryList.get(i);
                         enery.x -= this.xspeed;
                     }
-                    PkbGhost ghost = gameFrame.ghost;
-                    ghost.x -= this.xspeed;
+                    for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.x -= this.xspeed; }
+                    for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.x -= this.xspeed; }
                 }
                 //this.xspeed = 5;
             }
