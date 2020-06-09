@@ -92,28 +92,6 @@ public class PkbHuman extends Thread{
                     bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                     this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 }
-<<<<<<< HEAD
-                // else if(bumpedEnery instanceof Stone){
-                //     // 若道具是 Stone (pipe) 則放入背包
-                //     bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                //     this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
-                //     backpack.add(bumpedEnery);
-                // }
-=======
-                else if(bumpedEnery instanceof Stone){
-                    // 若道具是 Stone (pipe) 則放入背包
-                    backpack.add(bumpedEnery);
-                }
-                else
-                 if(bumpedEnery instanceof Fruit){
-                    img = new ImageIcon("img/back.jpg").getImage();
-                    teacher=true;
-                    
-                    Time(10000);
-                    //backpack.add(bumpedEnery);
-                }
->>>>>>> b47080bf7a53500bf6d1e6ed3e0e9b1f01dcea6e
-                // TODO: 其他道具
 
             }else{
                 // TODO: 非道具類互動
