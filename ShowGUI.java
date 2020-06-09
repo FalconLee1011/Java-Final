@@ -1,5 +1,5 @@
 // 可以放圖到視窗上
-package polly;
+package peekaboo;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

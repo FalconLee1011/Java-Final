@@ -1,4 +1,4 @@
-package com.huaxin.enery;
+package peekaboo.huaxin.enery;
 
 import java.awt.Image;
 

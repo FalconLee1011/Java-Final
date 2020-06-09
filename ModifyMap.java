@@ -1,4 +1,4 @@
-package com.huaxin;
+package peekaboo.huaxin;
 import java.io.FileNotFoundException;
 import java.lang.SecurityException;
 import java.util.Formatter;
