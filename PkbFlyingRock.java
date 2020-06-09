@@ -20,6 +20,7 @@ import java.awt.Point;
 
 /**
  * PkbGhost
+ * 撿起來的地板
  */
 public class PkbFlyingRock extends Thread{
 

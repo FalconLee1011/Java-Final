@@ -6,8 +6,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
-// import peekaboo.huaxin.enery.*;
-// import peekaboo.huaxin.mario.PkbHuman;
 import peekaboo.props.*;
 import peekaboo.*;
 

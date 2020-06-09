@@ -165,8 +165,8 @@ public class PkbHuman extends Thread{
                     yspeed = 2;
                     Time(10000);
                 }
-                else if(bumpedEnery instanceof Pipe){
-                    // 若道具是 rock (pipe) 則放入背包
+                else if(bumpedEnery instanceof Stone){
+                    // 若道具是 Stone (pipe) 則放入背包
                     backpack.add(bumpedEnery);
                 }
                 // TODO: 其他道具

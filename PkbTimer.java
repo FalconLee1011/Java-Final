@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-// import peekaboo.huaxin.enery.*;
 import peekaboo.props.*;
 import java.awt.Point;
 import java.util.Timer;
@@ -12,8 +11,10 @@ import java.util.TimerTask;
 import java.util.Date;
 import java.awt.Toolkit;
 
-
-public class TimeTest  {
+/*
+ * 倒數計時
+ */
+public class PkbTimer  {
     // 創建計時器
     Timer timergame = new Timer();
     public int num = 0,t;
@@ -22,7 +23,7 @@ public class TimeTest  {
     public GameFrame gf;
     public long midTime=20000;
     public long hh=0,mm=0,ss=0;
-    public TimeTest(GameFrame gf) {
+    public PkbTimer(GameFrame gf) {
         
         
     }

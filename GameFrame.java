@@ -23,7 +23,7 @@ public class GameFrame extends JFrame {
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
     public int[][] map = (new initMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human = new PkbHuman(this);// player
-    public TimeTest test=new TimeTest(this);
+    public PkbTimer test=new PkbTimer(this);
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
@@ -83,8 +83,8 @@ public class GameFrame extends JFrame {
                 if(brick_row == null) { brick_row = new HashMap<String, Enery>(); }
                 switch(map[i][j]) { 
                     case 0: // 畫地板                
-                        Back back = new Back(j * 30, i * 30, 30, 30, new ImageIcon("img/Back.png").getImage());//(x軸，y軸，寬，高)
-                        eneryList.add(back);                       
+                        Stone back = new Stone(j * 30, i * 30, 30, 30, new ImageIcon("img/Back.png").getImage());// (x軸，y軸，寬，高
+                        eneryList.add(back);
                         toolList.add(back);
                         toolList2.add(0);
                         rockList.add(back);
@@ -92,7 +92,7 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                        Brick brick = new Brick(j * 30, i * 30, 30, 30, new ImageIcon("img/cactus3.png").getImage());//(x軸，y軸，寬，高)
+                        Barrier brick = new Barrier(j * 30, i * 30, 30, 30, new ImageIcon("img/cactus3.png").getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brick_row.put(y_key, brick);
                         break;
@@ -124,15 +124,8 @@ public class GameFrame extends JFrame {
                         toolList2.add(5);
                         map_row.put(y_key, bewitch);
                         break; 
-                    case 6: 
-                        Pipe rock = new Pipe(j * 30, i * 30, 30, 30, new ImageIcon("img/rock.jpg").getImage());
-                        eneryList.add(rock);
-                        rockList.add(rock);
-                        rockList2.add(6);
-                        map_row.put(y_key, rock);
-                        break; 
                     case 7: 
-                        Dig dig = new Dig(j * 30, i * 30, 30, 30, new ImageIcon("img/dig.png").getImage());
+                        Hole dig = new Hole(j * 30, i * 30, 30, 30, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
                         rockList2.add(7);

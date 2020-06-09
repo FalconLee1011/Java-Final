@@ -2,7 +2,11 @@ package peekaboo.props;
 
 import java.awt.Image;
 
-// 迷惑
+/**
+ * 迷惑
+ * human跑的方向全部和按下去的鍵相反
+ * 
+ */ 
 
 public class Bewitch extends Enery {
 
