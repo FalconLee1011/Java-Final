@@ -1,5 +1,5 @@
 //地圖配置
-package com.huaxin;
+package peekaboo.huaxin;
 
 import java.io.BufferedReader;
 
