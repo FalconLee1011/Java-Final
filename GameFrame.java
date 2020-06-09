@@ -97,7 +97,7 @@ public class GameFrame extends JFrame {
                         brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
-                        Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/camel.gif").getImage());
+                        Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/camel_GIF.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
                         toolList2.add(2);
