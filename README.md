@@ -14,7 +14,7 @@
     + import peekaboo.*;
 * PkbGhost ------ package peekaboo.role;
     + import peekaboo.props.*;
-    //+ import peekaboo.huaxin.mario.PkbHuman;
+    + import peekaboo.*;
 
 ## 地圖 package peekaboo;
 * ModifyMap ----- package peekaboo;
@@ -25,7 +25,7 @@
     + import peekaboo.props.*;
 * GameFrame ----- package peekaboo;
     + import peekaboo.props.*;
-    //+ import peekaboo.huaxin.initMap;
+    + import peekaboo.role.*;
 
 ## 道具 package peekaboo.props;
 * PkbFlyingRock - package peekaboo.props;

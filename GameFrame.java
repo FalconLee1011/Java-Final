@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-// import peekaboo.huaxin.enery.*;
-// import peekaboo.huaxin.initMap;
 import peekaboo.props.*;
 import peekaboo.role.*;
 import java.awt.*;
