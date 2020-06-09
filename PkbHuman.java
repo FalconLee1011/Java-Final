@@ -96,7 +96,7 @@ public class PkbHuman extends Thread{
                     Time(10000);
                    // System.out.println(enery.x-120+" "+enery.y-120+" "+gameFrame.map[enery.x/120][enery.y/120]);
                     // gameFrame.map[enery.x][enery.y] = 0;
-                    // ModifyMap m = new ModifyMap("map.txt", gameFrame.map);
+                    // ModifyMap m = new ModifyMap("MAPS/map.txt", gameFrame.map);
 
                 } else if (bagList2.get(bagList2.size() - 1) == 3) {
                     xspeed = 2;

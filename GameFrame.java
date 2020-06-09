@@ -192,15 +192,15 @@ public class GameFrame extends JFrame {
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
         test.TimeGame();
-        big.setColor(Color.BLUE);
-        int fontSize = 50;
+        big.setColor(new Color(255,255,255));
+        int fontSize = 100;
         long kkk;
         String s;
         
         s = "Time: " + test.hh + ":" + test.mm + ":" + test.ss;
-        Font font = new Font("楷体",Font.BOLD,fontSize);
+        Font font = new Font("宋体",Font.BOLD,fontSize);
         big.setFont(font);
-        big.drawString(s,150,100);         
+        big.drawString(s,500,200);         
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
         big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         // Ghost
