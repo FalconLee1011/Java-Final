@@ -189,7 +189,7 @@ public class PkbHuman extends Thread{
         //while (true) {
             if(up){
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
                 this.lastDirection = Str_Up;
                 if (this.y >= 0 && this.y < 300) { this.y -= this.yspeed; }
                 else if (this.y > 300) {
@@ -222,7 +222,7 @@ public class PkbHuman extends Thread{
             }
             if (left) {// 向左走
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
                 lastDirection = Str_Left;
                 if (this.x > 30) { this.x -= this.xspeed; }
                 else if (this.x < 650) {
@@ -239,7 +239,7 @@ public class PkbHuman extends Thread{
             }
             if (right) {// 向右走
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
                 lastDirection = Str_Right;
                 if (this.x < 650) { this.x += this.xspeed; }
                 else if (this.x > 650) {

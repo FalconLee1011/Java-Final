@@ -92,12 +92,12 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                        Brick brick = new Brick(j * 30, i * 30, 30, 30, new ImageIcon("img/wm.jpg").getImage());//(x軸，y軸，寬，高)
+                        Brick brick = new Brick(j * 30, i * 30, 30, 30, new ImageIcon("img/cactus3.png").getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
-                        Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/skates.jpg").getImage());
+                        Shoe skates = new Shoe(j * 30, i * 30, 30, 30, new ImageIcon("img/camel.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
                         toolList2.add(2);
