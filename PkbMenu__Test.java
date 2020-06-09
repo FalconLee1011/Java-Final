@@ -1,4 +1,4 @@
-package peekaboo.huaxin.mario;
+package peekaboo.menu;
 
 import javax.swing.JFrame;
 

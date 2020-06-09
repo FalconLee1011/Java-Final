@@ -1,4 +1,4 @@
-package peekaboo.huaxin.mario;
+package peekaboo.menu;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -1,5 +1,5 @@
 // 遊戲起始
-package peekaboo.huaxin.mario;
+package peekaboo;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import peekaboo.huaxin.enery.*;
-import peekaboo.huaxin.initMap;
+// import peekaboo.huaxin.enery.*;
+// import peekaboo.huaxin.initMap;
+import peekaboo.props.*;
+import peekaboo.role.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

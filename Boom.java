@@ -1,4 +1,4 @@
-package peekaboo.huaxin.mario;
+package peekaboo.props;
 
 //子彈類
 
@@ -6,11 +6,11 @@ public class Boom {
 
     // 子彈的坐標，大小，速度
 
-    int x, y;
+    public int x, y;
 
-    int width;
+    public int width;
 
-    int speed = 1;
+    public int speed = 1;
 
     public Boom(int x, int y, int width) {
 

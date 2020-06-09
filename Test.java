@@ -1,5 +1,5 @@
 // 主程式，程序入口
-package peekaboo.huaxin.mario;
+package peekaboo;
 
 import javax.swing.JFrame;
 import java.awt.Color;

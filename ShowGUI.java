@@ -1,5 +1,5 @@
 // 可以放圖到視窗上
-package peekaboo;
+package peekaboo.menu;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

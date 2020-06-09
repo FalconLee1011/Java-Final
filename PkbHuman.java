@@ -1,11 +1,13 @@
-package peekaboo.huaxin.mario;
+package peekaboo.role;
 
 import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-import peekaboo.huaxin.enery.*;
-import peekaboo.huaxin.*;
+//import peekaboo.huaxin.enery.*;
+//import peekaboo.huaxin.*;
+import peekaboo.props.*;
+import peekaboo.*;
 import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
