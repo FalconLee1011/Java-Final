@@ -132,6 +132,13 @@ public class GameFrame extends JFrame {
                         toolList2.add(5);
                         map_row.put(y_key, bewitch);
                         break; 
+                    case 6: 
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/back.jpg").getImage());
+                        eneryList.add(Fruit);
+                        toolList.add(Fruit);
+                        toolList2.add(6);
+                        map_row.put(y_key, Fruit);
+                        break; 
                     case 7: 
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
