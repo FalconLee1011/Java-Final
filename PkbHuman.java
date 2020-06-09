@@ -25,7 +25,7 @@ public class PkbHuman extends Thread{
     public static final int width = 120, height = 120;// 角色的寬高
     public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
 
-    public boolean up = false, down = false,left = false, right = false ;
+    public boolean up = false, down = false,left = false, right = false , teacher = false ;
     private static final String Str_Up = "Up",Str_Down = "Down", Str_Left = "Left", Str_Right = "Right";
     public String lastDirection = "Right";
 
@@ -55,6 +55,7 @@ public class PkbHuman extends Thread{
             @Override
             public void run() {
                 System.out.println("10秒到了");
+                teacher=false;
                 xspeed=8;
                 yspeed=8;
                 Toolkit.getDefaultToolkit().beep();
@@ -169,6 +170,14 @@ public class PkbHuman extends Thread{
                     // 若道具是 Stone (pipe) 則放入背包
                     backpack.add(bumpedEnery);
                 }
+                else
+                 if(bumpedEnery instanceof Fruit){
+                    img = new ImageIcon("img/back.jpg").getImage();
+                    teacher=true;
+                    
+                    Time(10000);
+                    //backpack.add(bumpedEnery);
+                }
                 // TODO: 其他道具
 
             }else{
@@ -188,8 +197,12 @@ public class PkbHuman extends Thread{
         // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         //while (true) {
             if(up){
+                
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
+                if(teacher==true)
+                    this.img = new ImageIcon("img/back.jpg").getImage();
+                else
+                    this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
                 this.lastDirection = Str_Up;
                 if (this.y >= 0 && this.y <= 300) { this.y -= this.yspeed; }
                 else if (this.y > 300) {
@@ -205,7 +218,10 @@ public class PkbHuman extends Thread{
             }
             if(down){
                 // if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){ this.yspeed = 0; }
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                if(teacher==true)
+                    this.img = new ImageIcon("img/back.jpg").getImage();
+                else
+                    this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 lastDirection = Str_Down;
                 if (this.y < 300) { this.y += this.yspeed; }
                 else if (this.y >= 300) {
@@ -222,7 +238,10 @@ public class PkbHuman extends Thread{
             }
             if (left) {// 向左走
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
+                if(teacher==true)
+                    this.img = new ImageIcon("img/back.jpg").getImage();
+                else
+                    this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
                 lastDirection = Str_Left;
                 if (this.x >= 650) { this.x -= this.xspeed; }
                 else if (this.x < 650) {
@@ -239,7 +258,10 @@ public class PkbHuman extends Thread{
             }
             if (right) {// 向右走
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
-                this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
+                if(teacher==true)
+                    this.img = new ImageIcon("img/back.jpg").getImage();
+                else
+                    this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
                 lastDirection = Str_Right;
                 if (this.x <= 650) { this.x += this.xspeed; }
                 else if (this.x > 650) {
