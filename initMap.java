@@ -51,7 +51,7 @@ public class initMap {
                 map[i][j] = Integer.parseInt(values[j]);
             }
         }
-        ModifyMap temp= new ModifyMap("MAPS\temp.txt", map)
+        //ModifyMap temp= new ModifyMap("MAPS\temp.txt", map);
         return map;
     }
 }

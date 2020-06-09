@@ -128,7 +128,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/back.jpg").getImage());
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/downMove_GIF.gif").getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         toolList2.add(6);

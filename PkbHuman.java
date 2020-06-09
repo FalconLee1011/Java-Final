@@ -172,7 +172,7 @@ public class PkbHuman extends Thread{
                 }
                 else
                  if(bumpedEnery instanceof Fruit){
-                    img = new ImageIcon("img/back.jpg").getImage();
+                    img = new ImageIcon("img/downMove_GIF.gif").getImage();
                     teacher=true;
                     
                     Time(10000);
@@ -200,7 +200,7 @@ public class PkbHuman extends Thread{
                 
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
                 if(teacher==true)
-                    this.img = new ImageIcon("img/back.jpg").getImage();
+                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
                 else
                     this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
                 this.lastDirection = Str_Up;
@@ -219,7 +219,7 @@ public class PkbHuman extends Thread{
             if(down){
                 // if(bump(gameFrame.eneryList,Str_Down)!=0 && bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){ this.yspeed = 0; }
                 if(teacher==true)
-                    this.img = new ImageIcon("img/back.jpg").getImage();
+                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
                 else
                     this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 lastDirection = Str_Down;
@@ -239,7 +239,7 @@ public class PkbHuman extends Thread{
             if (left) {// 向左走
                 // if (bump(gameFrame.eneryList,Str_Left)!=0 && bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0) {//若撞到障礙物 this.xspeed = 0; }
                 if(teacher==true)
-                    this.img = new ImageIcon("img/back.jpg").getImage();
+                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
                 else
                     this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
                 lastDirection = Str_Left;
@@ -259,7 +259,7 @@ public class PkbHuman extends Thread{
             if (right) {// 向右走
                 // if (bump(gameFrame.eneryList,Str_Right)!=0 && bump(gameFrame.toolList,Str_Right)==0&& bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
                 if(teacher==true)
-                    this.img = new ImageIcon("img/back.jpg").getImage();
+                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
                 else
                     this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
                 lastDirection = Str_Right;
