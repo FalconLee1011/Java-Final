@@ -31,19 +31,24 @@ public class TimeTest  {
             @Override
             public void run() {
                 //System.out.println("跑Time");
-                midTime--;
+                if(midTime>0)
+                {
+                    midTime--;
                 hh = midTime / 90 / 60 % 60;
                 mm = midTime / 90 % 60;
                 ss = midTime % 60;
                 Toolkit.getDefaultToolkit().beep();
                 //timer.cancel();
+                //timergame.purge();
+                }
+                else
                 timergame.purge();
 
             }
             
         };
 
-        timergame.schedule(gametest, 20);
+        timergame.schedule(gametest, 1000);
         run = false;
     }
 
