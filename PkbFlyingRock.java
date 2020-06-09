@@ -34,7 +34,7 @@ public class PkbFlyingRock extends Thread{
 
   private int tolerance = 20;
 
-  public PkbFlyingRock(PkbHuman player, String direction) { 
+  public PkbFlyingRock(PkbHuman player) { 
     this.x = player.x;
     this.y = player.y;
     this.direction = direction;

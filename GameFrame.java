@@ -30,7 +30,12 @@ public class GameFrame extends JFrame {
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
-
+    // 直接追隨
+    // public PkbGhost ghost = new PkbGhost();
+    // 距離追隨
+    // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
+    // 距離追隨、會巡邏
+    public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
     public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -38,19 +43,10 @@ public class GameFrame extends JFrame {
     public ArrayList<Enery> toolList = new ArrayList<Enery>();//放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();//放道具數字
     public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
-    public ArrayList<PkbGhost> ghosts = new ArrayList<PkbGhost>();// 鬼
-    public ArrayList<PkbFlyingRock> flyingRocks = new ArrayList<PkbFlyingRock>();// 鬼
-
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
     public GameFrame() throws Exception {// 初始化bgImg和player
-        // 直接追隨
-        // public PkbGhost ghost = new PkbGhost();
-        // 距離追隨
-        // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
-        // 距離追隨、會巡邏
-        PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
-        ghosts.add(ghost);
+        
         human.start();
         // ghost.start();
         // 視窗重繪線程
@@ -133,7 +129,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/back.jpg").getImage());
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/downMove_GIF.gif").getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         toolList2.add(6);
@@ -158,10 +154,7 @@ public class GameFrame extends JFrame {
 
     public void initFrame() {
         // 設置視窗相關屬性
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
-        this.setSize(width,height);
+        this.setSize(3200,1800);
         this.setTitle("超級瑪麗");
         this.setResizable(false);//resizeable值为true时，表示生成的窗体可以自由改变大小；
         //resizeable值为false时，表示生成的窗体大小是由程序员决定的，用户不可以自由改变该窗体的大小。
@@ -187,36 +180,30 @@ public class GameFrame extends JFrame {
             Enery e = toolList.get(i);
             big.drawImage(e.img, e.x, e.y, e.width, e.height, null);//null不備擋住
         }
-        for (PkbFlyingRock Fock : flyingRocks){
-            big.drawImage(Fock.img, Fock.x, Fock.y, Fock.width, Fock.height, null);
-        }
 
         // 畫子彈
-        // for (int i = 0; i < boomList.size(); i++) {
-        //     Boom b = boomList.get(i);
-        //     Color c = big.getColor();
-        //     big.setColor(Color.red);
-        //     big.fillOval(b.x += b.speed, b.y, b.width, b.width);//填充椭圆的
-        //     big.setColor(c);
-        // }
-
+        for (int i = 0; i < boomList.size(); i++) {
+            Boom b = boomList.get(i);
+            Color c = big.getColor();
+            big.setColor(Color.red);
+            big.fillOval(b.x += b.speed, b.y, b.width, b.width);//填充椭圆的
+            big.setColor(c);
+        }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
         test.TimeGame();
-        big.setColor(Color.BLUE);
-        int fontSize = 50;
+        big.setColor(new Color(255,255,255));
+        int fontSize = 100;
         long kkk;
         String s;
         
         s = "Time: " + test.hh + ":" + test.mm + ":" + test.ss;
-        Font font = new Font("楷体",Font.BOLD,fontSize);
+        Font font = new Font("宋体",Font.BOLD,fontSize);
         big.setFont(font);
-        big.drawString(s,150,100);         
+        big.drawString(s,500,200);         
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
-        for (PkbGhost ghost : this.ghosts) {
-            big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
-        }
+        big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         // Ghost
         g.drawImage(bi, 0, 0, null);
     }
