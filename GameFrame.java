@@ -123,7 +123,7 @@ public class GameFrame extends JFrame {
                         doorSerial += 1;
                         break; 
                     case 5: 
-                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/bewitch.jpg").getImage());
+                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/scorpion.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         toolList2.add(5);
