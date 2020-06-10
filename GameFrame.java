@@ -33,6 +33,9 @@ public class GameFrame extends JFrame {
     public ArrayList <PkbFlyingRock> flyingRocks = new ArrayList<PkbFlyingRock>();
     public ArrayList <PkbGhost> ghosts = new ArrayList<PkbGhost>();
 
+    public ArrayList <Door> doors = new ArrayList<Door>();
+    public int doorSerial = 0;
+
     public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -49,8 +52,18 @@ public class GameFrame extends JFrame {
         // 距離追隨
         // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
         // 距離追隨、會巡邏
-        PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
-        this.ghosts.add(ghost);
+        PkbGhost ghost_add;
+        ghost_add = new PkbGhost(3120, 3120, 0, true, 600, true, 100);
+        this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(2013, 1000, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(500,720, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(1000,1000, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
         
         human.start();
         // ghost.start();
@@ -60,9 +73,8 @@ public class GameFrame extends JFrame {
                 while (true) {
                     repaint();// 重繪視窗
                     // checkBoom();// 檢查子彈是否出界
-                    if(ghost.pursue(human)){
-                        System.out.println("GAME OVER");
-                        // break;
+                    for (PkbGhost ghost : ghosts) {
+                        if(ghost.pursue(human)){ System.out.println("GAME OVER"); }
                     }
                     try {
                         Thread.sleep(10);
@@ -100,7 +112,6 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                    
                         Barrier brick = new Barrier(j * 120, i * 120, 120, 120, new ImageIcon(cactusArr[r.nextInt(3)]).getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brick_row.put(y_key, brick);
@@ -120,11 +131,13 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, turtle);
                         break; 
                     case 4: 
-                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage());
+                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);  
                         toolList2.add(4);   
                         map_row.put(y_key, door);
+                        doors.add(door);
+                        doorSerial += 1;
                         break; 
                     case 5: 
                         Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/bewitch.jpg").getImage());
@@ -159,7 +172,10 @@ public class GameFrame extends JFrame {
 
     public void initFrame() {
         // 設置視窗相關屬性
-        this.setSize(3200,1800);
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        int width = gd.getDisplayMode().getWidth();
+        int height = gd.getDisplayMode().getHeight();
+        this.setSize(width,height);
         this.setTitle("超級瑪麗");
         this.setResizable(false);//resizeable值为true时，表示生成的窗体可以自由改变大小；
         //resizeable值为false时，表示生成的窗体大小是由程序员决定的，用户不可以自由改变该窗体的大小。
