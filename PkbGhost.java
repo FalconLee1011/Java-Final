@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import peekaboo.props.*;
+import peekaboo.role.PkbHuman;
 import peekaboo.*;
 
 import java.security.SecureRandom;
@@ -29,8 +30,17 @@ public class PkbGhost extends Thread{
   private boolean isMoving = false;
   private boolean isRangedTrigger = false;
   private boolean willPatrol = false;
+  private boolean isShocked = false;
+  public boolean rageActivated = false;
+  public boolean speedHasBeenSet = false;
+
   private long lastMoved = 0;
+  private long timeShocked = 0;
   private long patrolInterval = 7000;
+  private long shockInterval = 5000;
+
+  private long rageSince = 0;
+  private long rageInterval = 10000;
 
   private int tolerance = 20;
 
@@ -61,8 +71,31 @@ public class PkbGhost extends Thread{
   }
   
   public boolean pursue(PkbHuman player){
-    if(this.isRangedTrigger){ pursueIsRangedTrigger(player); }
+    if(this.isShocked){
+      shockMove(player); 
+      return false;
+    }
+    else if(this.rageActivated){
+      if(!speedHasBeenSet){
+        this.speed += 2;
+        rageSince = Calendar.getInstance().getTimeInMillis();
+        speedHasBeenSet = true;
+      }
+      pursueIsNotRangedTrigger(player);
+    }
+    else if(this.isRangedTrigger){ pursueIsRangedTrigger(player); }
     else{ pursueIsNotRangedTrigger(player); }
+    if( hasBumpedIntoRock(player) ){
+      System.out.println("Socked!!!");
+      this.isShocked = true;
+      this.timeShocked = Calendar.getInstance().getTimeInMillis();
+      this.speed += 2;
+    }
+    if(this.rageActivated && Calendar.getInstance().getTimeInMillis() - rageSince >= this.rageInterval){
+      this.rageActivated = false;
+      this.speed -= 2;
+      speedHasBeenSet = false;
+    }
     return hasCapturedPlayer(player);
   }
 
@@ -70,22 +103,18 @@ public class PkbGhost extends Thread{
     if(isMoving){
       if(this.x < this.rndx){ 
         this.x += speed;
-        // TODO: Change pic
         this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage();
       }
       else if(this.x > this.rndx){ 
         this.x -= speed;
-        // TODO: Change pic
         this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage();
       }
       if(this.y < this.rndy){ 
         this.y += speed;
-        // TODO: Change pic
         this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
       }
       else if(this.y > this.rndy){ 
         this.y -= speed;
-        // TODO: Change pic
         this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage();
       }
 
@@ -104,16 +133,20 @@ public class PkbGhost extends Thread{
     if(isMoving){
       if(this.x < this.rndx){ 
         this.x += speed;
-        this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage(); }
+        this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage(); 
+      }
       else if(this.x > this.rndx){ 
         this.x -= speed;
-        this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage(); }
+        this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage(); 
+      }
       if(this.y < this.rndy){ 
         this.y += speed; 
-        this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();}
+        this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
+      }
       else if(this.y > this.rndy){ 
         this.y -= speed;
-        this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage(); }
+        this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage(); 
+      }
 
       if( (this.x + 120 >= this.rndx || this.x - 120 <= this.rndx) && (this.y + 120 >= this.rndy || this.y - 120 <= this.rndy) ){ 
         this.isMoving = false;
@@ -138,6 +171,57 @@ public class PkbGhost extends Thread{
     }
   }
 
+  private void shockMove(PkbHuman player){
+    if(Calendar.getInstance().getTimeInMillis() -  this.timeShocked >= this.shockInterval){
+      this.isShocked = false;
+      this.speed -= 2;
+      return;
+    }
+    if(isMoving){
+      if(this.x < this.rndx){ 
+        this.x += speed;
+        this.img = new ImageIcon("img/ghost_rightMove_GIF_160.gif").getImage(); 
+      }
+      else if(this.x > this.rndx){ 
+        this.x -= speed;
+        this.img = new ImageIcon("img/ghost_leftMove_GIF_160.gif").getImage(); 
+      }
+      if(this.y < this.rndy){ 
+        this.y += speed; 
+        this.img = new ImageIcon("img/ghost_downMove_GIF_160.gif").getImage();
+      }
+      else if(this.y > this.rndy){ 
+        this.y -= speed;
+        this.img = new ImageIcon("img/ghost_upMove_GIF_160.gif").getImage(); 
+      }
+
+      if( (this.x + 120 >= this.rndx || this.x - 120 <= this.rndx) && (this.y + 120 >= this.rndy || this.y - 120 <= this.rndy) ){ 
+        this.isMoving = false;
+      }
+    }else{
+      int rndx_tmp = rnd.nextInt(range);
+      int rndy_tmp = rnd.nextInt(range);
+      // lastMoved = Calendar.getInstance().getTimeInMillis();
+      if (this.x <= player.x && this.y <= player.y) { 
+        this.rndx = this.x - rndx_tmp;
+        this.rndy = this.y - rndy_tmp;
+      }
+      else if (this.x <= player.x && this.y >= player.y) { 
+        this.rndx = this.x - rndx_tmp;
+        this.rndy = this.y + rndy_tmp;
+      }
+      else if (this.x >= player.x && this.y >= player.y) { 
+        this.rndx = this.x + rndx_tmp;
+        this.rndy = this.y + rndy_tmp;
+      }
+      else if (this.x >= player.x && this.y <= player.y) { 
+        this.rndx = this.x + rndx_tmp;
+        this.rndy = this.y - rndy_tmp;
+      }
+      this.isMoving = true;
+    }
+  }
+
   private boolean isInRange(PkbHuman player){
     Rectangle ghostPoly = new Rectangle(this.x - ((width + this.range) / 2) , this.y  - ((height + this.range) / 2), width + range, height + range);
     Rectangle playerPoly = new Rectangle(player.x, player.y, player.width, player.height);
@@ -149,6 +233,16 @@ public class PkbGhost extends Thread{
     Rectangle ghostPoly = new Rectangle(this.x - ((width - tolerance) / 2), this.y - ((height - tolerance) / 2), width - tolerance, height - tolerance);
     Rectangle playerPoly = new Rectangle(player.x - ((player.width - tolerance) / 2), player.y - ((player.height - tolerance) / 2), player.width - tolerance, player.height - tolerance);
     if (ghostPoly.intersects(playerPoly)) { return true; }
+    return false;
+  }
+
+  private boolean hasBumpedIntoRock(PkbHuman player){
+    GameFrame g = player.gameFrame;
+    Rectangle ghostPoly = new Rectangle(this.x - (this.width / 2) , this.y  - (this.height / 2), width, height);
+    for (PkbFlyingRock fock : g.flyingRocks) {
+      Rectangle fockPoly = new Rectangle(fock.x - (fock.width / 2) , fock.y - (fock.height / 2), fock.width, fock.height);
+      if (ghostPoly.intersects(fockPoly)) { return true; }
+    }
     return false;
   }
 

@@ -12,6 +12,7 @@ import java.util.TimerTask;
 import java.util.Date;
 import java.awt.Toolkit;
 import java.util.Map;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class PkbHuman extends Thread{
     public boolean up = false, down = false,left = false, right = false , teacher = false ;
     private static final String Str_Up = "Up",Str_Down = "Down", Str_Left = "Left", Str_Right = "Right";
     public String lastDirection = "Right";
+    private static SecureRandom rnd = new SecureRandom();
 
 
     Timer timer = new Timer();
@@ -38,7 +40,6 @@ public class PkbHuman extends Thread{
     ArrayList<Point> pp = new ArrayList<>();
 
     ArrayList<Enery> backpack = new ArrayList<Enery>(0);
-
 
     public boolean pick = false, use = false, div = false;
     public int num=0;
@@ -83,28 +84,33 @@ public class PkbHuman extends Thread{
             Enery bumpedEnery = bump(this.gameFrame.mapEneryByPos);
             if(bumpedEnery != null){
                 System.out.println(bumpedEnery.getClass());
-                bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                // 從 bump 判定的字典中將碰撞到的物件移除
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
                 if(bumpedEnery instanceof Shoe){
                     xspeed = 20;
                     yspeed = 20;
                     Time(10000);
+                    bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                    // 從 bump 判定的字典中將碰撞到的物件移除
+                    this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));    
                 }
                 else if(bumpedEnery instanceof Turtle){
                     xspeed = 2;
                     yspeed = 2;
                     Time(10000);
+                    bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                    // 從 bump 判定的字典中將碰撞到的物件移除
+                    this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));    
                 }
-                else if(bumpedEnery instanceof Stone){
-                    // 若道具是 Stone (pipe) 則放入背包
-                    backpack.add(bumpedEnery);
+                else if(bumpedEnery instanceof Door){
+                    // 若是 Door
+                    int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
+                    Door door = this.gameFrame.doors.get(rnd_door);
+                    // teleport(door.x + 300, door.y);
                 }
                 else
                  if(bumpedEnery instanceof Fruit){
                     img = new ImageIcon("img/downMove_GIF.gif").getImage();
                     teacher=true;
-                    
+                    for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.rageActivated = true; }
                     Time(10000);
                     //backpack.add(bumpedEnery);
                 }
@@ -127,7 +133,6 @@ public class PkbHuman extends Thread{
         // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         //while (true) {
             if(up){
-                
                 // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0  && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
                 if(teacher==true)
                     this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
@@ -152,7 +157,7 @@ public class PkbHuman extends Thread{
                     this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
                 else
                     this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
-                lastDirection = Str_Down;
+                    lastDirection = Str_Down;    
                 if (this.y < 300) { this.y += this.yspeed; }
                 else if (this.y >= 300) {
                     gameFrame.bg.y -= this.yspeed;// 背景向上移動
@@ -207,7 +212,7 @@ public class PkbHuman extends Thread{
                 //this.xspeed = 5;
             }
             if (this.use){
-                if(this.backpack.size() != 0){
+                if(this.backpack.size() > 0){
                     this.backpack.remove(this.backpack.size() - 1);
                     PkbFlyingRock fr = new PkbFlyingRock(this, this.lastDirection);
                     this.gameFrame.flyingRocks.add(fr);
@@ -217,7 +222,7 @@ public class PkbHuman extends Thread{
             if (this.pick && isDiggable()){
                 Enery diggableEnery = bump(this.gameFrame.backEneryByPos);
                 diggableEnery.img = new ImageIcon("img/dig.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120)).remove(String.valueOf(diggableEnery.raw_y * 120));
+                this.gameFrame.backEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120)).remove(String.valueOf(diggableEnery.raw_y * 120));
                 this.backpack.add(diggableEnery);
             }
             try {
@@ -255,6 +260,33 @@ public class PkbHuman extends Thread{
             }
         }
         return false;
+    }
+
+    public void teleport(int target_y, int target_x){
+        // MOVE Y
+        // target_y = 40;
+        int var_y = target_y;
+        if (this.y + var_y < 300) { this.y += var_y; }
+        else if (this.y >= 300) {
+            // background、Enery、Ghost、FlyingRock move along target_y
+            gameFrame.bg.y -= var_y;
+            for(Enery enery: gameFrame.eneryList){ enery.y -= var_y; }
+            for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.y -= var_y; }
+            for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.y -= var_y; }
+        }
+
+        // MOVE X
+        // target_x = 40;
+        int var_x = target_x;
+        if (this.x + var_x <= 650) { this.x += var_x; }
+        else if (this.x > 650) {
+            // background、Enery、Ghost、FlyingRock move along target_x
+            gameFrame.bg.x -= var_x;
+            for(Enery enery: gameFrame.eneryList){ enery.x -= var_x; }
+            for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.x -= var_x; }
+            for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.x -= var_x; }
+        }
+
     }
 
 
