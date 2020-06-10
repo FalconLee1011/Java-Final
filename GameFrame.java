@@ -49,6 +49,7 @@ public class GameFrame extends JFrame {
     public ArrayList<Integer> rockList2 = new ArrayList<Integer>();// 裝石頭的數字
     public ArrayList<Enery> toolList = new ArrayList<Enery>();// 放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();// 放道具數字
+    public ArrayList<Barrier> brickList = new ArrayList<Barrier>();
     Random r = new Random();
 
     // Music music = new Music("/MUSIC/gameMusic.wav");
@@ -105,6 +106,7 @@ public class GameFrame extends JFrame {
                         Barrier brick = new Barrier(j * 120, i * 120, 120, 120,
                                 new ImageIcon(cactusArr[r.nextInt(3)]).getImage());// (x軸，y軸，寬，高)
                         eneryList.add(brick);
+                        brickList.add(brick);
                         brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
@@ -158,10 +160,10 @@ public class GameFrame extends JFrame {
                         brick_row.put(y_key, dig);
                         break;
                     case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heartWithSend.png").getImage());
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heart.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
-                        toolList2.add(8);
+                        toolList2.add(6);
                         // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
@@ -184,37 +186,42 @@ public class GameFrame extends JFrame {
                 while (true) {
                     repaint();
                     if(kaboom){
+                        for (int i = 0; i < brickList.size(); i++) {
+                            r.nextInt(brickList.size() - 1);
+                            Enery e = brickList.get(i);
+                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                            // try { Thread.sleep(5); }
+                            // catch (Exception e3) {}
+                        }
                         
-                        for (int i = 0; i < eneryList.size(); i++) {
-                            r.nextInt(eneryList.size() - 1);
-                            Enery e = eneryList.get(i);
-                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        }
-                        try { Thread.sleep(5); }
-                        catch (Exception e) {}
-                        for (int i = 0; i < toolList.size(); i++) {
-                            r.nextInt(toolList.size() - 1);
-                            Enery e = toolList.get(i);
-                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        }
-                        try { Thread.sleep(5); }
-                        catch (Exception e) {}
-                        if(flyingRocks.size() > 0){
-                            for (int i = 0; i < flyingRocks.size(); i++) {
-                                r.nextInt(flyingRocks.size() - 1);
-                                PkbFlyingRock fock = flyingRocks.get(i);
-                                fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                            }
-                        }
-                        try { Thread.sleep(5); }
-                        catch (Exception e) {}
-                        for (int i = 0; i < ghosts.size(); i++) {
-                            r.nextInt(ghosts.size() - 1);
-                            PkbGhost ghost = ghosts.get(i);
-                            ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        }
-                        try { Thread.sleep(5); }
-                        catch (Exception e) {}
+                        // for (int i = 0; i < eneryList.size(); i++) {
+                        //     r.nextInt(eneryList.size() - 1);
+                        //     Enery e = eneryList.get(i);
+                        //     e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        //     try { Thread.sleep(5); }
+                        //     catch (Exception e3) {}
+                        // }
+                        // for (int i = 0; i < toolList.size(); i++) {
+                        //     r.nextInt(toolList.size() - 1);
+                        //     Enery e = toolList.get(i);
+                        //     e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        //     try { Thread.sleep(5); }
+                        //     catch (Exception e12) {}
+                        // }
+                        // for (int i = 0; i < flyingRocks.size(); i++) {
+                        //     r.nextInt(flyingRocks.size() - 1);
+                        //     PkbFlyingRock fock = flyingRocks.get(i);
+                        //     fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        //     try { Thread.sleep(5); }
+                        //     catch (Exception e) {}
+                        // }
+                        // for (int i = 0; i < ghosts.size(); i++) {
+                        //     r.nextInt(ghosts.size() - 1);
+                        //     PkbGhost ghost = ghosts.get(i);
+                        //     ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        //     try { Thread.sleep(5); }
+                        //     catch (Exception e) {}
+                        // }
                         continue;
                     }
                     for (PkbGhost ghost : ghosts) {
@@ -282,8 +289,7 @@ public class GameFrame extends JFrame {
         big.setFont(font);
         big.drawString(s, 500, 200);
         h = "health " + hp;
-        Font font2 = new Font("微软雅黑", Font.BOLD, 50);
-        big.setColor(new Color(0, 0, 255));
+        Font font2 = new Font("宋体", Font.BOLD, 20);
         big.setFont(font2);
         big.drawString(h, 100, 200);
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
