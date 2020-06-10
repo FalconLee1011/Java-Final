@@ -17,15 +17,13 @@ public class Music {
 
 			clip = AudioSystem.getClip();
 			clip.open(dais);
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 
 	}
-	public void loop(){
+    public void loop(){
 		clip.loop(clip.LOOP_CONTINUOUSLY);
 	}
 	public void play() {
@@ -44,8 +42,21 @@ public class Music {
 	public void stop() {
 		if (clip.isRunning())
 			clip.stop();
+
 	}
-	public boolean isPlaying(){
-		return clip.isRunning();
+
+	public void setVolume(int volume) {
+		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		double gain = (double) volume / 100;
+		float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+		gainControl.setValue(dB);
+	}
+
+	public boolean isPlaying() {
+		if (clip.isRunning()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

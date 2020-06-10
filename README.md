@@ -17,7 +17,7 @@
 
 ## package peekaboo;
 * ModifyMap -----
-* initMap -------
+* InitMap -------
 * BackgroundImage 
 * Music
 * KeyListener --- 

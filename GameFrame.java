@@ -23,7 +23,7 @@ import java.util.Random;
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
-    public int[][] map = (new initMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
+    public int[][] map = (new InitMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
     public PkbHuman human;
     public PkbTimer test=new PkbTimer(this);
 
