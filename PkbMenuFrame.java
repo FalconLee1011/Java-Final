@@ -190,6 +190,7 @@ public class PkbMenuFrame extends JFrame{
                 }
                 else{
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Loading game...", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
+                    music.close();
                 }
         }
     }
