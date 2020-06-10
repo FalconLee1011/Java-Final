@@ -1,6 +1,7 @@
 package peekaboo.role;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
@@ -27,7 +28,7 @@ public class PkbHuman extends Thread {
     public static final int width = 120, height = 120;// 角色的寬高
     public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
 
-    public boolean up = false, down = false, left = false, right = false, camel = false;
+    public boolean up = false, down = false, left = false, right = false;
     private static final String Str_Up = "Up", Str_Down = "Down", Str_Left = "Left", Str_Right = "Right";
     public String lastDirection = "Right";
     private static SecureRandom rnd = new SecureRandom();
@@ -46,6 +47,11 @@ public class PkbHuman extends Thread {
 
     public boolean pick = false, use = false, div = false, teacher = false, isWitch = false, quickSend = false;
     public int num = 0;
+
+    // 如果吃到鞋子
+    public boolean camel = false;
+    public long timeSinceCamel = 0;
+    public long camelInterval = 120000;
 
     public PkbHuman(GameFrame g) {
         this.gameFrame = g;
@@ -100,6 +106,11 @@ public class PkbHuman extends Thread {
             // System.out.printf("VAR SINCE ORIGIN <%d, %d>%n", this.varSinceOrigin_X,
             // this.varSinceOrigin_Y);
             eneryInteract();
+            if(camel && Calendar.getInstance().getTimeInMillis() - timeSinceCamel >= camelInterval){
+                camel = false;
+                xspeed = 8;
+                yspeed = 8;
+            }
         }
     }
 
@@ -481,17 +492,17 @@ public class PkbHuman extends Thread {
         if (bumpedEnery != null) {
             System.out.println(bumpedEnery.getClass());
             if (bumpedEnery instanceof Shoe) {
+                camel = true;
+                timeSinceCamel = Calendar.getInstance().getTimeInMillis();
                 img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
                 xspeed = 20;
                 yspeed = 20;
-                camel = true;
                 sequence = 2;
                 System.out.println("shoe");
-                Time(12000);
+                // Time(12000);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
 
             } else if (bumpedEnery instanceof Turtle) {
                 xspeed = 2;
@@ -536,11 +547,7 @@ public class PkbHuman extends Thread {
             }
             // TODO: 其他道具
 
-        } else {
-            // TODO: 非道具類互動
-            // 若沒有碰撞到道具，則檢查是否可以被挖
-            // System.out.println(isDiggable());
-        }
+        } 
         if (this.use) {
             if (this.backpack.size() != 0) {
                 this.backpack.remove(this.backpack.size() - 1);
@@ -552,7 +559,7 @@ public class PkbHuman extends Thread {
         if (this.pick && isDiggable()) {
             Enery diggableEnery = bump(this.gameFrame.backEneryByPos);
             diggableEnery.img = new ImageIcon("img/dig.png").getImage();
-            this.gameFrame.mapEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120))
+            this.gameFrame.backEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120))
                     .remove(String.valueOf(diggableEnery.raw_y * 120));
             this.backpack.add(diggableEnery);
         }
@@ -576,6 +583,8 @@ public class PkbHuman extends Thread {
         }
         return null;
     }
+
+    // public
 
     public boolean isDiggable() {
         Rectangle playerPoly = new Rectangle(this.x - (width / 2), this.y - (height / 2), width, height);

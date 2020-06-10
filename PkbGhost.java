@@ -30,15 +30,16 @@ public class PkbGhost extends Thread{
   private boolean isMoving = false;
   private boolean isRangedTrigger = false;
   private boolean willPatrol = false;
-  private boolean isShocked = false;
-  public boolean rageActivated = false;
   public boolean speedHasBeenSet = false;
-
-  private long lastMoved = 0;
-  private long timeShocked = 0;
   private long patrolInterval = 7000;
-  private long shockInterval = 5000;
+  private long lastMoved = 0;
+  
 
+  private boolean isShocked = false;
+  private long timeShocked = 0;
+  private long shockInterval = 5000;
+  
+  public boolean rageActivated = false;
   private long rageSince = 0;
   private long rageInterval = 10000;
 
