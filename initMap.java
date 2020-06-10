@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class InitMap {
+public class initMap {
 
     // 數據容器
     public ArrayList<String> list = new ArrayList<String>();
