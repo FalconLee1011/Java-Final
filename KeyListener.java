@@ -21,6 +21,7 @@ public class KeyListener extends KeyAdapter {
     // 鍵盤監聽
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        // System.out.printf("CODE -> %d%n", code);
         switch (code) {
             case 37:// 向左走
             System.out.println("按keyboard: 左鍵");
@@ -39,13 +40,16 @@ public class KeyListener extends KeyAdapter {
                 gf.human.down = true;
                 break;
             case 65:
-                
                 System.out.println("按keyboard: A");
                 gf.human.pick=true;
                 break;
             case 87:
                 System.out.println("按keyboard: W");
                 gf.human.use=true;
+                break;
+            case 81:
+                System.out.println("KA-BOOM");
+                gf.kaboom = true;
                 break;
         }
     }

@@ -39,6 +39,8 @@ public class GameFrame extends JFrame {
     public int window_width;
     public int window_height;
 
+    public boolean kaboom = false;
+
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
     private static final String[] fruitArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
 
@@ -177,28 +179,41 @@ public class GameFrame extends JFrame {
 
         this.human = new PkbHuman(this);// player
         human.start();
-        // ghost.start();
-        // 視窗重繪線程
-        new Thread() {// 。thread以外的一個子thread則是指程式人員自行在主thread裡再定義一個「程式區塊」，並請cpu同步的去執行那個區塊。
+        new Thread() {
             public void run() {
                 while (true) {
-                    repaint();// 重繪視窗
-                    // checkBoom();// 檢查子彈是否出界
+                    repaint();
+                    if(kaboom){
+                        
+                        for (int i = 0; i < eneryList.size(); i++) {
+                            Enery e = eneryList.get(i);
+                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        }
+                        for (int i = 0; i < toolList.size(); i++) {
+                            Enery e = toolList.get(i);
+                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        }
+                        for (PkbFlyingRock fock : flyingRocks) {
+                            fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        }
+                        for (PkbGhost ghost : ghosts) {
+                            ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        }
+                        continue;
+                    }
                     for (PkbGhost ghost : ghosts) {
 
                         if (ghost.pursue(human)) {
                             hp--;
-                            if (hp < 0)
-                            {
+                            if (hp < 0){
                                 System.out.println("GAME OVER");
                             }
-                                
                         }
                     }
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();// 在命令行打印异常信息在程序中出错的位置及原因
+                        e.printStackTrace();
                     }
                 }
             }
@@ -207,24 +222,21 @@ public class GameFrame extends JFrame {
     }
 
     public void initFrame() {
-        // 設置視窗相關屬性
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         this.window_width = gd.getDisplayMode().getWidth();
         this.window_height = gd.getDisplayMode().getHeight();
         this.setSize(this.window_width, this.window_height);
         this.setTitle("超級瑪麗");
-        this.setResizable(false);// resizeable值为true时，表示生成的窗体可以自由改变大小；
-        // resizeable值为false时，表示生成的窗体大小是由程序员决定的，用户不可以自由改变该窗体的大小。
-        this.setLocationRelativeTo(null);// 设置窗口相对于指定组件的位置 null/c代表中央
-        this.setDefaultCloseOperation(3);// 窗口關閉時的呈現(3)->使用 System exit 方法退出应用程序。仅在应用程序中使用。结束了应用程序。
-        this.setVisible(true);// 设置可看的見
-        KeyListener kl = new KeyListener(this);// 視窗添加鍵盤監聽
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(3);
+        this.setVisible(true);
+        KeyListener kl = new KeyListener(this);
         this.addKeyListener(kl);
     }
 
     public void paint(Graphics g) {
 
-        // 利用雙緩衝畫背景圖片和馬里奧
         BufferedImage bi = (BufferedImage) this.createImage(this.getSize().width, this.getSize().height);
         Graphics big = bi.getGraphics();
 
