@@ -188,7 +188,7 @@ public class GameFrame extends JFrame {
 
                         if (ghost.pursue(human)) {
                             hp--;
-                            if (hp < 0)
+                            if (hp <= 0)
                             {
                                 System.out.println("GAME OVER");
                             }
