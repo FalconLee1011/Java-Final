@@ -250,7 +250,7 @@ public class PkbHuman extends Thread {
                 else if (teacher == false && camel == false && quickSend == true)
                     this.img = new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage();
                 else if (teacher == true && camel == false && quickSend == false)
-                    this.img = new ImageIcon("img/teacher_rightMove_GIF.gif").getImage();
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 else if (teacher == false && camel == false && quickSend == false)
                     this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
                 else if ((teacher == true && camel == true && quickSend == true)
