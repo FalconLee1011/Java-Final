@@ -212,7 +212,6 @@ public class GameFrame extends JFrame {
         test.TimeGame();
         big.setColor(new Color(255,255,255));
         int fontSize = 100;
-        long kkk;
         String s;
         
         s = "Time: " + test.hh + ":" + test.mm + ":" + test.ss;

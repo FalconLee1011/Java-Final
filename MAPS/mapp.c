@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define width 15
-#define height 16
+#define width 29
+#define height 12
 int maze[2 * height + 1][2 * width + 1] = {0};
 void initMaze()
 {
@@ -21,23 +21,53 @@ void initMaze()
     maze[1][1] = 0;
     maze[2 * height - 1][2 * width] = 0;
 }
-void printMaze()
+void printMaze(FILE *fp_w)
 {
     int i, j;
+    for (i = 1; i <= 7; i++)
+    {
+        for (j = 0; j <= 2 * width; j++)
+        {
+            if (j != 2 * width)
+            {
+                fprintf(fp_w, "1,", maze[i][j]);
+            }
+            else
+            {
+                fprintf(fp_w, "1", maze[i][j]);
+            }
+        }
+        fprintf(fp_w, "\n");
+    }
     for (i = 0; i <= 2 * height; i++)
     {
         for (j = 0; j <= 2 * width; j++)
         {
             if (j != 2 * width)
             {
-                printf("%d,", maze[i][j]);
+                fprintf(fp_w, "%d,", maze[i][j]);
             }
             else
             {
-                printf("%d", maze[i][j]);
+                fprintf(fp_w,"%d", maze[i][j]);
             }
         }
-        printf("\n");
+        fprintf(fp_w,"\n");
+    }
+    for (i = 1; i <= 7; i++)
+    {
+        for (j = 0; j <= 2 * width; j++)
+        {
+            if (j != 2 * width)
+            {
+                fprintf(fp_w, "1,", maze[i][j]);
+            }
+            else
+            {
+                fprintf(fp_w, "1", maze[i][j]);
+            }
+        }
+        fprintf(fp_w, "\n");
     }
 }
 void createMaze(int x, int y)
@@ -70,6 +100,10 @@ int main()
     srand((unsigned int)time(NULL));
     initMaze();
     createMaze(1, 1);
-    printMaze();
+    FILE *fp_w = fopen("maze.txt", "w");
+    if (fp_w == NULL)
+        return -1;
+    printMaze(fp_w);
+    fclose(fp_w);
     return 0;
 }
