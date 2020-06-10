@@ -540,8 +540,8 @@ public class PkbHuman extends Thread {
         int var_y = this.y - target_y;
         int var_x = this.x - target_x;
 
-        System.out.printf("CURRENT: <%d, %d> | MOVE TO <%d, %d> ", this.x, this.y, target_x, target_y);
-        System.out.printf("VAR: <%d, %d>%n", var_x, var_y);
+        // System.out.printf("CURRENT: <%d, %d> | MOVE TO <%d, %d> ", this.x, this.y, target_x, target_y);
+        // System.out.printf("VAR: <%d, %d>%n", var_x, var_y);
 
         gameFrame.bg.y += var_y;
         for(Enery enery: gameFrame.eneryList){ enery.y += var_y; }
@@ -553,8 +553,7 @@ public class PkbHuman extends Thread {
         for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.x += var_x; }
         for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.x += var_x; }
 
-
-        System.out.printf("MOVED TO: <%d, %d>%n%n ", this.x, this.y);
+        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.x, this.y);
 
     }
 
