@@ -21,7 +21,7 @@ public class PkbTimer  {
     public Timer time2;
     public boolean run = true;
     public GameFrame gf;
-    public long midTime=20000;
+    public long midTime=21000;
     public long hh=0,mm=0,ss=0;
     public PkbTimer(GameFrame gf) {
         
