@@ -44,7 +44,7 @@ public class PkbHuman extends Thread {
 
     ArrayList<Enery> backpack = new ArrayList<Enery>(0);
 
-    public boolean pick = false, use = false, div = false, teacher = false, isWitch = false;
+    public boolean pick = false, use = false, div = false, teacher = false, isWitch = false, quickSend = false;
     public int num = 0;
 
     public PkbHuman(GameFrame g) {
@@ -68,6 +68,7 @@ public class PkbHuman extends Thread {
                 teacher = false;
                 isWitch = false;
                 camel = false;
+                quickSend = false;
                 xspeed = 8;
                 yspeed = 8;
                 Toolkit.getDefaultToolkit().beep();
@@ -80,37 +81,24 @@ public class PkbHuman extends Thread {
         run = false;
     }
 
-    public void Timecamel(int t) {
-        TimerTask test = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("10秒到了");
-                isWitch = false;
-                camel = false;
-                xspeed = 8;
-                yspeed = 8;
-                Toolkit.getDefaultToolkit().beep();
-                // timer.cancel();
-                timer.purge();
-            }
-        };
-
-        timer.schedule(test, t);
-        run = false;
-    }
-
     public void run() {
         this.bagList.add(0);
 
         while (true) {
-            if (isWitch == true) Witch();
-            else move();
-            try { this.sleep(20); } 
-            catch (InterruptedException e) { e.printStackTrace(); }
+            if (isWitch == true)
+                Witch();
+            else
+                move();
+            try {
+                this.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             // this.varSinceOrigin_X = 120 - this.x;
             // this.varSinceOrigin_Y = 360 - this.y;
-            // System.out.printf("VAR SINCE ORIGIN <%d, %d>%n", this.varSinceOrigin_X, this.varSinceOrigin_Y);
+            // System.out.printf("VAR SINCE ORIGIN <%d, %d>%n", this.varSinceOrigin_X,
+            // this.varSinceOrigin_Y);
             eneryInteract();
         }
     }
@@ -122,18 +110,26 @@ public class PkbHuman extends Thread {
 
             // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0
             // && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-            if (teacher == true && camel == true) {
+
+            if (teacher == false && camel == true && quickSend == false)
+                this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == true)
+                this.img = new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage();
+            else if (teacher == true && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
+            else if ((teacher == true && camel == true && quickSend == true)
+                    || (teacher == true && camel == true && quickSend == false)
+                    || (teacher == true && camel == false && quickSend == true)
+                    || (teacher == false && camel == true && quickSend == true)) {
                 if (sequence == 6)
-                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 else if (sequence == 2)
                     this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                else if (sequence == 3)
+                    this.img = new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage();
+            }
 
             this.lastDirection = Str_Up;
             if (this.y >= 100 && this.y <= bound_y) {
@@ -145,28 +141,39 @@ public class PkbHuman extends Thread {
                     Enery enery = gameFrame.eneryList.get(i);
                     enery.y += this.yspeed;
                 }
-                for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.y += this.yspeed; }
-                for (PkbFlyingRock fock : this.gameFrame.flyingRocks) { fock.y += this.yspeed; }
+                for (PkbGhost ghost : this.gameFrame.ghosts) {
+                    ghost.y += this.yspeed;
+                }
+                for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+                    fock.y += this.yspeed;
+                }
                 // for (Door door : this.gameFrame.doors) { door.y += this.yspeed; }
             }
         }
-        if (down){
+        if (down) {
             // if(bump(gameFrame.eneryList,Str_Down)!=0 &&
             // bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
             // this.yspeed = 0; }
 
-            if (teacher == true && camel == true) {
+            if (teacher == false && camel == true && quickSend == false)
+                this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == true)
+                this.img = new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage();
+            else if (teacher == true && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+            else if ((teacher == true && camel == true && quickSend == true)
+                    || (teacher == true && camel == true && quickSend == false)
+                    || (teacher == true && camel == false && quickSend == true)
+                    || (teacher == false && camel == true && quickSend == true)) {
                 if (sequence == 6)
-                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 else if (sequence == 2)
                     this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                else if (sequence == 3)
+                    this.img = new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage();
+            }
             lastDirection = Str_Down;
             if (this.y < bound_y) {
                 this.y += this.yspeed;
@@ -193,18 +200,25 @@ public class PkbHuman extends Thread {
                    // bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0)
                    // {//若撞到障礙物 this.xspeed = 0; }
 
-            if (teacher == true && camel == true) {
-                if (sequence == 6)
-                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
-                else if (sequence == 2)
+                   if (teacher == false && camel == true && quickSend == false)
                     this.img = new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == true)
+                    this.img = new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage();
+                else if (teacher == true && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
+                else if ((teacher == true && camel == true && quickSend == true)
+                        || (teacher == true && camel == true && quickSend == false)
+                        || (teacher == true && camel == false && quickSend == true)
+                        || (teacher == false && camel == true && quickSend == true)) {
+                    if (sequence == 6)
+                        this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                    else if (sequence == 2)
+                        this.img = new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage();
+                    else if (sequence == 3)
+                        this.img = new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage();
+                        }
             lastDirection = Str_Left;
             if (this.x >= bound_x) {
                 this.x -= this.xspeed;
@@ -231,18 +245,25 @@ public class PkbHuman extends Thread {
                     // bump(gameFrame.toolList,Str_Right)==0&&
                     // bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
 
-            if (teacher == true && camel == true) {
-                if (sequence == 6)
-                    this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
-                else if (sequence == 2)
+                if (teacher == false && camel == true && quickSend == false)
                     this.img = new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == true)
+                    this.img = new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage();
+                else if (teacher == true && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                else if ((teacher == true && camel == true && quickSend == true)
+                        || (teacher == true && camel == true && quickSend == false)
+                        || (teacher == true && camel == false && quickSend == true)
+                        || (teacher == false && camel == true && quickSend == true)) {
+                    if (sequence == 6)
+                        this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                    else if (sequence == 2)
+                        this.img = new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage();
+                    else if (sequence == 3)
+                        this.img = new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage();
+                }
             lastDirection = Str_Right;
             if (this.x <= bound_x) {
                 this.x += this.xspeed;
@@ -279,18 +300,25 @@ public class PkbHuman extends Thread {
 
             // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0
             // && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
-            if (teacher == true && camel == true) {
+            if (teacher == false && camel == true && quickSend == false)
+                this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == true)
+                this.img = new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage();
+            else if (teacher == true && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
+            else if ((teacher == true && camel == true && quickSend == true)
+                    || (teacher == true && camel == true && quickSend == false)
+                    || (teacher == true && camel == false && quickSend == true)
+                    || (teacher == false && camel == true && quickSend == true)) {
                 if (sequence == 6)
-                    this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 else if (sequence == 2)
-                    this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                    this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
+                else if (sequence == 3)
+                    this.img = new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage();
+            }
             this.lastDirection = Str_Up;
             if (this.y >= 100 && this.y <= bound_y) {
                 this.y -= this.yspeed;
@@ -314,18 +342,25 @@ public class PkbHuman extends Thread {
             // bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
             // this.yspeed = 0; }
 
-            if (teacher == true && camel == true) {
+            if (teacher == false && camel == true && quickSend == false)
+                this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == true)
+                this.img = new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage();
+            else if (teacher == true && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+            else if (teacher == false && camel == false && quickSend == false)
+                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+            else if ((teacher == true && camel == true && quickSend == true)
+                    || (teacher == true && camel == true && quickSend == false)
+                    || (teacher == true && camel == false && quickSend == true)
+                    || (teacher == false && camel == true && quickSend == true)) {
                 if (sequence == 6)
-                    this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 else if (sequence == 2)
-                    this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_upMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                    this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
+                else if (sequence == 3)
+                    this.img = new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage();
+            }
             lastDirection = Str_Down;
             if (this.y < bound_y) {
                 this.y += this.yspeed;
@@ -350,18 +385,26 @@ public class PkbHuman extends Thread {
             // bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0)
             // {//若撞到障礙物 this.xspeed = 0; }
 
-            if (teacher == true && camel == true) {
-                if (sequence == 6)
-                    this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
-                else if (sequence == 2)
-                    this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+            if (teacher == false && camel == true && quickSend == false)
+                    this.img = new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == true)
+                    this.img = new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage();
+                else if (teacher == true && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
+                else if ((teacher == true && camel == true && quickSend == true)
+                        || (teacher == true && camel == true && quickSend == false)
+                        || (teacher == true && camel == false && quickSend == true)
+                        || (teacher == false && camel == true && quickSend == true)) {
+                    if (sequence == 6)
+                        this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                    else if (sequence == 2)
+                        this.img = new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage();
+                    else if (sequence == 3)
+                        this.img = new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage();
+                }
+                
             lastDirection = Str_Left;
             if (this.x >= bound_x) {
                 this.x -= this.xspeed;
@@ -386,18 +429,25 @@ public class PkbHuman extends Thread {
             // bump(gameFrame.toolList,Str_Right)==0&&
             // bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
 
-            if (teacher == true && camel == true) {
-                if (sequence == 6)
-                    this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
-                else if (sequence == 2)
-                    this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            } else if (teacher == false && camel == true)
-                this.img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
-            else if (teacher == false && camel == false)
-                this.img = new ImageIcon("img/human_leftMove_gif_160.gif").getImage();
-
-            else if (teacher == true && camel == false)
-                this.img = new ImageIcon("img/downMove_GIF.gif").getImage();
+            if (teacher == false && camel == true && quickSend == false)
+                    this.img = new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == true)
+                    this.img = new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage();
+                else if (teacher == true && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/teacher_rightMove_GIF.gif").getImage();
+                else if (teacher == false && camel == false && quickSend == false)
+                    this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                else if ((teacher == true && camel == true && quickSend == true)
+                        || (teacher == true && camel == true && quickSend == false)
+                        || (teacher == true && camel == false && quickSend == true)
+                        || (teacher == false && camel == true && quickSend == true)) {
+                    if (sequence == 6)
+                        this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                    else if (sequence == 2)
+                        this.img = new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage();
+                    else if (sequence == 3)
+                        this.img = new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage();
+                }
             lastDirection = Str_Right;
             if (this.x <= bound_x) {
                 this.x += this.xspeed;
@@ -425,7 +475,7 @@ public class PkbHuman extends Thread {
         // }
     }
 
-    public void eneryInteract(){
+    public void eneryInteract() {
         // 檢查是否碰撞到道具
         Enery bumpedEnery = bump(this.gameFrame.mapEneryByPos);
         if (bumpedEnery != null) {
@@ -440,40 +490,47 @@ public class PkbHuman extends Thread {
                 Time(12000);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
+                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
 
             } else if (bumpedEnery instanceof Turtle) {
                 xspeed = 2;
                 yspeed = 2;
                 Time(10000);
+                quickSend = true;
                 // 從 bump 判定的字典中將碰撞到的物件移除
+                sequence = 3;
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
-            } else if(bumpedEnery instanceof Door){
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
+                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+            } else if (bumpedEnery instanceof Door) {
                 // 若是 Door
                 int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
                 Door door = this.gameFrame.doors.get(rnd_door);
                 teleport(door.y, door.x + 120);
-            }
-            else if (bumpedEnery instanceof Fruit) {
+            } else if (bumpedEnery instanceof Fruit) {
                 img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
                 teacher = true;
                 sequence = 6;
-                for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.rageActivated = true; }
+                for (PkbGhost ghost : this.gameFrame.ghosts) {
+                    ghost.rageActivated = true;
+                }
                 Time(10000);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
+                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
 
                 // backpack.add(bumpedEnery);
             } else if (bumpedEnery instanceof Bewitch) {
 
-                img = new ImageIcon("img/downMove_GIF.gif").getImage();
+                img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 isWitch = true;
                 Time(10000);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120)).remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
+                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
 
                 // backpack.add(bumpedEnery);
             }
@@ -495,7 +552,8 @@ public class PkbHuman extends Thread {
         if (this.pick && isDiggable()) {
             Enery diggableEnery = bump(this.gameFrame.backEneryByPos);
             diggableEnery.img = new ImageIcon("img/dig.png").getImage();
-            this.gameFrame.mapEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120)).remove(String.valueOf(diggableEnery.raw_y * 120));
+            this.gameFrame.mapEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120))
+                    .remove(String.valueOf(diggableEnery.raw_y * 120));
             this.backpack.add(diggableEnery);
         }
 
@@ -535,27 +593,39 @@ public class PkbHuman extends Thread {
         return false;
     }
 
-    public void teleport(int target_y, int target_x){
+    public void teleport(int target_y, int target_x) {
         // MOVE Y
         int var_y = this.y - target_y;
         int var_x = this.x - target_x;
 
-        // System.out.printf("CURRENT: <%d, %d> | MOVE TO <%d, %d> ", this.x, this.y, target_x, target_y);
+        // System.out.printf("CURRENT: <%d, %d> | MOVE TO <%d, %d> ", this.x, this.y,
+        // target_x, target_y);
         // System.out.printf("VAR: <%d, %d>%n", var_x, var_y);
 
         gameFrame.bg.y += var_y;
-        for(Enery enery: gameFrame.eneryList){ enery.y += var_y; }
-        for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.y += var_y; }
-        for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.y += var_y; }
+        for (Enery enery : gameFrame.eneryList) {
+            enery.y += var_y;
+        }
+        for (PkbGhost ghost : this.gameFrame.ghosts) {
+            ghost.y += var_y;
+        }
+        for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+            fock.y += var_y;
+        }
 
         gameFrame.bg.x += var_x;
-        for(Enery enery: gameFrame.eneryList){ enery.x += var_x; }
-        for(PkbGhost ghost: this.gameFrame.ghosts){ ghost.x += var_x; }
-        for(PkbFlyingRock fock: this.gameFrame.flyingRocks){ fock.x += var_x; }
+        for (Enery enery : gameFrame.eneryList) {
+            enery.x += var_x;
+        }
+        for (PkbGhost ghost : this.gameFrame.ghosts) {
+            ghost.x += var_x;
+        }
+        for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+            fock.x += var_x;
+        }
 
         // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.x, this.y);
 
     }
-
 
 }

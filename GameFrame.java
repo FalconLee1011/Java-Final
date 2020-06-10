@@ -49,6 +49,8 @@ public class GameFrame extends JFrame {
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
+    Music music = new Music("/MUSIC/startmusic.wav");
+
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
@@ -112,7 +114,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, turtle);
                         break; 
                     case 4: 
-                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage(), doorSerial);
+                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);  
                         toolList2.add(4);   
@@ -148,7 +150,8 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        //peekaboo.huaxin.music.Util.startMusic("/startmusic.wav");
+        music.loop();
+
         this.human = new PkbHuman(this);// player
         human.start();
         // ghost.start();

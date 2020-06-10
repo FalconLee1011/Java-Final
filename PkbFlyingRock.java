@@ -28,7 +28,7 @@ public class PkbFlyingRock extends Thread{
   public int x = 0, y = 0;
   public int speed = 2;
   public static final int width = 120, height = 120;
-  public Image img = new ImageIcon("img/rock.png").getImage();
+  public Image img = new ImageIcon("img/bullet.png").getImage();
   private String direction;
   private int hasMoved;
 

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import peekaboo.Music;
+
 
 public class PkbMenuFrame extends JFrame{
     JPanel startPanel;
@@ -30,8 +32,11 @@ public class PkbMenuFrame extends JFrame{
     private JPanel btnJPanel= null;
     GridBagConstraints btnPlace= null;
     ButtonClick btnClick;
-
+    
     Container c= null;
+
+    Music music = new Music("/MUSIC/startmusic.wav");
+
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
         btnClick= new ButtonClick();
@@ -50,6 +55,7 @@ public class PkbMenuFrame extends JFrame{
         
         setStartPanel();
         add(startPanel, btnPlace);
+        music.play();
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
@@ -61,15 +67,15 @@ public class PkbMenuFrame extends JFrame{
         startPanel= new JPanel();
         startPanel.setOpaque(false);
         startBtn= new PkbMenuButton("   Start    ");//3 4
-        //musicBtn= new PkbMenuButton("  music   ");//2 3
+        musicBtn= new PkbMenuButton("  music   ");//2 3
         
         startBtn.addActionListener(btnClick);
-       //musicBtn.addActionListener(btnClick);
+        musicBtn.addActionListener(btnClick);
         
         startPanel.setLayout(new BoxLayout(startPanel, BoxLayout.Y_AXIS));
         startPanel.add(startBtn);
         startPanel.add(Box.createRigidArea(new Dimension(15, 25))); 
-        //startPanel.add(musicBtn);
+        startPanel.add(musicBtn);
 
         setModePanel();
         add(modePanel, btnPlace);
@@ -153,10 +159,14 @@ public class PkbMenuFrame extends JFrame{
                     modePanel.setVisible(true);
                 }
                 else if(e.getSource()== musicBtn){
-                    /*
-                    if(musicBtn.getActionCommand()== "music_on"){}
-                    else{}
-                    */
+                    
+                    if(music.isPlaying()==false){
+                        music.play();
+                    }
+                    else{
+                        music.stop();
+                    }
+                    
                 }
                 else if(e.getSource()== humanModeBtn){
                     modePanel.setVisible(false);
@@ -180,6 +190,7 @@ public class PkbMenuFrame extends JFrame{
                 }
                 else{
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Loading game...", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
+                    music.close();
                 }
         }
     }
