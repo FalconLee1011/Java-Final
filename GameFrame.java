@@ -190,11 +190,12 @@ public class GameFrame extends JFrame {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
                             Enery e = brickList.get(i);
-                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                            e.img = new ImageIcon("img/Back.png").getImage();
                             // try { Thread.sleep(5); }
                             // catch (Exception e3) {}
                         }
                         kaboom = false;
+                        System.out.println("BanBooZoled!");
                         // for (int i = 0; i < eneryList.size(); i++) {
                         //     r.nextInt(eneryList.size() - 1);
                         //     Enery e = eneryList.get(i);
