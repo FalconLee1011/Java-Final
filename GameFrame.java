@@ -141,11 +141,15 @@ public class GameFrame extends JFrame {
                         eneryList.add(dig);
                         rockList.add(dig);
                         rockList2.add(7);
-                        map_row.put(y_key, dig);
+                        // map_row.put(y_key, dig);
+                        brick_row.put(y_key, dig);
                         break; 
                }
+               // Evary enery on map
                mapEneryByPos.put(x_key, map_row);
+               // Every reachable area
                backEneryByPos.put(x_key, rock_row);
+               // Every unreachable area
                rockEneryByPos.put(x_key, brick_row);
             }
         }
