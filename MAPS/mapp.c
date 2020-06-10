@@ -100,7 +100,7 @@ int main()
     srand((unsigned int)time(NULL));
     initMaze();
     createMaze(1, 1);
-    FILE *fp_w = fopen("maze.txt", "w");
+    FILE *fp_w = fopen("maze2.txt", "w");
     if (fp_w == NULL)
         return -1;
     printMaze(fp_w);
