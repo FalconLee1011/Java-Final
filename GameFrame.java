@@ -39,17 +39,17 @@ public class GameFrame extends JFrame {
     public int window_width;
     public int window_height;
 
-    public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
+    private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
+    private static final String[] fruitArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
+    
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
     public ArrayList<Integer> rockList2 = new ArrayList<Integer>();// 裝石頭的數字
     public ArrayList<Enery> toolList = new ArrayList<Enery>();//放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();//放道具數字
-    // public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
-    public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
-    Music music = new Music("/MUSIC/gameMusic.wav");
+    //Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
@@ -123,14 +123,14 @@ public class GameFrame extends JFrame {
                         doorSerial += 1;
                         break; 
                     case 5: 
-                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/bewitch.jpg").getImage());
+                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/scorpion.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         toolList2.add(5);
                         map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/devilFruit_grape_GIF.gif").getImage());
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         toolList2.add(6);
@@ -154,7 +154,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        music.loop();
+        //music.loop();
 
         this.human = new PkbHuman(this);// player
         human.start();

@@ -19,49 +19,72 @@ import java.util.Calendar;
 import java.awt.Point;
 
 /**
- * PkbFlyingRock
- * 正在飛翔的石頭們
+ * PkbFlyingRock 正在飛翔的石頭們
  */
-public class PkbFlyingRock extends Thread{
+public class PkbFlyingRock extends Thread {
 
   public GameFrame gameFrame;
   public int x = 0, y = 0;
   public int speed = 2;
   public static final int width = 120, height = 120;
-  public Image img = new ImageIcon("img/bullet.png").getImage();
+  public Image img;
   private String direction;
   private int hasMoved;
 
   private int tolerance = 20;
 
-  public PkbFlyingRock(PkbHuman player, String direction) { 
+  public PkbFlyingRock(PkbHuman player, String direction) {
     this.x = player.x;
     this.y = player.y;
     this.direction = direction;
   }
 
-  public void run(){
+  public void run() {
 
     try {
       Thread.sleep(200);
-    } catch (Exception e) {
-      //TODO: handle exception
+    }
+    catch (Exception e) {
+      // TODO: handle exception
+    }
+
+    if (this.direction == "Up") {
+      img = new ImageIcon("img/bullet_up.png").getImage();
+    } 
+    else if (this.direction == "Down") {
+      img = new ImageIcon("img/bullet_down.png").getImage();
+    }
+    else if (this.direction == "Left") {
+      img = new ImageIcon("img/bullet_left.png").getImage();
+    } 
+    else if (this.direction == "Right") {
+      img = new ImageIcon("img/bullet_right.png").getImage();
     }
 
     while (true) {
-      if (this.direction == "Up") { this.y -= this.speed; }
-      else if (this.direction == "Down") { this.y += this.speed; }
-      else if (this.direction == "Left") { this.x -= this.speed; }
-      else if (this.direction == "Right") { this.x += this.speed; }
-      if(this.hasMoved > 500) break;
+      if (this.direction == "Up") {
+        this.y -= this.speed;
+      } 
+      else if (this.direction == "Down") {
+        this.y += this.speed;
+      } 
+      else if (this.direction == "Left") {
+        this.x -= this.speed;
+      } 
+      else if (this.direction == "Right") {
+        this.x += this.speed;
+      }
+      if (this.hasMoved > 500)
+        break;
       this.hasMoved += this.speed;
+      
       try {
         Thread.sleep(2);
-      } catch (Exception e) {
-        //TODO: handle exception
+      }
+      catch (Exception e) {
+        // TODO: handle exception
       }
     }
     this.img = new ImageIcon("").getImage();
   }
-
 }
