@@ -36,9 +36,9 @@ public class PkbTimer  {
                 if(midTime>0)
                 {
                     midTime--;
-                hh = midTime / 90 / 60 % 60;
-                mm = midTime / 90 % 60;
-                ss = midTime % 60;
+                hh = midTime / 100 / 60 % 60;
+                mm = midTime / 100 % 60;
+                ss = midTime % 100;
                 Toolkit.getDefaultToolkit().beep();
                 //timer.cancel();
                 //timergame.purge();
