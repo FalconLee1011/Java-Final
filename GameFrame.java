@@ -40,7 +40,7 @@ public class GameFrame extends JFrame {
     public int window_height;
 
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
-    private static final String[] fruitArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
+    private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
@@ -156,7 +156,7 @@ public class GameFrame extends JFrame {
                         brick_row.put(y_key, dig);
                         break;
                     case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heart.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
                         toolList2.add(6);
