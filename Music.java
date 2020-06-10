@@ -29,10 +29,9 @@ public class Music {
 	public void play() {
 		if (clip == null)
 			return;
-		// stop();
+		stop();
 		clip.setFramePosition(0);
-		//clip.start();
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
+		clip.start();
 	}
 
 	public void close() {
