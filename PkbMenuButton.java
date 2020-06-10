@@ -6,9 +6,7 @@ public class PkbMenuButton extends JButton{
     public PkbMenuButton(String btnText){
         super(btnText);
         Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
-        //System.out.println("screen width: "+d.width+ ", height: "+ d.height);
         int myWidth= (int)(d.width/ 30);
-        //System.out.println("myWidth: "+myWidth);
         setMargin(new Insets(10, 10, 10, 10));//上左下右
         setFont(new Font("SansSerif", Font.BOLD, myWidth));
         //setBackground(Color.WHITE);//背景色
