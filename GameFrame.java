@@ -45,7 +45,7 @@ public class GameFrame extends JFrame {
     public ArrayList<Integer> rockList2 = new ArrayList<Integer>();// 裝石頭的數字
     public ArrayList<Enery> toolList = new ArrayList<Enery>();//放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();//放道具數字
-    public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
+    // public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
@@ -227,13 +227,5 @@ public class GameFrame extends JFrame {
         }
         // Ghost
         g.drawImage(bi, 0, 0, null);
-    }
-
-    // 檢查子彈是否出界，出界則從容器中移除，不移除的話，內存會泄漏
-    public void checkBoom() {
-        for (int i = 0; i < boomList.size(); i++) {
-            Boom b = boomList.get(i);
-            if (b.x < 0 || b.x > 800) { boomList.remove(i); }
-        }
     }
 }

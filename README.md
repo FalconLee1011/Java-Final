@@ -28,9 +28,6 @@
     + import peekaboo.role.*;
 
 ## 道具 package peekaboo.props;
-* Boom ---------- 
-    - 馬力歐的子彈
-    - 可以參考
 * PkbFlyingRock - 撿起來的地板
     + import peekaboo.props.*;
     + import peekaboo.role.PkbHuman;
