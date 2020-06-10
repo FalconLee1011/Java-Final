@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
-    Music music = new Music("/MUSIC/startmusic.wav");
+    Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
