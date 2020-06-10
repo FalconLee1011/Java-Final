@@ -49,6 +49,8 @@ public class GameFrame extends JFrame {
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
+    Music music = new Music("/MUSIC/startmusic.wav");
+
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
@@ -148,7 +150,8 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        //peekaboo.huaxin.music.Util.startMusic("/startmusic.wav");
+        music.loop();
+
         this.human = new PkbHuman(this);// player
         human.start();
         // ghost.start();

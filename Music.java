@@ -1,4 +1,4 @@
-package pr.dawe.game.gfx;
+package peekaboo;
 
 import javax.sound.sampled.*;
 
@@ -25,7 +25,9 @@ public class Music {
 		}
 
 	}
-
+	public void loop(){
+		clip.loop(clip.LOOP_CONTINUOUSLY);
+	}
 	public void play() {
 		if (clip == null)
 			return;

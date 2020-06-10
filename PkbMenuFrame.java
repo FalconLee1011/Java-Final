@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import peekaboo.Music;
 
-import pr.dawe.game.gfx.Music;
 
 public class PkbMenuFrame extends JFrame{
     JPanel startPanel;
