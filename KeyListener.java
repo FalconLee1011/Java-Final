@@ -49,15 +49,6 @@ public class KeyListener extends KeyAdapter {
                 break;
         }
     }
-    // 添加子彈
-    // public void addBoom() {
-    //     Boom b = new Boom(gf.mario.x, gf.mario.y + 5, 10);
-    //     if (gf.mario.left)
-    //         b.speed = -2;
-    //     if (gf.mario.right)
-    //         b.speed = 2;
-    //     gf.boomList.add(b);
-    // }
     // 鍵盤釋放監聽
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

@@ -138,7 +138,7 @@ public class PkbHuman extends Thread {
     public void move() {
         // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         // while (true) {
-        if (up) {
+        if (up && !hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos)){
 
             // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0
             // && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
@@ -182,7 +182,7 @@ public class PkbHuman extends Thread {
                 // for (Door door : this.gameFrame.doors) { door.y += this.yspeed; }
             }
         }
-        if (down) {
+        if (down && !hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos)){
             // if(bump(gameFrame.eneryList,Str_Down)!=0 &&
             // bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
             // this.yspeed = 0; }
@@ -227,7 +227,7 @@ public class PkbHuman extends Thread {
             }
             // this.yspeed = 5;
         }
-        if (left) {// 向左走
+        if (left && !hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos)){// 向左走
                    // if (bump(gameFrame.eneryList,Str_Left)!=0 &&
                    // bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0)
                    // {//若撞到障礙物 this.xspeed = 0; }
@@ -272,7 +272,7 @@ public class PkbHuman extends Thread {
             }
             // this.xspeed = 5;
         }
-        if (right) {// 向右走
+        if (right && !hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos)){// 向右走
                     // if (bump(gameFrame.eneryList,Str_Right)!=0 &&
                     // bump(gameFrame.toolList,Str_Right)==0&&
                     // bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
@@ -606,7 +606,28 @@ public class PkbHuman extends Thread {
         return null;
     }
 
-    // public
+    public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos){
+        Rectangle playerPoly;
+
+        if (directionString.equals(Str_Up)) { playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + height), width, height); }
+        else if (directionString.equals(Str_Down)) { playerPoly = new Rectangle(this.x - (width / 2), this.y + (height / 2), width, height); }
+        else if (directionString.equals(Str_Left)) { playerPoly = new Rectangle(this.x - ((width / 2) + width), this.y - (height / 2), width, height); }
+        else if (directionString.equals(Str_Right)) { playerPoly = new Rectangle(this.x + (width / 2), this.y - (height / 2), width, height); }
+        else return false;
+
+        Map<String, Map<String, Enery>> birckPos = brickByPos;
+        Set<String> keys = birckPos.keySet();
+        for (String k : keys) {
+            for (String y_l : birckPos.get(k).keySet()) {
+                Enery e = birckPos.get(k).get(y_l);
+                Rectangle eneryPoly = new Rectangle(e.x - (e.width / 2), e.y - (e.height / 2), e.width, e.height);
+                if (playerPoly.intersects(eneryPoly)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean isDiggable() {
         Rectangle playerPoly = new Rectangle(this.x - (width / 2), this.y - (height / 2), width, height);
@@ -656,7 +677,8 @@ public class PkbHuman extends Thread {
         }
 
         // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.x, this.y);
-
     }
+
+
 
 }

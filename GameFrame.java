@@ -39,14 +39,14 @@ public class GameFrame extends JFrame {
     public int window_width;
     public int window_height;
 
-    public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
+    private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
+    private static final String[] fruitArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
+    
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
     public ArrayList<Enery> rockList = new ArrayList<Enery>();// 裝石頭
     public ArrayList<Integer> rockList2 = new ArrayList<Integer>();// 裝石頭的數字
     public ArrayList<Enery> toolList = new ArrayList<Enery>();//放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();//放道具數字
-    public ArrayList<Boom> boomList = new ArrayList<Boom>();// 子彈
-    public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
     //Music music = new Music("/MUSIC/gameMusic.wav");
@@ -130,7 +130,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, bewitch);
                         break; 
                     case 6: 
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120, new ImageIcon("img/devilFruit_grape_GIF.gif").getImage());
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         toolList2.add(6);
@@ -141,11 +141,15 @@ public class GameFrame extends JFrame {
                         eneryList.add(dig);
                         rockList.add(dig);
                         rockList2.add(7);
-                        map_row.put(y_key, dig);
+                        // map_row.put(y_key, dig);
+                        brick_row.put(y_key, dig);
                         break; 
                }
+               // Evary enery on map
                mapEneryByPos.put(x_key, map_row);
+               // Every reachable area
                backEneryByPos.put(x_key, rock_row);
+               // Every unreachable area
                rockEneryByPos.put(x_key, brick_row);
             }
         }
@@ -227,13 +231,5 @@ public class GameFrame extends JFrame {
         }
         // Ghost
         g.drawImage(bi, 0, 0, null);
-    }
-
-    // 檢查子彈是否出界，出界則從容器中移除，不移除的話，內存會泄漏
-    public void checkBoom() {
-        for (int i = 0; i < boomList.size(); i++) {
-            Boom b = boomList.get(i);
-            if (b.x < 0 || b.x > 800) { boomList.remove(i); }
-        }
     }
 }
