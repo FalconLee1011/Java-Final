@@ -112,7 +112,7 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, turtle);
                         break; 
                     case 4: 
-                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage(), doorSerial);
+                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);  
                         toolList2.add(4);   
