@@ -186,6 +186,7 @@ public class GameFrame extends JFrame {
                 while (true) {
                     repaint();
                     if(kaboom){
+
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
                             Enery e = brickList.get(i);
@@ -193,7 +194,7 @@ public class GameFrame extends JFrame {
                             // try { Thread.sleep(5); }
                             // catch (Exception e3) {}
                         }
-                        
+                        kaboom = false;
                         // for (int i = 0; i < eneryList.size(); i++) {
                         //     r.nextInt(eneryList.size() - 1);
                         //     Enery e = eneryList.get(i);
