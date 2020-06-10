@@ -284,7 +284,7 @@ public class PkbHuman extends Thread {
             else if (teacher == true && camel == false && quickSend == false)
                 this.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
             else if (teacher == false && camel == false && quickSend == false)
-                this.img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                this.img = new ImageIcon("img/human_rightMove_gif_160.gif").getImage();
             else if ((teacher == true && camel == true && quickSend == true)
                     || (teacher == true && camel == true && quickSend == false)
                     || (teacher == true && camel == false && quickSend == true)
@@ -560,6 +560,17 @@ public class PkbHuman extends Thread {
                 img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                 isWitch = true;
                 Time(10000,5);
+                // 從 bump 判定的字典中將碰撞到的物件移除
+                bumpedEnery.img = new ImageIcon("img/back.png").getImage();
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
+                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+
+                // backpack.add(bumpedEnery);
+            }
+            else if (bumpedEnery instanceof Heart) {
+
+                img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();
+                this.gameFrame.hp++;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
