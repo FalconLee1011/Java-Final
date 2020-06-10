@@ -26,48 +26,30 @@ void printMaze(FILE *fp_w)
     int i, j;
     for (i = 1; i <= 7; i++)
     {
+        fprintf(fp_w, "1,1,1,1,1,1,1,1,");
         for (j = 0; j <= 2 * width; j++)
         {
-            if (j != 2 * width)
-            {
-                fprintf(fp_w, "1,", maze[i][j]);
-            }
-            else
-            {
-                fprintf(fp_w, "1", maze[i][j]);
-            }
+            fprintf(fp_w, "1,");
         }
-        fprintf(fp_w, "\n");
+        fprintf(fp_w, "1,1,1,1,1,1,1,1\n");
     }
     for (i = 0; i <= 2 * height; i++)
     {
+        fprintf(fp_w, "1,1,1,1,1,1,1,1,");
         for (j = 0; j <= 2 * width; j++)
         {
-            if (j != 2 * width)
-            {
-                fprintf(fp_w, "%d,", maze[i][j]);
-            }
-            else
-            {
-                fprintf(fp_w,"%d", maze[i][j]);
-            }
+            fprintf(fp_w, "%d,", maze[i][j]);
         }
-        fprintf(fp_w,"\n");
+        fprintf(fp_w, "1,1,1,1,1,1,1,1\n");
     }
     for (i = 1; i <= 7; i++)
     {
+        fprintf(fp_w, "1,1,1,1,1,1,1,1,");
         for (j = 0; j <= 2 * width; j++)
         {
-            if (j != 2 * width)
-            {
-                fprintf(fp_w, "1,", maze[i][j]);
-            }
-            else
-            {
-                fprintf(fp_w, "1", maze[i][j]);
-            }
+            fprintf(fp_w, "1,");
         }
-        fprintf(fp_w, "\n");
+        fprintf(fp_w, "1,1,1,1,1,1,1,1\n");
     }
 }
 void createMaze(int x, int y)
@@ -95,15 +77,49 @@ void createMaze(int x, int y)
         createMaze(a, b);
     }
 }
+void printInitMap(FILE *fp_w)
+{
+    int i, j;
+    for (i = 1; i <= 8; i++)
+    {
+        fprintf(fp_w, "1,1,1,1,1,1,1,");
+        for (j = 0; j <= 2 * width; j++)
+        {
+            fprintf(fp_w, "1,");
+        }
+        fprintf(fp_w, "1,1,1,1,1,1,1\n");
+    }
+    for (i = 0; i <= 2 * height; i++)
+    {
+        fprintf(fp_w, "1,1,1,1,1,1,1,1,");
+        for (j = 1; j < 2 * width; j++)
+        {
+            fprintf(fp_w, "0,");
+        }
+        fprintf(fp_w, "1,1,1,1,1,1,1,1\n");
+    }
+    for (i = 1; i <= 8; i++)
+    {
+        fprintf(fp_w, "1,1,1,1,1,1,1,");
+        for (j = 0; j <= 2 * width; j++)
+        {
+            fprintf(fp_w, "1,");
+
+        }
+        fprintf(fp_w, "1,1,1,1,1,1,1\n");
+    }
+}
 int main()
 {
     srand((unsigned int)time(NULL));
-    initMaze();
-    createMaze(1, 1);
-    FILE *fp_w = fopen("maze2.txt", "w");
+    FILE *fp_w = fopen("maze.txt", "w");
     if (fp_w == NULL)
         return -1;
-    printMaze(fp_w);
+    initMaze();//print maze
+    createMaze(1, 1);//print maze
+    printMaze(fp_w);    //print maze
+    // printInitMap(fp_w); //print init map
+
     fclose(fp_w);
     return 0;
 }
