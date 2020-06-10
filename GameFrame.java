@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();//放道具數字
     Random r=new Random();
 
-    Music music = new Music("/MUSIC/gameMusic.wav");
+    //Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
@@ -154,7 +154,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        music.loop();
+        //music.loop();
 
         this.human = new PkbHuman(this);// player
         human.start();
