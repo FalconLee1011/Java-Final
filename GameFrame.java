@@ -61,17 +61,17 @@ public class GameFrame extends JFrame {
         // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
         // 距離追隨、會巡邏
         PkbGhost ghost_add;
-        ghost_add = new PkbGhost(3120, 3120, 0, true, 600, true, 100);
+        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 100);
         this.ghosts.add(ghost_add);
 
-        // ghost_add = new PkbGhost(2013, 1000, 1, true, 600, true, 100);
-        // this.ghosts.add(ghost_add);
+        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 100);
+        this.ghosts.add(ghost_add);
 
-        // ghost_add = new PkbGhost(500,720, 1, true, 600, true, 100);
-        // this.ghosts.add(ghost_add);
+        ghost_add = new PkbGhost(3120,3120, 1, true, 600, true, 100);
+        this.ghosts.add(ghost_add);
 
-        // ghost_add = new PkbGhost(1000,1000, 1, true, 600, true, 100);
-        // this.ghosts.add(ghost_add);
+        ghost_add = new PkbGhost(3120,3120, 1, true, 600, true, 100);
+        this.ghosts.add(ghost_add);
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
             for (int j = 0; j < map[0].length; j++) {
@@ -189,7 +189,7 @@ public class GameFrame extends JFrame {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
                             Enery e = brickList.get(i);
-                            e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                            e.img = new ImageIcon("img/Back.png").getImage();
                             // try { Thread.sleep(5); }
                             // catch (Exception e3) {}
                         }
@@ -234,9 +234,9 @@ public class GameFrame extends JFrame {
 
                         if (ghost.pursue(human)) {
                             hp--;
-                            if (hp <= 0)
-                            {
+                            if (hp <= 0){
                                 System.out.println("GAME OVER");
+                                // break;
                             }
                         }
                     }
@@ -256,7 +256,7 @@ public class GameFrame extends JFrame {
         this.window_width = gd.getDisplayMode().getWidth();
         this.window_height = gd.getDisplayMode().getHeight();
         this.setSize(this.window_width, this.window_height);
-        this.setTitle("超級瑪麗");
+        this.setTitle("PeeKaBoo~");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(3);
