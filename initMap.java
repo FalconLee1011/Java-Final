@@ -17,7 +17,7 @@ public class InitMap {
     public ArrayList<String> list = new ArrayList<String>();
     public int[][] map = null;
 
-    public int[][] readMap() throws Exception {//return 2D-array
+    public int[][] readMap() throws Exception {// return 2D-array
 
         // 構造文件輸入流
         FileInputStream fis = new FileInputStream("MAPS/map.txt");
@@ -26,7 +26,7 @@ public class InitMap {
         BufferedReader br = new BufferedReader(isr);
 
         String value = br.readLine();// 讀取一行數據
-        while (value != null) {//還有內容
+        while (value != null) {// 還有內容
             // 將讀取到的一行數據加入到容器中
             list.add(value);
             value = br.readLine();
@@ -37,9 +37,9 @@ public class InitMap {
         int row = list.size();// 得到多少行多少列
         int cloum = 0;
         for (int i = 0; i < 1; i++) {
-            String str = list.get(i);//list[i]
+            String str = list.get(i);// list[i]
             String[] values = str.split(",");
-            cloum = values.length;//1 row 幾個 elements
+            cloum = values.length;// 1 row 幾個 elements
         }
         map = new int[row][cloum];
 
@@ -51,7 +51,7 @@ public class InitMap {
                 map[i][j] = Integer.parseInt(values[j]);
             }
         }
-        //ModifyMap temp= new ModifyMap("MAPS\temp.txt", map);
+        // ModifyMap temp= new ModifyMap("MAPS\temp.txt", map);
         return map;
     }
 }
