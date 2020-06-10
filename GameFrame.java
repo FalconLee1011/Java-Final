@@ -186,17 +186,23 @@ public class GameFrame extends JFrame {
                     if(kaboom){
                         
                         for (int i = 0; i < eneryList.size(); i++) {
+                            r.nextInt(eneryList.size() - 1);
                             Enery e = eneryList.get(i);
                             e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         }
                         for (int i = 0; i < toolList.size(); i++) {
+                            r.nextInt(toolList.size() - 1);
                             Enery e = toolList.get(i);
                             e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         }
-                        for (PkbFlyingRock fock : flyingRocks) {
+                        for (int i = 0; i < fock.size(); i++) {
+                            r.nextInt(flyingRocks.size() - 1);
+                            PkbFlyingRock fock = flyingRocks.get(i);
                             fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         }
-                        for (PkbGhost ghost : ghosts) {
+                        for (int i = 0; i < ghost.size(); i++) {
+                            r.nextInt(ghosts.size() - 1);
+                            PkbGhost ghost = ghosts.get(i);
                             ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         }
                         continue;
