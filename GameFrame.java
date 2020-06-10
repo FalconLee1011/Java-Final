@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
     public int bspeed = 0;// 子彈速度
     Random r=new Random();
 
-    Music music = new Music("/MUSIC/gameMusic.wav");
+    //Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() throws Exception {// 初始化bgImg和player
         // 直接追隨
@@ -123,7 +123,7 @@ public class GameFrame extends JFrame {
                         doorSerial += 1;
                         break; 
                     case 5: 
-                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/bewitch.jpg").getImage());
+                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/scorpion.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         toolList2.add(5);
@@ -150,7 +150,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        music.loop();
+        //music.loop();
 
         this.human = new PkbHuman(this);// player
         human.start();

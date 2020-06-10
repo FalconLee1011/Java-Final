@@ -20,7 +20,7 @@ public class InitMap {
     public int[][] readMap() throws Exception {// return 2D-array
 
         // 構造文件輸入流
-        FileInputStream fis = new FileInputStream("MAPS/map.txt");
+        FileInputStream fis = new FileInputStream("MAPS/mapPaceman.txt");
 
         InputStreamReader isr = new InputStreamReader(fis);
         BufferedReader br = new BufferedReader(isr);
