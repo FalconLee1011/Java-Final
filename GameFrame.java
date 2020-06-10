@@ -189,30 +189,32 @@ public class GameFrame extends JFrame {
                             r.nextInt(eneryList.size() - 1);
                             Enery e = eneryList.get(i);
                             e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                            try { Thread.sleep(5); }
-                            catch (Exception e) {}
                         }
+                        try { Thread.sleep(5); }
+                        catch (Exception e) {}
                         for (int i = 0; i < toolList.size(); i++) {
                             r.nextInt(toolList.size() - 1);
                             Enery e = toolList.get(i);
                             e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                            try { Thread.sleep(5); }
-                            catch (Exception e) {}
                         }
-                        for (int i = 0; i < fock.size(); i++) {
-                            r.nextInt(flyingRocks.size() - 1);
-                            PkbFlyingRock fock = flyingRocks.get(i);
-                            fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                            try { Thread.sleep(5); }
-                            catch (Exception e) {}
+                        try { Thread.sleep(5); }
+                        catch (Exception e) {}
+                        if(flyingRocks.size() > 0){
+                            for (int i = 0; i < flyingRocks.size(); i++) {
+                                r.nextInt(flyingRocks.size() - 1);
+                                PkbFlyingRock fock = flyingRocks.get(i);
+                                fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                            }
                         }
-                        for (int i = 0; i < ghost.size(); i++) {
+                        try { Thread.sleep(5); }
+                        catch (Exception e) {}
+                        for (int i = 0; i < ghosts.size(); i++) {
                             r.nextInt(ghosts.size() - 1);
                             PkbGhost ghost = ghosts.get(i);
                             ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                            try { Thread.sleep(5); }
-                            catch (Exception e) {}
                         }
+                        try { Thread.sleep(5); }
+                        catch (Exception e) {}
                         continue;
                     }
                     for (PkbGhost ghost : ghosts) {
