@@ -56,7 +56,7 @@ public class PkbHuman extends Thread {
     */
     public PkbHuman(GameFrame g) {
         this.gameFrame = g;
-        teleport(1000, 500);
+        teleport(1200, 1500);
     }
 
     public int getX() {
@@ -328,7 +328,7 @@ public class PkbHuman extends Thread {
     public void Witch() {
         // System.out.printf("x: %d, y: %d%n", this.x, this.y);
         // while (true) {
-        if (down) {
+        if (down && !hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos)) {
 
             // if(bump(gameFrame.eneryList,Str_Up)!=0 && bump(gameFrame.toolList,Str_Up)==0
             // && bump(gameFrame.rockList,Str_Up)==0){//碰觸到道具，道具不影響速度變0 this.yspeed = 0; }
@@ -369,7 +369,7 @@ public class PkbHuman extends Thread {
                 }
             }
         }
-        if (up) {
+        if (up && !hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos)) {
             // if(bump(gameFrame.eneryList,Str_Down)!=0 &&
             // bump(gameFrame.toolList,Str_Down)==0&& bump(gameFrame.rockList,Str_Down)==0){
             // this.yspeed = 0; }
@@ -412,7 +412,7 @@ public class PkbHuman extends Thread {
             }
             // this.yspeed = 5;
         }
-        if (right) {// 向左走
+        if (right && !hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos)) {// 向左走
             // if (bump(gameFrame.eneryList,Str_Left)!=0 &&
             // bump(gameFrame.toolList,Str_Left)==0&& bump(gameFrame.rockList,Str_Left)==0)
             // {//若撞到障礙物 this.xspeed = 0; }
@@ -456,7 +456,7 @@ public class PkbHuman extends Thread {
             }
             // this.xspeed = 5;
         }
-        if (left) {// 向右走
+        if (left && !hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos)) {// 向右走
             // if (bump(gameFrame.eneryList,Str_Right)!=0 &&
             // bump(gameFrame.toolList,Str_Right)==0&&
             // bump(gameFrame.rockList,Str_Right)==0) {//若撞到障礙物 this.xspeed = 0; }
@@ -609,10 +609,18 @@ public class PkbHuman extends Thread {
     public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos){
         Rectangle playerPoly;
 
-        if (directionString.equals(Str_Up)) { playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + height), width, height); }
-        else if (directionString.equals(Str_Down)) { playerPoly = new Rectangle(this.x - (width / 2), this.y + (height / 2), width, height); }
-        else if (directionString.equals(Str_Left)) { playerPoly = new Rectangle(this.x - ((width / 2) + width), this.y - (height / 2), width, height); }
-        else if (directionString.equals(Str_Right)) { playerPoly = new Rectangle(this.x + (width / 2), this.y - (height / 2), width, height); }
+        if (directionString.equals(Str_Up)) { 
+            playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + (height / 10)), width - (width / 10), height - (height / 10)); 
+        }
+        else if (directionString.equals(Str_Down)) { 
+            playerPoly = new Rectangle(this.x - (width / 2), (this.y - (height / 2)) + (height / 10), width - (width / 10), height - (height / 10)); 
+        }
+        else if (directionString.equals(Str_Left)) { 
+            playerPoly = new Rectangle(this.x - ((width / 2) + (width / 10)), this.y - (height / 2), width - (width / 10), height - (height / 10)); 
+        }
+        else if (directionString.equals(Str_Right)) { 
+            playerPoly = new Rectangle(this.x - (width / 2) + (width / 10), this.y - (height / 2), width - (width / 10), height - (height / 10)); 
+        }
         else return false;
 
         Map<String, Map<String, Enery>> birckPos = brickByPos;
