@@ -158,10 +158,10 @@ public class GameFrame extends JFrame {
                         brick_row.put(y_key, dig);
                         break;
                     case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heart.png").getImage());
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
-                        toolList2.add(6);
+                        toolList2.add(8);
                         // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
@@ -282,7 +282,8 @@ public class GameFrame extends JFrame {
         big.setFont(font);
         big.drawString(s, 500, 200);
         h = "health " + hp;
-        Font font2 = new Font("宋体", Font.BOLD, 20);
+        Font font2 = new Font("微软雅黑", Font.BOLD, 50);
+        big.setColor(new Color(0, 0, 255));
         big.setFont(font2);
         big.drawString(h, 100, 200);
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
