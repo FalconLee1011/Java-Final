@@ -19,8 +19,8 @@ import java.util.Calendar;
 import java.awt.Point;
 
 /**
- * PkbGhost
- * 撿起來的地板
+ * PkbFlyingRock
+ * 正在飛翔的石頭們
  */
 public class PkbFlyingRock extends Thread{
 
@@ -38,26 +38,30 @@ public class PkbFlyingRock extends Thread{
     this.x = player.x;
     this.y = player.y;
     this.direction = direction;
-    System.out.println("ROCK Created");
   }
 
   public void run(){
 
     try {
-      Thread.sleep(1000);
+      Thread.sleep(200);
     } catch (Exception e) {
       //TODO: handle exception
     }
 
     while (true) {
-      System.out.printf("ROCK MOVING <%d, %d>", this.x, this.y);
       if (this.direction == "Up") { this.y -= this.speed; }
       else if (this.direction == "Down") { this.y += this.speed; }
       else if (this.direction == "Left") { this.x -= this.speed; }
       else if (this.direction == "Right") { this.x += this.speed; }
       if(this.hasMoved > 500) break;
       this.hasMoved += this.speed;
+      try {
+        Thread.sleep(2);
+      } catch (Exception e) {
+        //TODO: handle exception
+      }
     }
+    this.img = new ImageIcon("").getImage();
   }
 
 }

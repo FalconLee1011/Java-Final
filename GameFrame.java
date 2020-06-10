@@ -24,7 +24,7 @@ public class GameFrame extends JFrame {
 
     public BackgroundImage bg= new BackgroundImage(); // 背景圖片
     public int[][] map = (new initMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
-    public PkbHuman human = new PkbHuman(this);// player
+    public PkbHuman human;
     public PkbTimer test=new PkbTimer(this);
 
     public Map <String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
@@ -32,6 +32,12 @@ public class GameFrame extends JFrame {
     public Map <String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
     public ArrayList <PkbFlyingRock> flyingRocks = new ArrayList<PkbFlyingRock>();
     public ArrayList <PkbGhost> ghosts = new ArrayList<PkbGhost>();
+
+    public ArrayList <Door> doors = new ArrayList<Door>();
+    public int doorSerial = 0;
+
+    public int window_width;
+    public int window_height;
 
     public String[] cactusArr = {"img/cactus1.png", "img/cactus2.png", "img/cactus3.png"};
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -49,32 +55,19 @@ public class GameFrame extends JFrame {
         // 距離追隨
         // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
         // 距離追隨、會巡邏
-        PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200, true, 100);
-        this.ghosts.add(ghost);
-        
-        human.start();
-        // ghost.start();
-        // 視窗重繪線程
-        new Thread() {//。thread以外的一個子thread則是指程式人員自行在主thread裡再定義一個「程式區塊」，並請cpu同步的去執行那個區塊。
-            public void run() {
-                while (true) {
-                    repaint();// 重繪視窗
-                    // checkBoom();// 檢查子彈是否出界
-                    if(ghost.pursue(human)){
-                        System.out.println("GAME OVER");
-                        // break;
-                    }
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();//在命令行打印异常信息在程序中出错的位置及原因
-                    }
-                }
-            }
-        }.start();
-        
-        // Map mp = new Map();
-        // map = mp.readMap();// 建置地圖
+        PkbGhost ghost_add;
+        ghost_add = new PkbGhost(3120, 3120, 0, true, 600, true, 100);
+        this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(2013, 1000, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(500,720, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(1000,1000, 1, true, 600, true, 100);
+        // this.ghosts.add(ghost_add);
+
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
             for (int j = 0; j < map[0].length; j++) {
@@ -100,7 +93,6 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                    
                         Barrier brick = new Barrier(j * 120, i * 120, 120, 120, new ImageIcon(cactusArr[r.nextInt(3)]).getImage());//(x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brick_row.put(y_key, brick);
@@ -120,11 +112,13 @@ public class GameFrame extends JFrame {
                         map_row.put(y_key, turtle);
                         break; 
                     case 4: 
-                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage());
+                        Door door = new Door(j * 120, i * 120, 120, 120, new ImageIcon("img/door.jpg").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);  
                         toolList2.add(4);   
                         map_row.put(y_key, door);
+                        doors.add(door);
+                        doorSerial += 1;
                         break; 
                     case 5: 
                         Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120, new ImageIcon("img/bewitch.jpg").getImage());
@@ -155,11 +149,35 @@ public class GameFrame extends JFrame {
         }
         // 設置背景音樂
         //peekaboo.huaxin.music.Util.startMusic("/startmusic.wav");
+        this.human = new PkbHuman(this);// player
+        human.start();
+        // ghost.start();
+        // 視窗重繪線程
+        new Thread() {//。thread以外的一個子thread則是指程式人員自行在主thread裡再定義一個「程式區塊」，並請cpu同步的去執行那個區塊。
+            public void run() {
+                while (true) {
+                    repaint();// 重繪視窗
+                    // checkBoom();// 檢查子彈是否出界
+                    for (PkbGhost ghost : ghosts) {
+                        if(ghost.pursue(human)){ System.out.println("GAME OVER"); }
+                    }
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();//在命令行打印异常信息在程序中出错的位置及原因
+                    }
+                }
+            }
+        }.start();
+        
     }
 
     public void initFrame() {
         // 設置視窗相關屬性
-        this.setSize(3200,1800);
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        this.window_width = gd.getDisplayMode().getWidth();
+        this.window_height = gd.getDisplayMode().getHeight();
+        this.setSize(this.window_width, this.window_height);
         this.setTitle("超級瑪麗");
         this.setResizable(false);//resizeable值为true时，表示生成的窗体可以自由改变大小；
         //resizeable值为false时，表示生成的窗体大小是由程序员决定的，用户不可以自由改变该窗体的大小。
