@@ -193,12 +193,12 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== oneThreeBtn){
                     gf = new GameFrame("MAPS/mapDiffcult.txt");
                     gf.timeTrial=true;
-                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Maze...", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Difficult...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }
                 else if(e.getSource()== twoTwoBtn){
                     gf = new GameFrame("MAPS/maze.txt");
-                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Maze...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }
                 else{
