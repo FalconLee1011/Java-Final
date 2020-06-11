@@ -190,7 +190,14 @@ public class PkbMenuFrame extends JFrame{
                     modePanel.setVisible(true);
                 }
                 else{
+                    System.out.println(e.getSource());
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Loading game...", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
+                    try {
+                        //GameFrame gf = new GameFrame();
+                        //gf.initFrame();
+                    } catch (Exception err) {
+                        //TODO: handle exception
+                    }
                     music.close();
                 }
         }
