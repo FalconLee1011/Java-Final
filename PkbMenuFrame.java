@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import peekaboo.Music;
+import peekaboo.*;
 
 
 public class PkbMenuFrame extends JFrame{
