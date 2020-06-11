@@ -185,7 +185,7 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== ghostBackToModeBtn){
                     ghostModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                }
+                }d
                 else if(e.getSource()== humanBackToModeBtn){
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
@@ -193,7 +193,7 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== oneThreeBtn){
                     gf = new GameFrame("MAPS/mapDiffcult.txt");
                     gf.timeTrial=true;
-                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Maze...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }
                 else if(e.getSource()== twoTwoBtn){
