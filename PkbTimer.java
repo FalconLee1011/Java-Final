@@ -23,6 +23,7 @@ public class PkbTimer  {
     public GameFrame gf;
     public long midTime=21000;
     public long hh=0,mm=0,ss=0;
+    public long h=0,m=0,s=0;
     public PkbTimer(GameFrame gf) {
         
         
@@ -36,11 +37,15 @@ public class PkbTimer  {
                 if(midTime>0)
                 {
                     midTime--;
+                    num++;
                 hh = midTime / 100 / 60 % 60;
                 mm = midTime / 100 % 60;
                 ss = midTime % 100;
+                h = num / 100 / 60 % 60;
+                m = num / 100 % 60;
+                s = num % 100;
                 Toolkit.getDefaultToolkit().beep();
-                //timer.cancel();
+                
                 //timergame.purge();
                 }
                 else

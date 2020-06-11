@@ -23,7 +23,7 @@ import java.util.Random;
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg = new BackgroundImage(); // 背景圖片
-    public InitMap iMap = new InitMap("MAPS/map.txt"); 
+    public InitMap iMap = new InitMap("MAPS/map.txt");
     public int[][] map;
     public PkbHuman human;
     public PkbTimer test = new PkbTimer(this);
@@ -41,7 +41,7 @@ public class GameFrame extends JFrame {
     public int window_height;
 
     public boolean kaboom = false;
-
+    public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
@@ -56,22 +56,26 @@ public class GameFrame extends JFrame {
     // Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() {// 初始化bgImg和player
-        try { this.map = this.iMap.readMap(); } 
-        catch (Exception e) { }
+        try {
+            this.map = this.iMap.readMap();
+        } catch (Exception e) {
+        }
     }
 
     public GameFrame(String fileName) {// 初始化bgImg和player
         this.iMap = new InitMap(fileName);
-        try { this.map = this.iMap.readMap(); } 
-        catch (Exception e) { }
+        try {
+            this.map = this.iMap.readMap();
+        } catch (Exception e) {
+        }
     }
 
-    public void startGame(){
+    public void startGame() {
         initFrame();
         initGame();
     }
 
-    public void initGame(){
+    public void initGame() {
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
         // 距離追隨
@@ -84,10 +88,10 @@ public class GameFrame extends JFrame {
         ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 120);
         this.ghosts.add(ghost_add);
 
-        ghost_add = new PkbGhost(3120,3120, 1, true, 600, true, 600);
+        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 600);
         this.ghosts.add(ghost_add);
 
-        ghost_add = new PkbGhost(3120,3120, 1, true, 600, true, 900);
+        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 900);
         this.ghosts.add(ghost_add);
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
@@ -177,7 +181,8 @@ public class GameFrame extends JFrame {
                         brick_row.put(y_key, dig);
                         break;
                     case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120, new ImageIcon("img/heartWithSend.png").getImage());
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120,
+                                new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
                         toolList2.add(8);
@@ -202,7 +207,7 @@ public class GameFrame extends JFrame {
             public void run() {
                 while (true) {
                     repaint();
-                    if(kaboom){
+                    if (kaboom) {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
                             Enery e = brickList.get(i);
@@ -211,39 +216,39 @@ public class GameFrame extends JFrame {
                             // catch (Exception e3) {}
                         }
                         // for (int i = 0; i < eneryList.size(); i++) {
-                        //     // r.nextInt(eneryList.size() - 1);
-                        //     Enery e = eneryList.get(i);
-                        //     e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        // // r.nextInt(eneryList.size() - 1);
+                        // Enery e = eneryList.get(i);
+                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         // }
                         kaboom = false;
                         System.out.println("BanBooZoled!");
                         // for (int i = 0; i < eneryList.size(); i++) {
-                        //     r.nextInt(eneryList.size() - 1);
-                        //     Enery e = eneryList.get(i);
-                        //     e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        //     try { Thread.sleep(5); }
-                        //     catch (Exception e3) {}
+                        // r.nextInt(eneryList.size() - 1);
+                        // Enery e = eneryList.get(i);
+                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        // try { Thread.sleep(5); }
+                        // catch (Exception e3) {}
                         // }
                         // for (int i = 0; i < toolList.size(); i++) {
-                        //     r.nextInt(toolList.size() - 1);
-                        //     Enery e = toolList.get(i);
-                        //     e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        //     try { Thread.sleep(5); }
-                        //     catch (Exception e12) {}
+                        // r.nextInt(toolList.size() - 1);
+                        // Enery e = toolList.get(i);
+                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        // try { Thread.sleep(5); }
+                        // catch (Exception e12) {}
                         // }
                         // for (int i = 0; i < flyingRocks.size(); i++) {
-                        //     r.nextInt(flyingRocks.size() - 1);
-                        //     PkbFlyingRock fock = flyingRocks.get(i);
-                        //     fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        //     try { Thread.sleep(5); }
-                        //     catch (Exception e) {}
+                        // r.nextInt(flyingRocks.size() - 1);
+                        // PkbFlyingRock fock = flyingRocks.get(i);
+                        // fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        // try { Thread.sleep(5); }
+                        // catch (Exception e) {}
                         // }
                         // for (int i = 0; i < ghosts.size(); i++) {
-                        //     r.nextInt(ghosts.size() - 1);
-                        //     PkbGhost ghost = ghosts.get(i);
-                        //     ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        //     try { Thread.sleep(5); }
-                        //     catch (Exception e) {}
+                        // r.nextInt(ghosts.size() - 1);
+                        // PkbGhost ghost = ghosts.get(i);
+                        // ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
+                        // try { Thread.sleep(5); }
+                        // catch (Exception e) {}
                         // }
                         continue;
                     }
@@ -251,8 +256,9 @@ public class GameFrame extends JFrame {
 
                         if (ghost.pursue(human)) {
                             hp--;
-                            if (hp <= 0){
+                            if (hp <= 0) {
                                 System.out.println("GAME OVER");
+                                // test.timergame.cancel();////////計時賽的時間暫停
                                 // break;
                             }
                         }
@@ -306,11 +312,18 @@ public class GameFrame extends JFrame {
         big.setColor(new Color(255, 255, 255));
         int fontSize = 100;
         String s, h;
-
-        s = "Time " + test.hh + ":" + test.mm + ":" + test.ss;
-        Font font = new Font("宋体", Font.BOLD, fontSize);
-        big.setFont(font);
-        big.drawString(s, 500, 200);
+        if (timeTrial == true) {
+            test.TimeGame();
+            s = "Time " + test.h + ":" + test.m + ":" + test.s;
+            Font font = new Font("宋体", Font.BOLD, fontSize);
+            big.setFont(font);
+            big.drawString(s, 500, 200);
+        } else {
+            s = "Time " + test.hh + ":" + test.mm + ":" + test.ss;
+            Font font = new Font("宋体", Font.BOLD, fontSize);
+            big.setFont(font);
+            big.drawString(s, 500, 200);
+        }
         h = "health " + hp;
         big.setColor(new Color(0, 0, 255));
         Font font2 = new Font("宋体", Font.BOLD, 50);

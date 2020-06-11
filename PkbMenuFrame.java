@@ -190,6 +190,12 @@ public class PkbMenuFrame extends JFrame{
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
                 }
+                else if(e.getSource()== oneThreeBtn){
+                    gf = new GameFrame("MAPS/mapDiffcult.txt");
+                    gf.timeTrial=true;
+                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
+                    gf.startGame();
+                }
                 else if(e.getSource()== twoTwoBtn){
                     gf = new GameFrame("MAPS/maze.txt");
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
@@ -213,8 +219,8 @@ public class PkbMenuFrame extends JFrame{
                     }
                     else if(e.getSource() == fivePBtn){
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Unlock with $130 NT!", "Locked", JOptionPane.INFORMATION_MESSAGE);
-                        // gf = new GameFrame("MAPS/map.txt");
-                        // gf.startGame();
+                         gf = new GameFrame("MAPS/mapPaceman.txt");
+                         gf.startGame();
                     }
 
                     music.close();
