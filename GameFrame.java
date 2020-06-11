@@ -313,13 +313,16 @@ public class GameFrame extends JFrame {
         }
 
         if(hasWon && isGameOver){
+            // GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            // this.window_width = gd.getDisplayMode().getWidth();
+            // this.window_height = gd.getDisplayMode().getHeight();
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), human.x, human.y, img.getIconWidth(), img.getIconHeight(), null);
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
 
         }
         else if(!hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), human.x, human.y, img.getIconWidth(), img.getIconHeight(), null);
+            ImageIcon img = new ImageIcon("img/gameover.png");
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
         }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
