@@ -40,6 +40,9 @@ public class GameFrame extends JFrame {
     public int window_width;
     public int window_height;
 
+    private boolean hasWon = false;
+    private boolean isGameOver = false;
+
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
@@ -258,7 +261,10 @@ public class GameFrame extends JFrame {
                             hp--;
                             if (hp <= 0) {
                                 System.out.println("GAME OVER");
+                                hasWon = false;
+                                isGameOver = true;
                                 // test.timergame.cancel();////////計時賽的時間暫停
+                                repaint();
                                 // break;
                             }
                         }
@@ -304,6 +310,16 @@ public class GameFrame extends JFrame {
         }
         for (PkbFlyingRock fock : this.flyingRocks) {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
+        }
+
+        if(hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/win_GIF.gif");
+            big.drawImage(img.getImage(), human.x, human.y, img.getIconWidth(), img.getIconHeight(), null);
+
+        }
+        else if(!hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/win_GIF.gif");
+            big.drawImage(img.getImage(), human.x, human.y, img.getIconWidth(), img.getIconHeight(), null);
         }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
