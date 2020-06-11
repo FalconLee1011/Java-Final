@@ -185,7 +185,7 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== ghostBackToModeBtn){
                     ghostModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                }
+                }d
                 else if(e.getSource()== humanBackToModeBtn){
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
