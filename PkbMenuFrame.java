@@ -219,8 +219,8 @@ public class PkbMenuFrame extends JFrame{
                     }
                     else if(e.getSource() == fivePBtn){
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Unlock with $130 NT!", "Locked", JOptionPane.INFORMATION_MESSAGE);
-                         gf = new GameFrame("MAPS/mapPaceman.txt");
-                         gf.startGame();
+                        //  gf = new GameFrame("MAPS/mapPaceman.txt");
+                        //  gf.startGame();
                     }
 
                     music.close();
