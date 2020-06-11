@@ -155,6 +155,7 @@ public class PkbMenuFrame extends JFrame{
     private class ButtonClick implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+                GameFrame gf;
                 if(e.getSource()== startBtn){
                     startPanel.setVisible(false);
                     modePanel.setVisible(true);
@@ -189,15 +190,33 @@ public class PkbMenuFrame extends JFrame{
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
                 }
+                else if(e.getSource()== twoTwoBtn){
+                    gf = new GameFrame("MAPS/maze.txt");
+                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
+                    gf.startGame();
+                }
                 else{
-                    System.out.println(e.getSource());
-                    JOptionPane.showMessageDialog(PkbMenuFrame.this, "Loading game...", "Welcome!", JOptionPane.INFORMATION_MESSAGE);
-                    try {
-                        //GameFrame gf = new GameFrame();
-                        //gf.initFrame();
-                    } catch (Exception err) {
-                        //TODO: handle exception
+                    if(e.getSource() == onePBtn){
+                        gf = new GameFrame("MAPS/map.txt");
+                        JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
+                        gf.startGame();
                     }
+                    else if(e.getSource() == twoPBtn){
+                        gf = new GameFrame("MAPS/map1.txt");
+                        JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 2...", JOptionPane.INFORMATION_MESSAGE);
+                        gf.startGame();
+                    }
+                    else if(e.getSource() == threePBtn){
+                        gf = new GameFrame("MAPS/map2.txt");
+                        JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 3...", JOptionPane.INFORMATION_MESSAGE);
+                        gf.startGame();
+                    }
+                    else if(e.getSource() == fivePBtn){
+                        JOptionPane.showMessageDialog(PkbMenuFrame.this, "Unlock with $130 NT!", "Locked", JOptionPane.INFORMATION_MESSAGE);
+                        // gf = new GameFrame("MAPS/map.txt");
+                        // gf.startGame();
+                    }
+
                     music.close();
                 }
         }

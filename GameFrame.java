@@ -23,7 +23,8 @@ import java.util.Random;
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg = new BackgroundImage(); // 背景圖片
-    public int[][] map = (new InitMap()).readMap();// 畫地圖，制定規則，是1畫磚頭，是2畫skates，是3畫水管
+    public InitMap iMap = new InitMap("MAPS/map.txt"); 
+    public int[][] map;
     public PkbHuman human;
     public PkbTimer test = new PkbTimer(this);
 
@@ -54,7 +55,23 @@ public class GameFrame extends JFrame {
 
     // Music music = new Music("/MUSIC/gameMusic.wav");
 
-    public GameFrame() throws Exception {// 初始化bgImg和player
+    public GameFrame() {// 初始化bgImg和player
+        try { this.map = this.iMap.readMap(); } 
+        catch (Exception e) { }
+    }
+
+    public GameFrame(String fileName) {// 初始化bgImg和player
+        this.iMap = new InitMap(fileName);
+        try { this.map = this.iMap.readMap(); } 
+        catch (Exception e) { }
+    }
+
+    public void startGame(){
+        initFrame();
+        initGame();
+    }
+
+    public void initGame(){
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
         // 距離追隨

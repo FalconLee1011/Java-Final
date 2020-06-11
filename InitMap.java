@@ -10,13 +10,17 @@ import java.util.ArrayList;
 public class InitMap {
 
     // 數據容器
+    public String fileName = "MAPS/map.txt";
     public ArrayList<String> list = new ArrayList<String>();
     public int[][] map = null;
+
+    public InitMap(){}
+    public InitMap(String mapFile){ this.fileName = mapFile; }
 
     public int[][] readMap() throws Exception {// return 2D-array
 
         // 構造文件輸入流
-        FileInputStream file = new FileInputStream("MAPS/map.txt");
+        FileInputStream file = new FileInputStream(fileName);
         InputStreamReader isr = new InputStreamReader(file);
         BufferedReader br = new BufferedReader(isr);
 
