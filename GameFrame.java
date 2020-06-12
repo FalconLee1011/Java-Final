@@ -43,7 +43,7 @@ public class GameFrame extends JFrame {
 
     public boolean hasWon = false;
     public boolean isGameOver = false;
-
+    public boolean save = false;
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
@@ -133,7 +133,6 @@ public class GameFrame extends JFrame {
                         Stone back = new Stone(j * 120, i * 120, 120, 120, new ImageIcon("img/Back.png").getImage());// (x軸，y軸，寬，高
                         eneryList.add(back);
                         toolList.add(back);
-                        toolList2.add(0);
                         rockList.add(back);
                         rock_row.put(y_key, back);
                         break;
@@ -230,7 +229,14 @@ public class GameFrame extends JFrame {
                     for (PkbGhost ghost : ghosts) {
 
                         if (ghost.pursue(human)) {
-                            hp--;
+                            if(save==false)
+                            {
+                                hp--;
+                                save=true;
+                                System.out.println("save");
+                                human.Time(2000, 100);
+                            }
+                            
                             if (hp <= 0) {
                                 System.out.println("GAME OVER");
                                 hasWon = false;
@@ -299,12 +305,12 @@ public class GameFrame extends JFrame {
         String s, h;
         if (timeTrial == true) {
             test.TimeGame();
-            s = "Time " + test.h + ":" + test.m + ":" + test.s;
+            s = "Time " + test.h + ":" + test.m ;
             Font font = new Font("宋体", Font.BOLD, fontSize);
             big.setFont(font);
             big.drawString(s, 500, 200);
         } else {
-            s = "Time " + test.hh + ":" + test.mm + ":" + test.ss;
+            s = "Time " + test.hh + ":" + test.mm ;
             Font font = new Font("宋体", Font.BOLD, fontSize);
             big.setFont(font);
             big.drawString(s, 500, 200);

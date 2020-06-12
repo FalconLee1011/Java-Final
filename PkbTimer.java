@@ -38,11 +38,11 @@ public class PkbTimer  {
                 {
                     midTime--;
                     num++;
-                hh = midTime / 100 / 60 % 60;
-                mm = midTime / 100 % 60;
+                hh = midTime / 90 / 60 % 60;
+                mm = midTime / 90 % 60;
                 ss = midTime % 100;
-                h = num / 100 / 60 % 60;
-                m = num / 100 % 60;
+                h = num / 90 / 60 % 60;
+                m = num / 90 % 60;
                 s = num % 100;
                 Toolkit.getDefaultToolkit().beep();
                 
