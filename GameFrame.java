@@ -239,7 +239,7 @@ public class GameFrame extends JFrame {
                             e.img = new ImageIcon("img/Back.png").getImage();
                         }
                         kaboom = false;
-                        System.out.println("BanBooZoled!");
+                        // System.out.println("BanBooZoled!");
                         continue;
                     }
                     for (PkbGhost ghost : ghosts) {
@@ -249,7 +249,7 @@ public class GameFrame extends JFrame {
                             {
                                 hp--;
                                 save=true;
-                                System.out.println("save");
+                                // System.out.println("save");
                                 human.Time(2000, 100);
                             }
                             
@@ -298,8 +298,8 @@ public class GameFrame extends JFrame {
         for (PkbFlyingRock fock : this.flyingRocks) {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
-
         big.setColor(new Color(255, 255, 255));
+
         int fontSize = 100;
         String strTime,strMin,strSec, strHp;
         timer.timerStart();

@@ -291,7 +291,7 @@ public class PkbHuman extends Thread {
         // 檢查是否碰撞到道具
         Enery bumpedEnery = bump(this.gameFrame.mapEneryByPos);
         if (bumpedEnery != null) {
-            System.out.println(bumpedEnery.getClass());
+            // System.out.println(bumpedEnery.getClass());
             if (bumpedEnery instanceof Shoe) {
                 camel = true;
                 // timeSinceCamel = Calendar.getInstance().getTimeInMillis();//另一個計時
@@ -300,7 +300,7 @@ public class PkbHuman extends Thread {
                 imgSetQueue.add(this.activeImgSet);
                 xspeed = camelSpeed;
                 yspeed = camelSpeed;
-                System.out.println("shoe");
+                // System.out.println("shoe");
                 Time(12000, 2);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
@@ -366,7 +366,7 @@ public class PkbHuman extends Thread {
                 // backpack.add(bumpedEnery);
             }
             else if (bumpedEnery instanceof MazeExit) {
-                System.out.println("EXIT!");
+                // System.out.println("EXIT!");
                 this.gameFrame.hasWon = true;
                 this.gameFrame.isGameOver = true;
             }

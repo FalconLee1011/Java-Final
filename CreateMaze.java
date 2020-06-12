@@ -24,12 +24,12 @@ public class CreateMaze {
         for (int i = this.w - 8; i < this.w; i++) {
             this.maze[this.h - 9][i] = 9;
         }
-        for (int i = 0; i < this.h; i++) {
-            System.out.printf("%d", this.maze[i][0]);
-            for (int j = 1; j < this.w; j++)
-                System.out.printf(",%d", this.maze[i][j]);
-            System.out.println();
-        }
+        // for (int i = 0; i < this.h; i++) {
+        //     System.out.printf("%d", this.maze[i][0]);
+        //     for (int j = 1; j < this.w; j++)
+        //         System.out.printf(",%d", this.maze[i][j]);
+        //     System.out.println();
+        // }
     }
 
     public int[][] getMaze() { return this.maze; }

@@ -87,7 +87,7 @@ public class PkbGhost extends Thread{
     else if(this.isRangedTrigger){ pursueIsRangedTrigger(player); }
     else{ pursueIsNotRangedTrigger(player); }
     if( hasBumpedIntoRock(player) ){
-      System.out.println("Socked!!!");
+      // System.out.println("Socked!!!");
       this.isShocked = true;
       this.timeShocked = Calendar.getInstance().getTimeInMillis();
       this.speed += 2;
