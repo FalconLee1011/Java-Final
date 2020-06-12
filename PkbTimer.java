@@ -13,7 +13,7 @@ public class PkbTimer  {
     private Timer timergame = new Timer();
     private int count = 0;
     private boolean isRun = true;
-    private long midTime=3000;//?
+    public long midTime=1000;//?
     public long countMin=0,countSec=0,countMSec=0;
     public long MapMin=0,MapSec=0,MapMSec=0;
 

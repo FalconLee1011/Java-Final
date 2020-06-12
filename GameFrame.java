@@ -1,4 +1,5 @@
 // 遊戲起始
+
 package peekaboo;
 
 import java.awt.Color;
@@ -26,9 +27,7 @@ public class GameFrame extends JFrame {
     public InitMap iMap = new InitMap("MAPS/map.txt");
     public int[][] map;
     public PkbHuman human;
-    //public PkbTimer test = new PkbTimer(this);
     public PkbTimer timer = new PkbTimer();
-
 
     public Map<String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map<String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
@@ -38,7 +37,7 @@ public class GameFrame extends JFrame {
 
     public ArrayList<Door> doors = new ArrayList<Door>();
     public int doorSerial = 0;
-    public int hp = 1;
+    public int hp = 1;//玩家的生命值
     public int window_width = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
     public int window_height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
     public int numOfGhost = 4;
@@ -225,6 +224,14 @@ public class GameFrame extends JFrame {
                         if(breakTime > 75) break; 
                         breakTime += 1;
                     }
+                    if (timer.midTime <= 0) {//時間<=0，會結束
+                        // System.out.println("GAME OVER");
+                        hasWon = true;
+                        isGameOver = true;
+                        // test.timergame.cancel();////////計時賽的時間暫停
+                        // repaint();
+                        break;
+                    }
                     if (kaboom) {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
@@ -292,15 +299,14 @@ public class GameFrame extends JFrame {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
 
-        timer.timerStart();
         big.setColor(new Color(255, 255, 255));
         int fontSize = 100;
         String strTime,strMin,strSec, strHp;
+        timer.timerStart();
         if (timeTrial == true) {
-            timer.timerStart();
             strSec=(timer.MapSec<10)?"0"+timer.MapSec:""+timer.MapSec;
             strMin=(timer.MapMin<10)?"0"+timer.MapMin:""+timer.MapMin;
-        } else {
+        }else {
             strSec=(timer.countSec<10)?"0"+timer.countSec:""+timer.countSec;
             strMin=(timer.countMin<10)?"0"+timer.countMin:""+timer.countMin;
         }
@@ -313,7 +319,7 @@ public class GameFrame extends JFrame {
         Font font2 = new Font("宋体", Font.BOLD, 50);
         big.setFont(font2);
         big.drawString(strHp, 100, 200);
-        
+
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
         for (PkbGhost ghost : ghosts) {
             big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
