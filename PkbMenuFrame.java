@@ -144,9 +144,9 @@ public class PkbMenuFrame extends JFrame{
     private void setGhostModePanel(){
         ghostModePanel= new JPanel();
         ghostModePanel.setOpaque(false);
-        oneThreeBtn= new PkbMenuButton("    Time Trial   ");//可存活的時間
-        twoTwoBtn= new PkbMenuButton("        Maze       ");//2 3
-        ghostBackToModeBtn= new PkbMenuButton("        Back       ");//3 3
+        oneThreeBtn= new PkbMenuButton("    Time Trial   ");
+        twoTwoBtn= new PkbMenuButton("        Maze       ");
+        ghostBackToModeBtn= new PkbMenuButton("        Back       ");
 
         oneThreeBtn.addActionListener(btnClick);
         twoTwoBtn.addActionListener(btnClick);
@@ -162,11 +162,11 @@ public class PkbMenuFrame extends JFrame{
     private void setHumanModePanel(){
         humanModePanel= new JPanel();
         humanModePanel.setOpaque(false);
-        onePBtn= new PkbMenuButton("  Level 1  ");//2 2
-        twoPBtn= new PkbMenuButton("  Level 2  ");//1 1
-        threePBtn= new PkbMenuButton("  Level 3  ");//1 1
-        fivePBtn= new PkbMenuButton("  Level 4  ");//1 1
-        humanBackToModeBtn= new PkbMenuButton("    Back    ");//4 5
+        onePBtn= new PkbMenuButton("  Level 1  ");
+        twoPBtn= new PkbMenuButton("  Level 2  ");
+        threePBtn= new PkbMenuButton("  Level 3  ");
+        fivePBtn= new PkbMenuButton("  Level 4  ");
+        humanBackToModeBtn= new PkbMenuButton("    Back    ");
 
         onePBtn.addActionListener(btnClick);
         twoPBtn.addActionListener(btnClick);
