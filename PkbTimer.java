@@ -1,62 +1,47 @@
 package peekaboo;
 
-import java.util.ArrayList;
-import java.awt.Image;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
 import peekaboo.props.*;
-import java.awt.Point;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Date;
 import java.awt.Toolkit;
 
 /*
- * 倒數計時
+ * 創建計時器
  */
+
 public class PkbTimer  {
-    // 創建計時器
-    Timer timergame = new Timer();
-    public int num = 0,t;
-    public Timer time2;
-    public boolean run = true;
-    public GameFrame gf;
-    public long midTime=3000;
-    public long hh=0,mm=0,ss=0;
-    public long h=0,m=0,s=0;
-    public PkbTimer(GameFrame gf) {
-        
-        
-    }
-    public void TimeGame() {
-        //System.out.println("Time");
+    private Timer timergame = new Timer();
+    private int count = 0;
+    private boolean isRun = true;
+    private long midTime=3000;//?
+    public long countMin=0,countSec=0,countMSec=0;
+    public long MapMin=0,MapSec=0,MapMSec=0;
+
+    public void timerStart() {
         TimerTask gametest = new TimerTask() {
             @Override
             public void run() {
-                //System.out.println("跑Time");
                 if(midTime>0)
                 {
                     midTime--;
-                    num++;
-                hh = midTime / 20 / 60 % 60;
-                mm = midTime / 20 % 60;
-                ss = midTime % 100;
-                h = num / 20 % 60;
-                m = num / 20 % 60;
-                s = num % 100;
-                Toolkit.getDefaultToolkit().beep();
-                
-                timergame.purge();
+                    count++;
+                    //計時賽的時間
+                    countMin = midTime / 20 / 60 % 60;
+                    countSec = midTime / 20 % 60;
+                    countMSec = midTime % 100;
+                    //正常模式的時間---倒數計時器
+                    MapMin = count / 20 % 60;
+                    MapSec = count / 20 % 60;
+                    MapMSec = count % 100;
+
+                    Toolkit.getDefaultToolkit().beep();
+                    timergame.purge();
                 }
                 else
                 timergame.purge();
-
             }
-            
         };
-
         timergame.schedule(gametest, 1000);
-        run = false;
+        isRun = false;
     }
-
 }
