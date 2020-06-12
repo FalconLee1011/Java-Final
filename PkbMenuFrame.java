@@ -95,6 +95,7 @@ public class PkbMenuFrame extends JFrame{
         instrucPanel.setVisible(false);
     }
     private void setInstrucPanel(){
+        instrucPanel= new JPanel();
         instrucLabel= new JLabel();
         instrucLabel.setIcon(new ImageIcon("img/gameInstruction.png"));
         instrucPanel.setOpaque(false);
