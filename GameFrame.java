@@ -88,7 +88,7 @@ public class GameFrame extends JFrame {
         setBackground(color);
         initFrame();
         loadGameProp();
-        gameIsReady = true
+        gameIsReady = true;
     }
 
     public void loadGameProp() {

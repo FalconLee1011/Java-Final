@@ -50,6 +50,10 @@ public class PkbHuman extends Thread {
     ArrayList<Integer> bagList2 = new ArrayList<Integer>(0);
     ArrayList<Point> pp = new ArrayList<>();
 
+    private long portalCooldown = 2000;
+    private long portalCooldownSince = 0;
+    private boolean portalIsCooldown = false;
+
     public Image[] defaultImgSet = { new ImageIcon("img/human_upMove_gif_160.gif").getImage(),
             new ImageIcon("img/human_downMove_gif_160.gif").getImage(),
             new ImageIcon("img/human_leftMove_gif_160.gif").getImage(),
@@ -316,9 +320,16 @@ public class PkbHuman extends Thread {
                         .remove(String.valueOf(bumpedEnery.raw_y * 120));
             } else if (bumpedEnery instanceof Door) {
                 // 若是 Door
-                int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
-                Door door = this.gameFrame.doors.get(rnd_door);
-                teleport(door.y, door.x + 120);
+                if(!this.portalIsCooldown){
+                    int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
+                    Door door = this.gameFrame.doors.get(rnd_door);
+                    teleport(door.y, door.x + 120);
+                    this.portalCooldown = true;
+                    this.portalCooldownSince = Calendar.getInstance().getTimeInMillis();
+                }
+                else if(Calendar.getInstance().getTimeInMillis() - time.portalCooldownSince > this.portalCooldown){
+                    this.portalCooldown = false;
+                }
             } else if (bumpedEnery instanceof Fruit) {
                 // img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
                 this.activeImgSet = this.tracherImgSet;
