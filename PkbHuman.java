@@ -265,7 +265,6 @@ public class PkbHuman extends Thread {
                 imgSetQueue.add(this.activeImgSet);
                 xspeed = camelSpeed;
                 yspeed = camelSpeed;
-                sequence = 2;
                 System.out.println("shoe");
                 Time(12000,2);
                 // 從 bump 判定的字典中將碰撞到的物件移除
@@ -281,7 +280,6 @@ public class PkbHuman extends Thread {
                 Time(10000,3);
                 quickSend = true;
                 // 從 bump 判定的字典中將碰撞到的物件移除
-                sequence = 3;
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
                         .remove(String.valueOf(bumpedEnery.raw_y * 120));
@@ -295,7 +293,6 @@ public class PkbHuman extends Thread {
                 this.activeImgSet = this.tracherImgSet;
                 imgSetQueue.add(this.activeImgSet);
                 teacher = true;
-                sequence = 6;
                 for (PkbGhost ghost : this.gameFrame.ghosts) {
                     ghost.rageActivated = true;
                 }
