@@ -72,9 +72,9 @@ public class PkbMenuFrame extends JFrame{
     private void setStartPanel(){
         startPanel= new JPanel();
         startPanel.setOpaque(false);
-        startBtn= new PkbMenuButton("   START    ");//3 4
-        musicBtn= new PkbMenuButton("   MUSIC    ");//3 4
-        descriptBtn= new PkbMenuButton("Instrutions");
+        startBtn= new PkbMenuButton("     START    ");//3 4
+        musicBtn= new PkbMenuButton("     MUSIC    ");//3 4
+        descriptBtn= new PkbMenuButton(" Instrutions ");
         
         startBtn.addActionListener(btnClick);
         musicBtn.addActionListener(btnClick);
@@ -103,8 +103,8 @@ public class PkbMenuFrame extends JFrame{
 
         instrucToStartBtn.addActionListener(btnClick);
         
-        instrucPanel.setLayout(new BorderLayout(4, 4));
-        instrucPanel.add(instrucLabel,BorderLayout.CENTER);
+        instrucPanel.setLayout(new BorderLayout());//可傳參數(間隙)
+        instrucPanel.add(instrucLabel, BorderLayout.CENTER);
         instrucPanel.add(instrucToStartBtn, BorderLayout.SOUTH);
     }
     private void setModePanel(){
@@ -196,7 +196,7 @@ public class PkbMenuFrame extends JFrame{
                     
                 }
                 else if(e.getSource()== descriptBtn){
-                    //startPanel.setVisible(false);
+                    startPanel.setVisible(false);
                     instrucPanel.setVisible(true);
                 }
                 else if(e.getSource()== instrucToStartBtn){
