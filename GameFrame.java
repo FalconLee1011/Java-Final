@@ -43,7 +43,7 @@ public class GameFrame extends JFrame {
 
     public boolean hasWon = false;
     public boolean isGameOver = false;
-
+    public boolean save = false;
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
@@ -90,12 +90,13 @@ public class GameFrame extends JFrame {
         // 距離追隨
         // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
         // 距離追隨、會巡邏
-        PkbGhost ghost_add;
+        // ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
 
         for (int i = 0; i < this.numOfGhost; i++) {
+            PkbGhost ghost_add;
             int rndx = r.nextInt(this.window_width - 500);
             int rndy = r.nextInt(this.window_height - 500);
-            ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
+            ghost_add = new PkbGhost(rndx, rndy, 1, true, 1200, true, 300);
             this.ghosts.add(ghost_add);
         }
         
@@ -133,7 +134,6 @@ public class GameFrame extends JFrame {
                         Stone back = new Stone(j * 120, i * 120, 120, 120, new ImageIcon("img/Back.png").getImage());// (x軸，y軸，寬，高
                         eneryList.add(back);
                         toolList.add(back);
-                        toolList2.add(0);
                         rockList.add(back);
                         rock_row.put(y_key, back);
                         break;
@@ -196,6 +196,12 @@ public class GameFrame extends JFrame {
                         // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
+                    case 9: // 畫地板
+                        MazeExit mazeexit = new MazeExit(j * 120, i * 120, 120, 120, new ImageIcon("img/Back.png").getImage());// (x軸，y軸，寬，高
+                        eneryList.add(mazeexit);
+                        toolList.add(mazeexit);
+                        map_row.put(y_key, mazeexit);
+                        break;
                 }
                 // Evary enery on map
                 mapEneryByPos.put(x_key, map_row);
@@ -213,15 +219,13 @@ public class GameFrame extends JFrame {
         new Thread() {
             public void run() {
                 while (true) {
-                    if(isGameOver){ break; }
                     repaint();
+                    if(isGameOver){ break; }
                     if (kaboom) {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);
                             Enery e = brickList.get(i);
                             e.img = new ImageIcon("img/Back.png").getImage();
-                            // try { Thread.sleep(5); }
-                            // catch (Exception e3) {}
                         }
                         kaboom = false;
                         System.out.println("BanBooZoled!");
@@ -230,14 +234,21 @@ public class GameFrame extends JFrame {
                     for (PkbGhost ghost : ghosts) {
 
                         if (ghost.pursue(human)) {
-                            hp--;
+                            if(save==false)
+                            {
+                                hp--;
+                                save=true;
+                                System.out.println("save");
+                                human.Time(2000, 100);
+                            }
+                            
                             if (hp <= 0) {
                                 System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
                                 // test.timergame.cancel();////////計時賽的時間暫停
                                 // repaint();
-                                // break;
+                                break;
                             }
                         }
                     }
@@ -265,18 +276,6 @@ public class GameFrame extends JFrame {
         BufferedImage bi = (BufferedImage) this.createImage(this.getSize().width, this.getSize().height);
         Graphics big = bi.getGraphics();
 
-        if(hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            int m = 4;
-            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
-
-        }
-        else if(!hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/gameover_GIF.gif");
-            int m = 4;
-            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
-        }
-
         big.drawImage(bg.img, bg.x, bg.y, null);
         for (int i = 0; i < eneryList.size(); i++) {
             Enery e = eneryList.get(i);
@@ -299,12 +298,12 @@ public class GameFrame extends JFrame {
         String s, h;
         if (timeTrial == true) {
             test.TimeGame();
-            s = "Time " + test.h + ":" + test.m + ":" + test.s;
+            s = "Time " + test.h + ":" + test.m ;
             Font font = new Font("宋体", Font.BOLD, fontSize);
             big.setFont(font);
             big.drawString(s, 500, 200);
         } else {
-            s = "Time " + test.hh + ":" + test.mm + ":" + test.ss;
+            s = "Time " + test.hh + ":" + test.mm ;
             Font font = new Font("宋体", Font.BOLD, fontSize);
             big.setFont(font);
             big.drawString(s, 500, 200);
@@ -318,7 +317,18 @@ public class GameFrame extends JFrame {
         for (PkbGhost ghost : ghosts) {
             big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         }
-        // Ghost
+        if(hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/win_GIF.gif");
+            int m = 2;
+            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
+        }
+        else if(!hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/gameover_GIF.gif");
+            int m = 2;
+            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
+        }
+
         g.drawImage(bi, 0, 0, null);
+
     }
 }

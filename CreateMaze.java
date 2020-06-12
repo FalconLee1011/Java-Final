@@ -10,10 +10,19 @@ public class CreateMaze {
     public CreateMaze() {
         this.init();
         this.createMaze(8, 8);
-        this.maze[8][7] = 0;
-        this.maze[9][8] = 0;
+
+        this.maze[9][12] = 0;
+        this.maze[9][13] = 0;
+        this.maze[9][14] = 0;
+        this.maze[10][12] = 0;
+        this.maze[10][13] = 0;
+        this.maze[10][14] = 0;
+        this.maze[11][12] = 0;
+        this.maze[11][13] = 0;
+        this.maze[11][14] = 0;
+
         for (int i = this.w - 8; i < this.w; i++) {
-            this.maze[this.h - 9][i] = 0;   
+            this.maze[this.h - 9][i] = 9;
         }
         for (int i = 0; i < this.h; i++) {
             System.out.printf("%d", this.maze[i][0]);
