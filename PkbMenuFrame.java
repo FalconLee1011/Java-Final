@@ -218,8 +218,9 @@ public class PkbMenuFrame extends JFrame{
                         gf.startGame();
                     }
                     else if(e.getSource() == fivePBtn){
+                        gf = new GameFrame("MAPS/mapPaceman.txt", 16);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading secreat map...", JOptionPane.INFORMATION_MESSAGE);
-                         gf = new GameFrame("MAPS/mapPaceman.txt", 16);
+                         
                          gf.startGame();
                     }
 
