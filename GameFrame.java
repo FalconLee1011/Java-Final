@@ -37,8 +37,9 @@ public class GameFrame extends JFrame {
     public ArrayList<Door> doors = new ArrayList<Door>();
     public int doorSerial = 0;
     public int hp = 1;
-    public int window_width;
-    public int window_height;
+    public int window_width = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getWidth();
+    public int window_height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
+    public int numOfGhost = 4;
 
     private boolean hasWon = false;
     private boolean isGameOver = false;
@@ -59,18 +60,18 @@ public class GameFrame extends JFrame {
     // Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() {// 初始化bgImg和player
-        try {
-            this.map = this.iMap.readMap();
-        } catch (Exception e) {
-        }
+        try { this.map = this.iMap.readMap(); } 
+        catch (Exception e) {}
     }
 
-    public GameFrame(String fileName) {// 初始化bgImg和player
+    public GameFrame(String fileName, int numOfGhost) {// 初始化bgImg和player
         this.iMap = new InitMap(fileName);
-        try {
-            this.map = this.iMap.readMap();
-        } catch (Exception e) {
+        try { this.map = this.iMap.readMap(); } 
+        catch (Exception e) {}
+        if(numOfGhost >= 20){
+            this.numOfGhost = 20;
         }
+        this.numOfGhost = numOfGhost;
     }
 
     public void startGame() {
@@ -282,9 +283,6 @@ public class GameFrame extends JFrame {
     }
 
     public void initFrame() {
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        this.window_width = gd.getDisplayMode().getWidth();
-        this.window_height = gd.getDisplayMode().getHeight();
         this.setSize(this.window_width, this.window_height);
         this.setTitle("PeeKaBoo~");
         this.setResizable(false);
