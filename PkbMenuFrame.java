@@ -208,25 +208,21 @@ public class PkbMenuFrame extends JFrame{
                         gf = new GameFrame("MAPS/map.txt", 4);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == twoPBtn){
                         gf = new GameFrame("MAPS/map1.txt", 8);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading Level 2...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == threePBtn){
                         gf = new GameFrame("MAPS/map2.txt", 12);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 3...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == fivePBtn){
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading secreat map...", JOptionPane.INFORMATION_MESSAGE);
                          gf = new GameFrame("MAPS/mapPaceman.txt", 16);
                          gf.startGame();
-                         music.close();
                     }
                     music.close();
                 }
