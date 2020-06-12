@@ -169,7 +169,7 @@ public class GameFrame extends JFrame {
                         break;
                     case 5:
                         Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/scorpion.gif").getImage());
+                                new ImageIcon("img/scorpion_GIF.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         map_row.put(y_key, bewitch);
