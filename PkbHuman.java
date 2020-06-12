@@ -47,55 +47,45 @@ public class PkbHuman extends Thread {
     ArrayList<Integer> bagList2 = new ArrayList<Integer>(0);
     ArrayList<Point> pp = new ArrayList<>();
 
-    public Image[] defaultImgSet = {
-        new ImageIcon("img/human_upMove_gif_160.gif").getImage()
-        , new ImageIcon("img/human_downMove_gif_160.gif").getImage()
-        , new ImageIcon("img/human_leftMove_gif_160.gif").getImage()
-        , new ImageIcon("img/human_rightMove_gif_160.gif").getImage()
-    };
-    
-    public Image[] tracherImgSet = {
-        new ImageIcon("img/teacher_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/teacher_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/teacher_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/teacher_downMove_GIF.gif").getImage()
-    };
-    
-    public Image[] turtleImgSet = {
-        new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage()
-        , new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage()
-        , new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage()
-    };
-    
-    public Image[] camelImgSet = {
-        new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage()
-        , new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage()
-        , new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage()
-    };
-    
-    public Image[] dizzyImgSet = {
-        new ImageIcon("img/dizzyHuman_upMove_GIF.gif").getImage()
-        , new ImageIcon("img/dizzyHuman_downMove_GIF.gif").getImage()
-        , new ImageIcon("img/dizzyHuman_leftMove_GIF.gif").getImage()
-        , new ImageIcon("img/dizzyHuman_rightMove_GIF.gif").getImage()
-    };
+    public Image[] defaultImgSet = { new ImageIcon("img/human_upMove_gif_160.gif").getImage(),
+            new ImageIcon("img/human_downMove_gif_160.gif").getImage(),
+            new ImageIcon("img/human_leftMove_gif_160.gif").getImage(),
+            new ImageIcon("img/human_rightMove_gif_160.gif").getImage() };
+
+    public Image[] tracherImgSet = { new ImageIcon("img/teacher_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/teacher_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/teacher_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/teacher_downMove_GIF.gif").getImage() };
+
+    public Image[] turtleImgSet = { new ImageIcon("img/slowHuman_upMove_GIF.gif").getImage(),
+            new ImageIcon("img/slowHuman_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/slowHuman_leftMove_GIF.gif").getImage(),
+            new ImageIcon("img/slowHuman_rightMove_GIF.gif").getImage() };
+
+    public Image[] camelImgSet = { new ImageIcon("img/camelHuman_upMove_GIF.gif").getImage(),
+            new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/camelHuman_leftMove_GIF.gif").getImage(),
+            new ImageIcon("img/camelHuman_rightMove_GIF.gif").getImage() };
+
+    public Image[] dizzyImgSet = { new ImageIcon("img/dizzyHuman_upMove_GIF.gif").getImage(),
+            new ImageIcon("img/dizzyHuman_downMove_GIF.gif").getImage(),
+            new ImageIcon("img/dizzyHuman_leftMove_GIF.gif").getImage(),
+            new ImageIcon("img/dizzyHuman_rightMove_GIF.gif").getImage() };
 
     public Image[] activeImgSet;
     private ArrayList<Image[]> imgSetQueue = new ArrayList<Image[]>();
 
     ArrayList<Enery> backpack = new ArrayList<Enery>(0);
 
-    public boolean pick = false, use = false, div = false, teacher = false, isWitch = false, quickSend = false,camel=false;
+    public boolean pick = false, use = false, div = false, teacher = false, isWitch = false, quickSend = false,
+            camel = false;
     public int num = 0;
 
     // 如果吃到鞋子//另一個計時
     /*
-    public boolean camel = false;
-    public long timeSinceCamel = 0;
-    public long camelInterval = 120000;
-    */
+     * public boolean camel = false; public long timeSinceCamel = 0; public long
+     * camelInterval = 120000;
+     */
     public PkbHuman(GameFrame g) {
         this.gameFrame = g;
         this.activeImgSet = this.defaultImgSet;
@@ -116,6 +106,7 @@ public class PkbHuman extends Thread {
         TimerTask test = new TimerTask() {
             @Override
             public void run() {
+
                 switch (tool) {
                     case 2:
                         camel = false;
@@ -130,23 +121,28 @@ public class PkbHuman extends Thread {
                         activeImgSet = defaultImgSet;
                         break;
                     case 5:
-                        isWitch = false;//蠍子
+                        isWitch = false;// 蠍子
                         // imgSetQueue.remove(imgSetQueue.size() - 1);
                         // activeImgSet = imgSetQueue.get(imgSetQueue.size() - 1);
                         activeImgSet = defaultImgSet;
                         break;
-    
+
                     case 6:
                         teacher = false;
                         // imgSetQueue.remove(imgSetQueue.size() - 1);
                         // activeImgSet = imgSetQueue.get(imgSetQueue.size() - 1);
                         activeImgSet = defaultImgSet;
                         break;
+                    case 100:
+                        gameFrame.save = false;
+                        // imgSetQueue.remove(imgSetQueue.size() - 1);
+                        // activeImgSet = imgSetQueue.get(imgSetQueue.size() - 1);
+                        activeImgSet = defaultImgSet;
+                        break;
+                        
                     default:
                         break;
                 }
-                System.out.println("10秒到了");
-                
                 xspeed = defaultSpeed;
                 yspeed = defaultSpeed;
                 Toolkit.getDefaultToolkit().beep();
@@ -162,7 +158,7 @@ public class PkbHuman extends Thread {
 
         while (true) {
             // if (isWitch == true)
-                // Witch();
+            // Witch();
             // else
             move();
             try {
@@ -171,36 +167,41 @@ public class PkbHuman extends Thread {
                 e.printStackTrace();
             }
             eneryInteract();
-            /*//另一個計時
-            if (camel && Calendar.getInstance().getTimeInMillis() - timeSinceCamel >= camelInterval) {
-                camel = false;
-                xspeed = 8;
-                yspeed = 8;
-            }
-            */
+            /*
+             * //另一個計時 if (camel && Calendar.getInstance().getTimeInMillis() -
+             * timeSinceCamel >= camelInterval) { camel = false; xspeed = 8; yspeed = 8; }
+             */
         }
     }
 
     public void move() {
-        if (!isWitch && up || isWitch && down){
+        if (!isWitch && up || isWitch && down) {
             this.lastDirection = Str_Up;
             this.img = this.activeImgSet[0];
-            if(!hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos)){ moveUp(); }
+            if (!hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos)) {
+                moveUp();
+            }
         }
-        if (!isWitch && down || isWitch && up){
+        if (!isWitch && down || isWitch && up) {
             lastDirection = Str_Down;
             this.img = this.activeImgSet[1];
-            if(!hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos)){ moveDown(); }
+            if (!hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos)) {
+                moveDown();
+            }
         }
-        if (!isWitch && left || isWitch && right){
+        if (!isWitch && left || isWitch && right) {
             lastDirection = Str_Left;
             this.img = this.activeImgSet[2];
-            if(!hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos)){ moveLeft(); }
+            if (!hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos)) {
+                moveLeft();
+            }
         }
-        if (!isWitch && right || isWitch && left){
+        if (!isWitch && right || isWitch && left) {
             lastDirection = Str_Right;
             this.img = this.activeImgSet[3];
-            if(!hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos)){ moveRight(); }
+            if (!hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos)) {
+                moveRight();
+            }
         }
         try {
             this.sleep(20);
@@ -215,9 +216,15 @@ public class PkbHuman extends Thread {
         else if (this.y > bound_y || this.y < 500) {
             gameFrame.bg.y += this.yspeed;// 背景向下移動
             // 障礙物項左移動
-            for (Enery enery : this.gameFrame.eneryList) { enery.y += this.yspeed; }
-            for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.y += this.yspeed; }
-            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) { fock.y += this.yspeed; }
+            for (Enery enery : this.gameFrame.eneryList) {
+                enery.y += this.yspeed;
+            }
+            for (PkbGhost ghost : this.gameFrame.ghosts) {
+                ghost.y += this.yspeed;
+            }
+            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+                fock.y += this.yspeed;
+            }
         }
     }
 
@@ -227,9 +234,15 @@ public class PkbHuman extends Thread {
         else if (this.y >= bound_y) {
             gameFrame.bg.y -= this.yspeed;// 背景向上移動
             // 障礙物項左移動
-            for (Enery enery: this.gameFrame.eneryList) { enery.y -= this.yspeed; }
-            for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.y -= this.yspeed; }
-            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) { fock.y -= this.yspeed; }
+            for (Enery enery : this.gameFrame.eneryList) {
+                enery.y -= this.yspeed;
+            }
+            for (PkbGhost ghost : this.gameFrame.ghosts) {
+                ghost.y -= this.yspeed;
+            }
+            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+                fock.y -= this.yspeed;
+            }
         }
     }
 
@@ -239,9 +252,15 @@ public class PkbHuman extends Thread {
         else if (this.x < bound_x) {
             gameFrame.bg.x += this.xspeed;// 背景向右移動
             // 障礙物項右移動
-            for (Enery enery: this.gameFrame.eneryList) { enery.x += this.xspeed; }
-            for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.x += this.xspeed; }
-            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) { fock.x += this.xspeed; }
+            for (Enery enery : this.gameFrame.eneryList) {
+                enery.x += this.xspeed;
+            }
+            for (PkbGhost ghost : this.gameFrame.ghosts) {
+                ghost.x += this.xspeed;
+            }
+            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+                fock.x += this.xspeed;
+            }
         }
     }
 
@@ -251,9 +270,15 @@ public class PkbHuman extends Thread {
         else if (this.x > bound_x) {
             gameFrame.bg.x -= this.xspeed;// 背景向左移動
             // 障礙物項左移動
-            for (Enery enery: this.gameFrame.eneryList) { enery.x -= this.xspeed; }
-            for (PkbGhost ghost : this.gameFrame.ghosts) { ghost.x -= this.xspeed; }
-            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) { fock.x -= this.xspeed; }
+            for (Enery enery : this.gameFrame.eneryList) {
+                enery.x -= this.xspeed;
+            }
+            for (PkbGhost ghost : this.gameFrame.ghosts) {
+                ghost.x -= this.xspeed;
+            }
+            for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
+                fock.x -= this.xspeed;
+            }
         }
     }
 
@@ -264,14 +289,14 @@ public class PkbHuman extends Thread {
             System.out.println(bumpedEnery.getClass());
             if (bumpedEnery instanceof Shoe) {
                 camel = true;
-                //timeSinceCamel = Calendar.getInstance().getTimeInMillis();//另一個計時
+                // timeSinceCamel = Calendar.getInstance().getTimeInMillis();//另一個計時
                 // img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
                 this.activeImgSet = this.camelImgSet;
                 imgSetQueue.add(this.activeImgSet);
                 xspeed = camelSpeed;
                 yspeed = camelSpeed;
                 System.out.println("shoe");
-                Time(12000,2);
+                Time(12000, 2);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
@@ -282,7 +307,7 @@ public class PkbHuman extends Thread {
                 imgSetQueue.add(this.activeImgSet);
                 xspeed = turtleSpeed;
                 yspeed = turtleSpeed;
-                Time(10000,3);
+                Time(10000, 3);
                 quickSend = true;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
@@ -301,7 +326,7 @@ public class PkbHuman extends Thread {
                 for (PkbGhost ghost : this.gameFrame.ghosts) {
                     ghost.rageActivated = true;
                 }
-                Time(10000,6);
+                Time(10000, 6);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
@@ -312,15 +337,14 @@ public class PkbHuman extends Thread {
                 this.activeImgSet = this.dizzyImgSet;
                 imgSetQueue.add(this.activeImgSet);
                 isWitch = true;
-                Time(10000,5);
+                Time(10000, 5);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
                         .remove(String.valueOf(bumpedEnery.raw_y * 120));
 
                 // backpack.add(bumpedEnery);
-            }
-            else if (bumpedEnery instanceof Heart) {
+            } else if (bumpedEnery instanceof Heart) {
                 this.gameFrame.hp++;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
@@ -372,22 +396,23 @@ public class PkbHuman extends Thread {
         return null;
     }
 
-    public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos){
+    public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos) {
         Rectangle playerPoly;
 
-        if (directionString.equals(Str_Up)) { 
-            playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + (height / 10)), width - (width / 10), height - (height / 10)); 
-        }
-        else if (directionString.equals(Str_Down)) { 
-            playerPoly = new Rectangle(this.x - (width / 2), (this.y - (height / 2)) + (height / 10), width - (width / 10), height - (height / 10)); 
-        }
-        else if (directionString.equals(Str_Left)) { 
-            playerPoly = new Rectangle(this.x - ((width / 2) + (width / 10)), this.y - (height / 2), width - (width / 10), height - (height / 10)); 
-        }
-        else if (directionString.equals(Str_Right)) { 
-            playerPoly = new Rectangle(this.x - (width / 2) + (width / 10), this.y - (height / 2), width - (width / 10), height - (height / 10)); 
-        }
-        else return false;
+        if (directionString.equals(Str_Up)) {
+            playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + (height / 10)),
+                    width - (width / 10), height - (height / 10));
+        } else if (directionString.equals(Str_Down)) {
+            playerPoly = new Rectangle(this.x - (width / 2), (this.y - (height / 2)) + (height / 10),
+                    width - (width / 10), height - (height / 10));
+        } else if (directionString.equals(Str_Left)) {
+            playerPoly = new Rectangle(this.x - ((width / 2) + (width / 10)), this.y - (height / 2),
+                    width - (width / 10), height - (height / 10));
+        } else if (directionString.equals(Str_Right)) {
+            playerPoly = new Rectangle(this.x - (width / 2) + (width / 10), this.y - (height / 2), width - (width / 10),
+                    height - (height / 10));
+        } else
+            return false;
 
         Map<String, Map<String, Enery>> birckPos = brickByPos;
         Set<String> keys = birckPos.keySet();
