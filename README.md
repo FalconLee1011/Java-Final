@@ -15,7 +15,7 @@
     + import peekaboo.*;
 
 ## package peekaboo;
-* ModifyMap -----
+* CreateMaze -----
 * InitMap -------
 * BackgroundImage 
 * Music
