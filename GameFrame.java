@@ -26,7 +26,9 @@ public class GameFrame extends JFrame {
     public InitMap iMap = new InitMap("MAPS/map.txt");
     public int[][] map;
     public PkbHuman human;
-    public PkbTimer test = new PkbTimer(this);
+    //public PkbTimer test = new PkbTimer(this);
+    public PkbTimer timer = new PkbTimer();
+
 
     public Map<String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map<String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
@@ -248,7 +250,7 @@ public class GameFrame extends JFrame {
                                 // System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
-                                // test.timergame.cancel();////////計時賽的時間暫停
+                                // timer.timergame.cancel();////////計時賽的時間暫停
                                 // repaint();
                                 break;
                             }
@@ -290,30 +292,28 @@ public class GameFrame extends JFrame {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
 
-        // 畫人物
-        // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
-        // g.drawImage(bi, 0, 0, null);
-        test.TimeGame();
+        timer.timerStart();
         big.setColor(new Color(255, 255, 255));
         int fontSize = 100;
-        String s, h;
+        String strTime,strMin,strSec, strHp;
         if (timeTrial == true) {
-            test.TimeGame();
-            s = "Time " + test.h + ":" + test.m ;
-            Font font = new Font("宋体", Font.BOLD, fontSize);
-            big.setFont(font);
-            big.drawString(s, 500, 200);
+            timer.timerStart();
+            strSec=(timer.MapSec<10)?"0"+timer.MapSec:""+timer.MapSec;
+            strMin=(timer.MapMin<10)?"0"+timer.MapMin:""+timer.MapMin;
         } else {
-            s = "Time " + test.hh + ":" + test.mm ;
-            Font font = new Font("宋体", Font.BOLD, fontSize);
-            big.setFont(font);
-            big.drawString(s, 500, 200);
+            strSec=(timer.countSec<10)?"0"+timer.countSec:""+timer.countSec;
+            strMin=(timer.countMin<10)?"0"+timer.countMin:""+timer.countMin;
         }
-        h = "health " + hp;
+        strTime= "Time " +strMin+":"+strSec;
+        Font font = new Font("宋体", Font.BOLD, fontSize);
+        big.setFont(font);
+        big.drawString(strTime, 500, 200);
+        strHp = "health " + hp;
         big.setColor(new Color(0, 0, 255));
         Font font2 = new Font("宋体", Font.BOLD, 50);
         big.setFont(font2);
-        big.drawString(h, 100, 200);
+        big.drawString(strHp, 100, 200);
+        
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
         for (PkbGhost ghost : ghosts) {
             big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
