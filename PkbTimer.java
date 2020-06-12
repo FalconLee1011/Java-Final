@@ -30,7 +30,7 @@ public class PkbTimer  {
                     countSec = midTime / 20 % 60;
                     countMSec = midTime % 100;
                     //正常模式的時間---倒數計時器
-                    MapMin = count / 20 % 60;
+                    MapMin = count / 20/ 60 % 60;
                     MapSec = count / 20 % 60;
                     MapMSec = count % 100;
 
