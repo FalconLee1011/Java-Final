@@ -191,35 +191,35 @@ public class PkbMenuFrame extends JFrame{
                     modePanel.setVisible(true);
                 }
                 else if(e.getSource()== oneThreeBtn){
-                    gf = new GameFrame("MAPS/mapDiffcult.txt");
+                    gf = new GameFrame("MAPS/mapDiffcult.txt", 20);
                     gf.timeTrial=true;
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Difficult...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }
                 else if(e.getSource()== twoTwoBtn){
-                    gf = new GameFrame("MAPS/maze.txt");
+                    gf = new GameFrame("MAPS/maze.txt", 4);
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Maze...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }
                 else{
                     if(e.getSource() == onePBtn){
-                        gf = new GameFrame("MAPS/map.txt");
+                        gf = new GameFrame("MAPS/map.txt", 4);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
                     }
                     else if(e.getSource() == twoPBtn){
-                        gf = new GameFrame("MAPS/map1.txt");
+                        gf = new GameFrame("MAPS/map1.txt", 8);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 2...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
                     }
                     else if(e.getSource() == threePBtn){
-                        gf = new GameFrame("MAPS/map2.txt");
+                        gf = new GameFrame("MAPS/map2.txt", 12);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 3...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
                     }
                     else if(e.getSource() == fivePBtn){
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading secreat map...", JOptionPane.INFORMATION_MESSAGE);
-                         gf = new GameFrame("MAPS/mapPaceman.txt");
+                         gf = new GameFrame("MAPS/mapPaceman.txt", 16);
                          gf.startGame();
                     }
 

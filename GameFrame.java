@@ -86,17 +86,23 @@ public class GameFrame extends JFrame {
         // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
         // 距離追隨、會巡邏
         PkbGhost ghost_add;
-        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 300);
-        this.ghosts.add(ghost_add);
 
-        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 120);
-        this.ghosts.add(ghost_add);
+        for (int i = 0; i < this.numOfGhost; i++) {
+            int rndx = r.nextInt(this.window_width - 500);
+            int rndy = r.nextInt(this.window_height - 500);
+            ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
+            this.ghosts.add(ghost_add);
+        }
+        
 
-        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 600);
-        this.ghosts.add(ghost_add);
+        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 120);
+        // this.ghosts.add(ghost_add);
 
-        ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 900);
-        this.ghosts.add(ghost_add);
+        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 600);
+        // this.ghosts.add(ghost_add);
+
+        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 900);
+        // this.ghosts.add(ghost_add);
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
             for (int j = 0; j < map[0].length; j++) {
