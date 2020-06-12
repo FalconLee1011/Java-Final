@@ -41,8 +41,8 @@ public class GameFrame extends JFrame {
     public int window_height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
     public int numOfGhost = 4;
 
-    private boolean hasWon = false;
-    private boolean isGameOver = false;
+    public boolean hasWon = false;
+    public boolean isGameOver = false;
 
     public boolean kaboom = false;
     public boolean timeTrial = false;
@@ -276,7 +276,7 @@ public class GameFrame extends JFrame {
                                 System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
-                                test.timergame.cancel();////////計時賽的時間暫停
+                                // test.timergame.cancel();////////計時賽的時間暫停
                                 repaint();
                                 break;
                             }
@@ -306,6 +306,16 @@ public class GameFrame extends JFrame {
         BufferedImage bi = (BufferedImage) this.createImage(this.getSize().width, this.getSize().height);
         Graphics big = bi.getGraphics();
 
+        if(hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/win_GIF.gif");
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+
+        }
+        else if(!hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/gameover.gif");
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+        }
+
         big.drawImage(bg.img, bg.x, bg.y, null);
         for (int i = 0; i < eneryList.size(); i++) {
             Enery e = eneryList.get(i);
@@ -319,18 +329,6 @@ public class GameFrame extends JFrame {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
 
-        if(hasWon && isGameOver){
-            // GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            // this.window_width = gd.getDisplayMode().getWidth();
-            // this.window_height = gd.getDisplayMode().getHeight();
-            ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 4), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
-
-        }
-        else if(!hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/gameover.png");
-            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 2), (this.window_height / 4) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
-        }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);
