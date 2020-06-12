@@ -223,41 +223,8 @@ public class GameFrame extends JFrame {
                             // try { Thread.sleep(5); }
                             // catch (Exception e3) {}
                         }
-                        // for (int i = 0; i < eneryList.size(); i++) {
-                        // // r.nextInt(eneryList.size() - 1);
-                        // Enery e = eneryList.get(i);
-                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        // }
                         kaboom = false;
                         System.out.println("BanBooZoled!");
-                        // for (int i = 0; i < eneryList.size(); i++) {
-                        // r.nextInt(eneryList.size() - 1);
-                        // Enery e = eneryList.get(i);
-                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        // try { Thread.sleep(5); }
-                        // catch (Exception e3) {}
-                        // }
-                        // for (int i = 0; i < toolList.size(); i++) {
-                        // r.nextInt(toolList.size() - 1);
-                        // Enery e = toolList.get(i); 
-                        // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        // try { Thread.sleep(5); }
-                        // catch (Exception e12) {}
-                        // }
-                        // for (int i = 0; i < flyingRocks.size(); i++) {
-                        // r.nextInt(flyingRocks.size() - 1);
-                        // PkbFlyingRock fock = flyingRocks.get(i);
-                        // fock.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        // try { Thread.sleep(5); }
-                        // catch (Exception e) {}
-                        // }
-                        // for (int i = 0; i < ghosts.size(); i++) {
-                        // r.nextInt(ghosts.size() - 1);
-                        // PkbGhost ghost = ghosts.get(i);
-                        // ghost.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
-                        // try { Thread.sleep(5); }
-                        // catch (Exception e) {}
-                        // }
                         continue;
                     }
                     for (PkbGhost ghost : ghosts) {
@@ -269,8 +236,8 @@ public class GameFrame extends JFrame {
                                 hasWon = false;
                                 isGameOver = true;
                                 // test.timergame.cancel();////////計時賽的時間暫停
-                                repaint();
-                                break;
+                                // repaint();
+                                // break;
                             }
                         }
                     }
@@ -300,12 +267,14 @@ public class GameFrame extends JFrame {
 
         if(hasWon && isGameOver){
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+            int m = 4;
+            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
 
         }
         else if(!hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/gameover.gif");
-            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+            ImageIcon img = new ImageIcon("img/gameover_GIF.gif");
+            int m = 4;
+            big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
         }
 
         big.drawImage(bg.img, bg.x, bg.y, null);
