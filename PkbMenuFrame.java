@@ -19,21 +19,21 @@ public class PkbMenuFrame extends JFrame{
     PkbMenuButton instrucToStartBtn;
 
     JPanel modePanel;
-    PkbMenuButton normalModeBtn;
     PkbMenuButton specialModeBtn;
+    PkbMenuButton normalModeBtn;
     PkbMenuButton backToStartBtn;
 
-    JPanel normalModePanel;
+    JPanel specialModePanel;
     PkbMenuButton timeTrialBtn;
     PkbMenuButton mazeBtn;
-    PkbMenuButton normalBackToModeBtn;
+    PkbMenuButton specialBackToModeBtn;
 
-    JPanel specialModePanel;
+    JPanel normalModePanel;
     PkbMenuButton levelOneBtn;
     PkbMenuButton levelTwoBtn;
     PkbMenuButton levelThreeBtn;
     PkbMenuButton levelFourBtn;
-    PkbMenuButton specialBackToModeBtn;
+    PkbMenuButton normalBackToModeBtn;
 
     JPanel loadingPanel;
     JLabel loadingLabel;
@@ -93,11 +93,13 @@ public class PkbMenuFrame extends JFrame{
 
         setModePanel();
         setInstrucPanel();
+        //setLoadingPanel();
     
         add(modePanel, btnPlace);
         add(instrucPanel, btnPlace);
         modePanel.setVisible(false);
         instrucPanel.setVisible(false);
+        //loadingPanel.setVisible(false);
     }
     private void setInstrucPanel(){
         instrucPanel= new JPanel();
@@ -116,12 +118,12 @@ public class PkbMenuFrame extends JFrame{
     private void setModePanel(){
         modePanel= new JPanel();
         modePanel.setOpaque(false);
-        normalModeBtn= new PkbMenuButton("  Normal Mode  ");//1 1
-        specialModeBtn= new PkbMenuButton("  Special Mode  ");//2 2
+        specialModeBtn= new PkbMenuButton("  special Mode  ");//1 1
+        normalModeBtn= new PkbMenuButton("  normal Mode  ");//2 2
         backToStartBtn= new PkbMenuButton("         Back         ");//8 8
 
-        normalModeBtn.addActionListener(btnClick);
         specialModeBtn.addActionListener(btnClick);
+        normalModeBtn.addActionListener(btnClick);
         backToStartBtn.addActionListener(btnClick);
         
         modePanel.setLayout(new BoxLayout(modePanel, BoxLayout.Y_AXIS));
@@ -131,60 +133,60 @@ public class PkbMenuFrame extends JFrame{
         modePanel.add(Box.createRigidArea (new Dimension(15, 25)));
         modePanel.add(backToStartBtn);
 
-        setnormalModePanel();
         setspecialModePanel();
+        setnormalModePanel();
         
-        add(normalModePanel, btnPlace);
         add(specialModePanel, btnPlace);
-        normalModePanel.setVisible(false);
+        add(normalModePanel, btnPlace);
         specialModePanel.setVisible(false);
-    }
-
-    private void setnormalModePanel(){
-        normalModePanel= new JPanel();
-        normalModePanel.setOpaque(false);
-        timeTrialBtn= new PkbMenuButton("    Time Trial   ");//可存活的時間
-        mazeBtn= new PkbMenuButton("        Maze       ");//2 3
-        normalBackToModeBtn= new PkbMenuButton("        Back       ");//3 3
-
-        timeTrialBtn.addActionListener(btnClick);
-        mazeBtn.addActionListener(btnClick);
-        normalBackToModeBtn.addActionListener(btnClick);
-        
-        normalModePanel.setLayout(new BoxLayout(normalModePanel, BoxLayout.Y_AXIS));
-        normalModePanel.add(timeTrialBtn);
-        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
-        normalModePanel.add(mazeBtn);
-        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
-        normalModePanel.add(normalBackToModeBtn);
+        normalModePanel.setVisible(false);
     }
 
     private void setspecialModePanel(){
         specialModePanel= new JPanel();
         specialModePanel.setOpaque(false);
+        timeTrialBtn= new PkbMenuButton("    Time Trial   ");//可存活的時間
+        mazeBtn= new PkbMenuButton("        Maze       ");//2 3
+        specialBackToModeBtn= new PkbMenuButton("        Back       ");//3 3
+
+        timeTrialBtn.addActionListener(btnClick);
+        mazeBtn.addActionListener(btnClick);
+        specialBackToModeBtn.addActionListener(btnClick);
+        
+        specialModePanel.setLayout(new BoxLayout(specialModePanel, BoxLayout.Y_AXIS));
+        specialModePanel.add(timeTrialBtn);
+        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        specialModePanel.add(mazeBtn);
+        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        specialModePanel.add(specialBackToModeBtn);
+    }
+
+    private void setnormalModePanel(){
+        normalModePanel= new JPanel();
+        normalModePanel.setOpaque(false);
         levelOneBtn= new PkbMenuButton("  Level 1  ");//2 2
         levelTwoBtn= new PkbMenuButton("  Level 2  ");//1 1
         levelThreeBtn= new PkbMenuButton("  Level 3  ");//1 1
         levelFourBtn= new PkbMenuButton("  Level 4  ");//1 1
-        specialBackToModeBtn= new PkbMenuButton("    Back    ");//4 5
+        normalBackToModeBtn= new PkbMenuButton("    Back    ");//4 5
 
         levelOneBtn.addActionListener(btnClick);
         levelTwoBtn.addActionListener(btnClick);
         levelThreeBtn.addActionListener(btnClick);
         levelFourBtn.addActionListener(btnClick);
-        specialBackToModeBtn.addActionListener(btnClick);
+        normalBackToModeBtn.addActionListener(btnClick);
         
-        specialModePanel.setLayout(new BoxLayout(specialModePanel, BoxLayout.Y_AXIS));
-        specialModePanel.add(levelOneBtn);
-        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
-        specialModePanel.add(levelTwoBtn);
-        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
-        specialModePanel.add(levelThreeBtn);
-        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
-        specialModePanel.add(levelFourBtn);
-        specialModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        normalModePanel.setLayout(new BoxLayout(normalModePanel, BoxLayout.Y_AXIS));
+        normalModePanel.add(levelOneBtn);
+        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        normalModePanel.add(levelTwoBtn);
+        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        normalModePanel.add(levelThreeBtn);
+        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        normalModePanel.add(levelFourBtn);
+        normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
         
-        specialModePanel.add(specialBackToModeBtn);
+        normalModePanel.add(normalBackToModeBtn);
     }
     private void setLoadingPanel(){
         loadingPanel = new JPanel();
@@ -192,7 +194,7 @@ public class PkbMenuFrame extends JFrame{
         logoLabel =  new JLabel();
         loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
         logoLabel.setIcon(new ImageIcon("img/logo_GIF.gif"));
-
+        
         loadingPanel.setOpaque(false); 
         
         loadingPanel.setLayout(new BorderLayout());//可傳參數(間隙)
@@ -225,11 +227,11 @@ public class PkbMenuFrame extends JFrame{
                 instrucPanel.setVisible(false);
                 startPanel.setVisible(true);
             }
-            else if(e.getSource()== normalModeBtn){
+            else if(e.getSource()== specialModeBtn){
                 modePanel.setVisible(false);
                 specialModePanel.setVisible(true);
             }
-            else if(e.getSource()== specialModeBtn){
+            else if(e.getSource()== normalModeBtn){
                 modePanel.setVisible(false);
                 normalModePanel.setVisible(true);
             }
@@ -237,12 +239,12 @@ public class PkbMenuFrame extends JFrame{
                 modePanel.setVisible(false);
                 startPanel.setVisible(true);
             }
-            else if(e.getSource()== normalBackToModeBtn){
-                normalModePanel.setVisible(false);
-                modePanel.setVisible(true);
-            }
             else if(e.getSource()== specialBackToModeBtn){
                 specialModePanel.setVisible(false);
+                modePanel.setVisible(true);
+            }
+            else if(e.getSource()== normalBackToModeBtn){
+                normalModePanel.setVisible(false);
                 modePanel.setVisible(true);
             }
             else if(e.getSource()== timeTrialBtn){
@@ -260,11 +262,9 @@ public class PkbMenuFrame extends JFrame{
             }
             else{
                 if(e.getSource() == levelOneBtn){
-                    callLoadingScreen();
-                    startPanel.setVisible(false);
-                    instrucPanel.setVisible(true);
-                    // gf = new GameFrame("MAPS/map.txt", 4);
-                    // gf.initGame();
+                    gf = new GameFrame("MAPS/map.txt", 4);
+                    gf.initGame();
+                    gf.gameStart();
                 }
                 else if(e.getSource() == levelTwoBtn){
                     gf = new GameFrame("MAPS/map1.txt", 8);
@@ -284,15 +284,5 @@ public class PkbMenuFrame extends JFrame{
                 music.close();
             }
         }
-    }
-
-    private void callLoadingScreen(){
-        startPanel.setVisible(false);
-        modePanel.setVisible(false);
-        normalModePanel.setVisible(false);
-        specialModePanel.setVisible(false);
-        normalModePanel.setVisible(false);
-        btnJPanel.setVisible(false);
-        loadingPanel.setVisible(true);
     }
 }
