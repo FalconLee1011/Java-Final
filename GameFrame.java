@@ -209,6 +209,7 @@ public class GameFrame extends JFrame {
         new Thread() {
             public void run() {
                 while (true) {
+                    if(isGameOver){ break; }
                     repaint();
                     if (kaboom) {
                         for (int i = 0; i < brickList.size(); i++) {
@@ -234,7 +235,7 @@ public class GameFrame extends JFrame {
                         // }
                         // for (int i = 0; i < toolList.size(); i++) {
                         // r.nextInt(toolList.size() - 1);
-                        // Enery e = toolList.get(i);
+                        // Enery e = toolList.get(i); 
                         // e.img = new ImageIcon("img/teacher_downMove_GIF.gif").getImage();
                         // try { Thread.sleep(5); }
                         // catch (Exception e12) {}
@@ -265,7 +266,7 @@ public class GameFrame extends JFrame {
                                 isGameOver = true;
                                 // test.timergame.cancel();////////計時賽的時間暫停
                                 repaint();
-                                // break;
+                                break;
                             }
                         }
                     }
