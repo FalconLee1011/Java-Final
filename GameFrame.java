@@ -46,6 +46,8 @@ public class GameFrame extends JFrame {
     public boolean save = false;
     public boolean kaboom = false;
     public boolean timeTrial = false;
+    
+    private int breakTime = 0;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
     private static final Color color = new Color(197, 168, 111);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
@@ -94,8 +96,8 @@ public class GameFrame extends JFrame {
 
         for (int i = 0; i < this.numOfGhost; i++) {
             PkbGhost ghost_add;
-            int rndx = r.nextInt(this.window_width - 500);
-            int rndy = r.nextInt(this.window_height - 500);
+            int rndx = r.nextInt(this.window_width);
+            int rndy = r.nextInt(this.window_height);
             ghost_add = new PkbGhost(rndx, rndy, 1, true, 1200, true, 300);
             this.ghosts.add(ghost_add);
         }
@@ -220,7 +222,10 @@ public class GameFrame extends JFrame {
             public void run() {
                 while (true) {
                     repaint();
-                    if(isGameOver){ break; }
+                    if(isGameOver){ 
+                        if(breakTime > 75) break; 
+                        breakTime += 1;
+                    }
                     if (kaboom) {
                         for (int i = 0; i < brickList.size(); i++) {
                             r.nextInt(brickList.size() - 1);

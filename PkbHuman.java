@@ -28,6 +28,9 @@ public class PkbHuman extends Thread {
     public int turtleSpeed = 2;
     public int camelSpeed = 30;
 
+    // DEBUG ONLY
+    private boolean ignoreWalls = false;
+
     public int sequence = 0;// 記錄誰最後
     public static final int width = 120, height = 120;// 角色的寬高
     public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
@@ -90,6 +93,8 @@ public class PkbHuman extends Thread {
         this.gameFrame = g;
         this.activeImgSet = this.defaultImgSet;
         imgSetQueue.add(this.activeImgSet);
+        this.xspeed = this.defaultSpeed;
+        this.yspeed = this.defaultSpeed;
         teleport(1200, 1560); // 10, 13
         // teleport(900, 900);
     }
@@ -177,31 +182,27 @@ public class PkbHuman extends Thread {
     public void move() {
         if (!isWitch && up || isWitch && down) {
             this.lastDirection = Str_Up;
-            this.img = this.activeImgSet[0];
-            if (!hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos)) {
+            // this.img = this.activeImgSet[0];
+            if (!hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos) || ignoreWalls)
                 moveUp();
-            }
         }
         if (!isWitch && down || isWitch && up) {
             lastDirection = Str_Down;
             this.img = this.activeImgSet[1];
-            if (!hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos)) {
+            if (!hasBumpIntoWall(Str_Down, this.gameFrame.rockEneryByPos) || ignoreWalls)
                 moveDown();
-            }
         }
         if (!isWitch && left || isWitch && right) {
             lastDirection = Str_Left;
             this.img = this.activeImgSet[2];
-            if (!hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos)) {
+            if (!hasBumpIntoWall(Str_Left, this.gameFrame.rockEneryByPos) || ignoreWalls)
                 moveLeft();
-            }
         }
         if (!isWitch && right || isWitch && left) {
             lastDirection = Str_Right;
             this.img = this.activeImgSet[3];
-            if (!hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos)) {
+            if (!hasBumpIntoWall(Str_Right, this.gameFrame.rockEneryByPos) || ignoreWalls)
                 moveRight();
-            }
         }
         try {
             this.sleep(20);
@@ -399,18 +400,33 @@ public class PkbHuman extends Thread {
     public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos) {
         Rectangle playerPoly;
 
+        int xtol = width - width / 5;
+        int ytol = height - height / 5;
+
         if (directionString.equals(Str_Up)) {
-            playerPoly = new Rectangle(this.x - (width / 2), this.y - ((height / 2) + (height / 10)),
-                    width - (width / 10), height - (height / 10));
+            playerPoly = new Rectangle(
+                this.x - (width / 2), 
+                this.y - ((height / 2) + (height / 10)), 
+                xtol, ytol
+            );
         } else if (directionString.equals(Str_Down)) {
-            playerPoly = new Rectangle(this.x - (width / 2), (this.y - (height / 2)) + (height / 10),
-                    width - (width / 10), height - (height / 10));
+            playerPoly = new Rectangle(
+                this.x - (width / 2), 
+                (this.y - (height / 2)) + (height / 10), 
+                xtol, ytol
+            );
         } else if (directionString.equals(Str_Left)) {
-            playerPoly = new Rectangle(this.x - ((width / 2) + (width / 10)), this.y - (height / 2),
-                    width - (width / 10), height - (height / 10));
+            playerPoly = new Rectangle(
+                this.x - ((width / 2) + (width / 10)), 
+                this.y - (height / 2), 
+                xtol, ytol
+            );
         } else if (directionString.equals(Str_Right)) {
-            playerPoly = new Rectangle(this.x - (width / 2) + (width / 10), this.y - (height / 2), width - (width / 10),
-                    height - (height / 10));
+            playerPoly = new Rectangle(
+                this.x - (width / 2) + (width / 10), 
+                this.y - (height / 2), 
+                xtol, ytol
+            );
         } else
             return false;
 
