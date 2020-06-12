@@ -324,11 +324,11 @@ public class PkbHuman extends Thread {
                     int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
                     Door door = this.gameFrame.doors.get(rnd_door);
                     teleport(door.y, door.x + 120);
-                    this.portalCooldown = true;
+                    this.portalIsCooldown= true;
                     this.portalCooldownSince = Calendar.getInstance().getTimeInMillis();
                 }
-                else if(Calendar.getInstance().getTimeInMillis() - time.portalCooldownSince > this.portalCooldown){
-                    this.portalCooldown = false;
+                else if(Calendar.getInstance().getTimeInMillis() - this.portalCooldownSince > this.portalCooldown){
+                    this.portalIsCooldown= false;
                 }
             } else if (bumpedEnery instanceof Fruit) {
                 // img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();

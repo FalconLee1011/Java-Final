@@ -139,6 +139,7 @@ public class PkbMenuFrame extends JFrame{
         normalModePanel.setVisible(false);
         specialModePanel.setVisible(false);
     }
+
     private void setnormalModePanel(){
         normalModePanel= new JPanel();
         normalModePanel.setOpaque(false);
@@ -157,6 +158,7 @@ public class PkbMenuFrame extends JFrame{
         normalModePanel.add(Box.createRigidArea (new Dimension(15, 25)));
         normalModePanel.add(normalBackToModeBtn);
     }
+
     private void setspecialModePanel(){
         specialModePanel= new JPanel();
         specialModePanel.setOpaque(false);
@@ -185,112 +187,112 @@ public class PkbMenuFrame extends JFrame{
         specialModePanel.add(specialBackToModeBtn);
     }
     private void setLoadingPanel(){
-        loadingPanel= new JPanel();
-        loadingLabel= new JLabel();
-        logoLabel= new JLabel();
+        loadingPanel = new JPanel();
+        loadingLabel = new JLabel();
+        logoLabel =  new JLabel();
         loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
         logoLabel.setIcon(new ImageIcon("img/logo_GIF.gif"));
 
         loadingPanel.setOpaque(false); 
         
-        loadingPanel.setLayout(new BorderLayout(10, 10));//可傳參數(間隙)
+        loadingPanel.setLayout(new BorderLayout());//可傳參數(間隙)
         loadingPanel.add(loadingLabel, BorderLayout.CENTER);
         loadingPanel.add(logoLabel, BorderLayout.SOUTH);
     }
     private class ButtonClick implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-                GameFrame gf;
-                if(e.getSource()== startBtn){
-                    startPanel.setVisible(false);
-                    modePanel.setVisible(true);
-                }
-                else if(e.getSource()== musicBtn){
-                    
-                    if(music.isPlaying()==false){
-                        music.play();
-                    }
-                    else{
-                        music.stop();
-                    }
-                    
-                }
-                else if(e.getSource()== descriptBtn){
-                    startPanel.setVisible(false);
-                    instrucPanel.setVisible(true);
-                }
-                else if(e.getSource()== instrucToStartBtn){
-                    instrucPanel.setVisible(false);
-                    startPanel.setVisible(true);
-                }
-                else if(e.getSource()== normalModeBtn){
-                    modePanel.setVisible(false);
-                    specialModePanel.setVisible(true);
-                }
-                else if(e.getSource()== specialModeBtn){
-                    modePanel.setVisible(false);
-                    normalModePanel.setVisible(true);
-                }
-                else if(e.getSource()== backToStartBtn){
-                    modePanel.setVisible(false);
-                    startPanel.setVisible(true);
-                }
-                else if(e.getSource()== normalBackToModeBtn){
-                    normalModePanel.setVisible(false);
-                    modePanel.setVisible(true);
-                }
-                else if(e.getSource()== specialBackToModeBtn){
-                    specialModePanel.setVisible(false);
-                    modePanel.setVisible(true);
-                }
-                else if(e.getSource()== timeTrialBtn){
-                    normalModePanel.setVisible(false);
-                    setLoadingPanel();
-                    loadingPanel.setVisible(true);
-                    gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
-                    gf.timeTrial=true;
-                    gf.startGame();
-                    music.close();
-                }
-                else if(e.getSource()== mazeBtn){
-                    normalModePanel.setVisible(false);
-                    setLoadingPanel();
-                    loadingPanel.setVisible(true);
-                    gf = new GameFrame("maze", 4);
-                    gf.startGame();
-                    music.close();
+            GameFrame gf;
+            if(e.getSource()== startBtn){
+                startPanel.setVisible(false);
+                modePanel.setVisible(true);
+            }
+            else if(e.getSource()== musicBtn){
+                
+                if(music.isPlaying()==false){
+                    music.play();
                 }
                 else{
-                    if(e.getSource() == levelOneBtn){
-                        specialModePanel.setVisible(false);
-                        setLoadingPanel();
-                        loadingPanel.setVisible(true);
-                        gf = new GameFrame("MAPS/map.txt", 4);
-                        //gf.startGame();
-                    }
-                    else if(e.getSource() == levelTwoBtn){
-                        specialModePanel.setVisible(false);
-                        setLoadingPanel();
-                        loadingPanel.setVisible(true);
-                        gf = new GameFrame("MAPS/map1.txt", 8);
-                        gf.startGame();
-                    }
-                    else if(e.getSource()== levelThreeBtn){
-                        specialModePanel.setVisible(false);
-                        setLoadingPanel();
-                        loadingPanel.setVisible(true);
-                        gf = new GameFrame("MAPS/map2.txt", 12);
-                        gf.startGame();
-                    }
-                    else if(e.getSource() == levelFourBtn){
-                        specialModePanel.setVisible(false);
-                        setLoadingPanel();
-                        loadingPanel.setVisible(true);
-                        gf = new GameFrame("MAPS/mapPaceman.txt", 16);
-                        gf.startGame();
-                    }
-                    music.close();
+                    music.stop();
                 }
+                
+            }
+            else if(e.getSource()== descriptBtn){
+                startPanel.setVisible(false);
+                instrucPanel.setVisible(true);
+            }
+            else if(e.getSource()== instrucToStartBtn){
+                instrucPanel.setVisible(false);
+                startPanel.setVisible(true);
+            }
+            else if(e.getSource()== normalModeBtn){
+                modePanel.setVisible(false);
+                specialModePanel.setVisible(true);
+            }
+            else if(e.getSource()== specialModeBtn){
+                modePanel.setVisible(false);
+                normalModePanel.setVisible(true);
+            }
+            else if(e.getSource()== backToStartBtn){
+                modePanel.setVisible(false);
+                startPanel.setVisible(true);
+            }
+            else if(e.getSource()== normalBackToModeBtn){
+                normalModePanel.setVisible(false);
+                modePanel.setVisible(true);
+            }
+            else if(e.getSource()== specialBackToModeBtn){
+                specialModePanel.setVisible(false);
+                modePanel.setVisible(true);
+            }
+            else if(e.getSource()== timeTrialBtn){
+                gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
+                gf.timeTrial=true;
+                gf.initGame();
+                gf.gameStart();
+                music.close();
+            }
+            else if(e.getSource()== mazeBtn){
+                gf = new GameFrame("maze", 4);
+                gf.initGame();
+                gf.gameStart();
+                music.close();
+            }
+            else{
+                if(e.getSource() == levelOneBtn){
+                    callLoadingScreen();
+                    startPanel.setVisible(false);
+                    instrucPanel.setVisible(true);
+                    // gf = new GameFrame("MAPS/map.txt", 4);
+                    // gf.initGame();
+                }
+                else if(e.getSource() == levelTwoBtn){
+                    gf = new GameFrame("MAPS/map1.txt", 8);
+                    gf.initGame();
+                    gf.gameStart();
+                }
+                else if(e.getSource()== levelThreeBtn){
+                    gf = new GameFrame("MAPS/map2.txt", 12);
+                    gf.initGame();
+                    gf.gameStart();
+                }
+                else if(e.getSource() == levelFourBtn){
+                    gf = new GameFrame("MAPS/mapPaceman.txt", 16);
+                    gf.initGame();    
+                    gf.gameStart();                
+                }
+                music.close();
+            }
         }
+    }
+
+    private void callLoadingScreen(){
+        startPanel.setVisible(false);
+        modePanel.setVisible(false);
+        normalModePanel.setVisible(false);
+        specialModePanel.setVisible(false);
+        normalModePanel.setVisible(false);
+        btnJPanel.setVisible(false);
+        loadingPanel.setVisible(true);
     }
 }
