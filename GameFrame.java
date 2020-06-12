@@ -58,9 +58,13 @@ public class GameFrame extends JFrame {
     public ArrayList<Enery> toolList = new ArrayList<Enery>();// 放道具
     public ArrayList<Integer> toolList2 = new ArrayList<Integer>();// 放道具數字
     public ArrayList<Barrier> brickList = new ArrayList<Barrier>();
+    int[][] ghostPos = {{26,10}, {22,30}, {19,49}, {11,64}, {29,63}, {33,19}, {33,59}, {9,28}, {18,58}, {26,27}, {18,33}, {26,26}, {15,50}, {30,21}, {26,53}, {16,19}, {11,38}, {22,62}, {24,9}, {38,13}, {30,57}};
+
     Random r = new Random();
 
-     Music music = new Music("/MUSIC/gameMusic.wav");
+    Music music = new Music("/MUSIC/gameMusic.wav");
+
+    boolean gameIsReady = false;
 
     public GameFrame() {// 初始化bgImg和player
         try { this.map = this.iMap.readMap(); } 
@@ -80,13 +84,14 @@ public class GameFrame extends JFrame {
         this.numOfGhost = numOfGhost;
     }
 
-    public void startGame() {
+    public void initGame() {
         setBackground(color);
         initFrame();
-        initGame();
+        loadGameProp();
+        gameIsReady = true
     }
 
-    public void initGame() {
+    public void loadGameProp() {
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
         // 距離追隨
@@ -98,19 +103,9 @@ public class GameFrame extends JFrame {
             PkbGhost ghost_add;
             int rndx = r.nextInt(this.window_width);
             int rndy = r.nextInt(this.window_height);
-            ghost_add = new PkbGhost(rndx, rndy, 1, true, 1200, true, 300);
+            ghost_add = new PkbGhost(ghostPos[i][0] * 120, ghostPos[i][1] * 120, 1, true, 1200, true, 300);
             this.ghosts.add(ghost_add);
         }
-        
-
-        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 120);
-        // this.ghosts.add(ghost_add);
-
-        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 600);
-        // this.ghosts.add(ghost_add);
-
-        // ghost_add = new PkbGhost(3120, 3120, 1, true, 600, true, 900);
-        // this.ghosts.add(ghost_add);
 
         for (int i = 0; i < map.length; i++) {// 讀取地圖，並配置地圖
             for (int j = 0; j < map[0].length; j++) {
@@ -215,7 +210,9 @@ public class GameFrame extends JFrame {
         }
         // 設置背景音樂
          music.loop();
+    }
 
+    public void gameStart(){
         this.human = new PkbHuman(this);// player
         human.start();
         new Thread() {
@@ -262,7 +259,6 @@ public class GameFrame extends JFrame {
                 }
             }
         }.start();
-
     }
 
     public void initFrame() {
