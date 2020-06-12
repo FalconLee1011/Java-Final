@@ -21,7 +21,7 @@ public class PkbTimer  {
     public Timer time2;
     public boolean run = true;
     public GameFrame gf;
-    public long midTime=21000;
+    public long midTime=3000;
     public long hh=0,mm=0,ss=0;
     public long h=0,m=0,s=0;
     public PkbTimer(GameFrame gf) {
@@ -38,15 +38,15 @@ public class PkbTimer  {
                 {
                     midTime--;
                     num++;
-                hh = midTime / 90 / 60 % 60;
-                mm = midTime / 90 % 60;
+                hh = midTime / 20 / 60 % 60;
+                mm = midTime / 20 % 60;
                 ss = midTime % 100;
-                h = num / 90 / 60 % 60;
-                m = num / 90 % 60;
+                h = num / 20 % 60;
+                m = num / 20 % 60;
                 s = num % 100;
                 Toolkit.getDefaultToolkit().beep();
                 
-                //timergame.purge();
+                timergame.purge();
                 }
                 else
                 timergame.purge();
