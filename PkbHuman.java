@@ -100,7 +100,8 @@ public class PkbHuman extends Thread {
         this.gameFrame = g;
         this.activeImgSet = this.defaultImgSet;
         imgSetQueue.add(this.activeImgSet);
-        teleport(1200, 1500);
+        teleport(1200, 1560); // 10, 13
+        // teleport(900, 900);
     }
 
     public int getX() {
@@ -209,8 +210,9 @@ public class PkbHuman extends Thread {
     }
 
     private void moveUp(){
-        if (this.y >= 100 && this.y <= bound_y) { this.y -= this.yspeed; } 
-        else if (this.y > bound_y || this.y < 100) {
+        this.img = this.activeImgSet[0];
+        if (this.y >= 500 && this.y <= bound_y) { this.y -= this.yspeed; } 
+        else if (this.y > bound_y || this.y < 500) {
             gameFrame.bg.y += this.yspeed;// 背景向下移動
             // 障礙物項左移動
             for (Enery enery : this.gameFrame.eneryList) { enery.y += this.yspeed; }
@@ -220,6 +222,7 @@ public class PkbHuman extends Thread {
     }
 
     private void moveDown(){
+        this.img = this.activeImgSet[1];
         if (this.y < bound_y) { this.y += this.yspeed; } 
         else if (this.y >= bound_y) {
             gameFrame.bg.y -= this.yspeed;// 背景向上移動
@@ -231,6 +234,7 @@ public class PkbHuman extends Thread {
     }
 
     private void moveLeft(){
+        this.img = this.activeImgSet[2];
         if (this.x >= bound_x) { this.x -= this.xspeed; } 
         else if (this.x < bound_x) {
             gameFrame.bg.x += this.xspeed;// 背景向右移動
@@ -242,6 +246,7 @@ public class PkbHuman extends Thread {
     }
 
     private void moveRight(){
+        this.img = this.activeImgSet[3];
         if (this.x <= bound_x) { this.x += this.xspeed; } 
         else if (this.x > bound_x) {
             gameFrame.bg.x -= this.xspeed;// 背景向左移動
@@ -323,6 +328,11 @@ public class PkbHuman extends Thread {
                         .remove(String.valueOf(bumpedEnery.raw_y * 120));
 
                 // backpack.add(bumpedEnery);
+            }
+            else if (bumpedEnery instanceof MazeExit) {
+                System.out.println("EXIT!");
+                this.gameFrame.hasWon = true;
+                this.gameFrame.isGameOver = true;
             }
 
         }
