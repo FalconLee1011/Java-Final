@@ -242,7 +242,7 @@ public class PkbGhost extends Thread{
     Rectangle ghostPoly = new Rectangle(this.x - (this.width / 2) , this.y  - (this.height / 2), width, height);
     for (PkbFlyingRock fock : g.flyingRocks) {
       Rectangle fockPoly = new Rectangle(fock.x - (fock.width / 2) , fock.y - (fock.height / 2), fock.width, fock.height);
-      if (ghostPoly.intersects(fockPoly)) { return true; }
+      if (ghostPoly.intersects(fockPoly) && fock.valid) { return true; }
     }
     return false;
   }

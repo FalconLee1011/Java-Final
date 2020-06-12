@@ -33,6 +33,8 @@ public class PkbFlyingRock extends Thread {
 
   private int tolerance = 20;
 
+  public boolean valid = true;
+
   public PkbFlyingRock(PkbHuman player, String direction) {
     this.x = player.x;
     this.y = player.y;
@@ -74,9 +76,12 @@ public class PkbFlyingRock extends Thread {
       else if (this.direction == "Right") {
         this.x += this.speed;
       }
-      if (this.hasMoved > 500)
+      if (this.hasMoved > 500){
+        this.valid = false;
         break;
-      this.hasMoved += this.speed;
+      }
+      
+        this.hasMoved += this.speed;
       
       try {
         Thread.sleep(2);
