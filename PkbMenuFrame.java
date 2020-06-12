@@ -72,9 +72,9 @@ public class PkbMenuFrame extends JFrame{
     private void setStartPanel(){
         startPanel= new JPanel();
         startPanel.setOpaque(false);
-        startBtn= new PkbMenuButton("   START    ");//3 4
-        musicBtn= new PkbMenuButton("   MUSIC    ");//3 4
-        descriptBtn= new PkbMenuButton("Instrutions");
+        startBtn= new PkbMenuButton("     START    ");//3 4
+        musicBtn= new PkbMenuButton("     MUSIC    ");//3 4
+        descriptBtn= new PkbMenuButton(" Instrutions ");
         
         startBtn.addActionListener(btnClick);
         musicBtn.addActionListener(btnClick);
