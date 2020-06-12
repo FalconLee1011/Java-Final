@@ -221,7 +221,7 @@ public class GameFrame extends JFrame {
                 while (true) {
                     repaint();
                     if(isGameOver){ 
-                        if(breakTime > 75) break; 
+                        // if(breakTime > 75) break; 
                         breakTime += 1;
                     }
                     if (timer.midTime <= 0) {//時間<=0，會結束
