@@ -265,7 +265,7 @@ public class GameFrame extends JFrame {
                                 System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
-                                // test.timergame.cancel();////////計時賽的時間暫停
+                                test.timergame.cancel();////////計時賽的時間暫停
                                 repaint();
                                 break;
                             }
@@ -316,12 +316,12 @@ public class GameFrame extends JFrame {
             // this.window_width = gd.getDisplayMode().getWidth();
             // this.window_height = gd.getDisplayMode().getHeight();
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 4), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
 
         }
         else if(!hasWon && isGameOver){
             ImageIcon img = new ImageIcon("img/gameover.png");
-            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 2), (this.window_height / 4) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
         }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
