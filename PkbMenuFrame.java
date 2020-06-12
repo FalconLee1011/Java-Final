@@ -68,7 +68,7 @@ public class PkbMenuFrame extends JFrame{
         startPanel= new JPanel();
         startPanel.setOpaque(false);
         startBtn= new PkbMenuButton("   START    ");//3 4
-        musicBtn= new PkbMenuButton("  MUSIC   ");//2 3
+        musicBtn= new PkbMenuButton("   MUSIC    ");//2 3
         
         startBtn.addActionListener(btnClick);
         musicBtn.addActionListener(btnClick);
@@ -173,27 +173,22 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== humanModeBtn){
                     modePanel.setVisible(false);
                     humanModePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== ghostModeBtn){
                     modePanel.setVisible(false);
                     ghostModePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== backToStartBtn){
                     modePanel.setVisible(false);
                     startPanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== ghostBackToModeBtn){
                     ghostModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== humanBackToModeBtn){
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== oneThreeBtn){
                     gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
@@ -233,7 +228,6 @@ public class PkbMenuFrame extends JFrame{
                          gf.startGame();
                          music.close();
                     }
-
                     music.close();
                 }
         }
