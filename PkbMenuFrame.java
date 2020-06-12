@@ -191,7 +191,7 @@ public class PkbMenuFrame extends JFrame{
         loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
         logoLabel.setIcon(new ImageIcon("img/logo_GIF.gif"));
 
-        loadingPanel.setOpaque(false);
+        loadingPanel.setOpaque(false); 
         
         loadingPanel.setLayout(new BorderLayout(10, 10));//可傳參數(間隙)
         loadingPanel.add(loadingLabel, BorderLayout.CENTER);
