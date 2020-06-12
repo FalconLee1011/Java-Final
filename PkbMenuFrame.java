@@ -98,6 +98,15 @@ public class PkbMenuFrame extends JFrame{
         instrucPanel= new JPanel();
         instrucLabel= new JLabel();
         instrucLabel.setIcon(new ImageIcon("img/gameInstruction.png"));
+        // Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
+        // BufferedImage bimage= new BufferedImage(d.width, (int)(0.6* d.height), BufferedImage.TYPE_INT_ARGB);
+        // try {
+        //     BufferedImage bi = ImageIO.read(new File("img/gameInstruction.png"));
+        //     bi.getSubimage(0, 0, 10, 10);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+
         instrucPanel.setOpaque(false);
         instrucToStartBtn= new PkbMenuButton("   Back   ");//3 3
 
