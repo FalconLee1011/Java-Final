@@ -191,7 +191,7 @@ public class PkbMenuFrame extends JFrame{
                     modePanel.setVisible(true);
                 }
                 else if(e.getSource()== oneThreeBtn){
-                    gf = new GameFrame("MAPS/mapDiffcult.txt", 20);
+                    gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
                     gf.timeTrial=true;
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Difficult...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
