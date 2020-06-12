@@ -197,7 +197,7 @@ public class PkbMenuFrame extends JFrame{
                     gf.startGame();
                 }
                 else if(e.getSource()== twoTwoBtn){
-                    gf = new GameFrame("MAPS/maze.txt", 4);
+                    gf = new GameFrame("maze", 4);
                     JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Maze...", JOptionPane.INFORMATION_MESSAGE);
                     gf.startGame();
                 }

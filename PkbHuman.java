@@ -23,7 +23,7 @@ public class PkbHuman extends Thread {
 
     public GameFrame gameFrame;// 遊戲地圖
     public int x = 120, y = 360;// 角色的坐標(一開始在左下角)
-    public int xspeed = 8, yspeed = 8;// 角色的坐標(一開始在左下角)
+    public int xspeed = 12, yspeed = 12;// 角色的坐標(一開始在左下角)
     public int sequence = 0;// 記錄誰最後
     public static final int width = 120, height = 120;// 角色的寬高
     public Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片

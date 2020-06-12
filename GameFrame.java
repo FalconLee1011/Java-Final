@@ -47,6 +47,7 @@ public class GameFrame extends JFrame {
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
+    private static final Color color = new Color(194, 164, 109);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -65,16 +66,20 @@ public class GameFrame extends JFrame {
     }
 
     public GameFrame(String fileName, int numOfGhost) {// 初始化bgImg和player
-        this.iMap = new InitMap(fileName);
-        try { this.map = this.iMap.readMap(); } 
-        catch (Exception e) {}
-        if(numOfGhost >= 20){
-            this.numOfGhost = 20;
+        if(fileName.equals("maze")){ this.map = new CreateMaze().getMaze(); }
+        else{
+            this.iMap = new InitMap(fileName);
+            try { this.map = this.iMap.readMap(); } 
+            catch (Exception e) {}
+            if(numOfGhost >= 20){
+                this.numOfGhost = 20;
+            }
         }
         this.numOfGhost = numOfGhost;
     }
 
     public void startGame() {
+        setBackground(color);
         initFrame();
         initGame();
     }
@@ -277,11 +282,8 @@ public class GameFrame extends JFrame {
                             }
                         }
                     }
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    try { Thread.sleep(10); }
+                    catch (InterruptedException e) { e.printStackTrace(); }
                 }
             }
         }.start();

@@ -5,13 +5,16 @@ public class CreateMaze {
     private final int[] offsetX = {-2, 2, 0, 0};
     private final int[] offsetY = {0, 0, -2, 2};
     private final int h = 56 - 16 + 1, w = 88 - 16 + 1;
-    public int[][] maze = new int[h][w];
+    private int[][] maze = new int[h][w];
 
     public CreateMaze() {
         this.init();
         this.createMaze(8, 8);
         this.maze[8][7] = 0;
-        this.maze[this.h - 9][this.w - 7] = 0;
+        this.maze[9][8] = 0;
+        for (int i = this.w - 8; i < this.w; i++) {
+            this.maze[this.h - 9][i] = 0;   
+        }
         for (int i = 0; i < this.h; i++) {
             System.out.printf("%d", this.maze[i][0]);
             for (int j = 1; j < this.w; j++)
@@ -19,6 +22,8 @@ public class CreateMaze {
             System.out.println();
         }
     }
+
+    public int[][] getMaze() { return this.maze; }
 
     private void init() {
         for (int i = 0; i < h; i++) {
