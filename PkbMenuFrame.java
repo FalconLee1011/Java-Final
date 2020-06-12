@@ -205,27 +205,22 @@ public class PkbMenuFrame extends JFrame{
                 else if(e.getSource()== humanModeBtn){
                     modePanel.setVisible(false);
                     humanModePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== ghostModeBtn){
                     modePanel.setVisible(false);
                     ghostModePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== backToStartBtn){
                     modePanel.setVisible(false);
                     startPanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== ghostBackToModeBtn){
                     ghostModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== humanBackToModeBtn){
                     humanModePanel.setVisible(false);
                     modePanel.setVisible(true);
-                    music.close();
                 }
                 else if(e.getSource()== oneThreeBtn){
                     gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
@@ -245,27 +240,22 @@ public class PkbMenuFrame extends JFrame{
                         gf = new GameFrame("MAPS/map.txt", 4);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading Level 1...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == twoPBtn){
                         gf = new GameFrame("MAPS/map1.txt", 8);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading Level 2...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == threePBtn){
                         gf = new GameFrame("MAPS/map2.txt", 12);
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click ok to start!", "Loading Level 3...", JOptionPane.INFORMATION_MESSAGE);
                         gf.startGame();
-                        music.close();
                     }
                     else if(e.getSource() == fivePBtn){
                         JOptionPane.showMessageDialog(PkbMenuFrame.this, "Click OK to start!", "Loading secreat map...", JOptionPane.INFORMATION_MESSAGE);
                          gf = new GameFrame("MAPS/mapPaceman.txt", 16);
                          gf.startGame();
-                         music.close();
                     }
-
                     music.close();
                 }
         }

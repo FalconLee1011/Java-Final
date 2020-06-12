@@ -41,13 +41,13 @@ public class GameFrame extends JFrame {
     public int window_height = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight();
     public int numOfGhost = 4;
 
-    private boolean hasWon = false;
-    private boolean isGameOver = false;
+    public boolean hasWon = false;
+    public boolean isGameOver = false;
 
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
-    private static final Color color = new Color(194, 164, 109);
+    private static final Color color = new Color(197, 168, 111);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -58,7 +58,7 @@ public class GameFrame extends JFrame {
     public ArrayList<Barrier> brickList = new ArrayList<Barrier>();
     Random r = new Random();
 
-    // Music music = new Music("/MUSIC/gameMusic.wav");
+     Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() {// 初始化bgImg和player
         try { this.map = this.iMap.readMap(); } 
@@ -135,7 +135,6 @@ public class GameFrame extends JFrame {
                         toolList.add(back);
                         toolList2.add(0);
                         rockList.add(back);
-                        rockList2.add(0);
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
@@ -150,7 +149,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/camel_GIF.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
-                        toolList2.add(2);
                         map_row.put(y_key, skates);
                         break;
                     case 3: // 畫烏龜
@@ -158,7 +156,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/quickSend_GIF_160.gif").getImage());
                         eneryList.add(turtle);
                         toolList.add(turtle);
-                        toolList2.add(3);
                         map_row.put(y_key, turtle);
                         break;
                     case 4:
@@ -166,7 +163,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);
-                        toolList2.add(4);
                         map_row.put(y_key, door);
                         doors.add(door);
                         doorSerial += 1;
@@ -176,7 +172,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/scorpion.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
-                        toolList2.add(5);
                         map_row.put(y_key, bewitch);
                         break;
                     case 6:
@@ -184,14 +179,12 @@ public class GameFrame extends JFrame {
                                 new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
-                        toolList2.add(6);
                         map_row.put(y_key, Fruit);
                         break;
                     case 7:
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
-                        rockList2.add(7);
                         // map_row.put(y_key, dig);
                         brick_row.put(y_key, dig);
                         break;
@@ -200,7 +193,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
-                        toolList2.add(8);
                         // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
@@ -214,7 +206,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        // music.loop();
+         music.loop();
 
         this.human = new PkbHuman(this);// player
         human.start();
@@ -276,7 +268,7 @@ public class GameFrame extends JFrame {
                                 System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
-                                test.timergame.cancel();////////計時賽的時間暫停
+                                // test.timergame.cancel();////////計時賽的時間暫停
                                 repaint();
                                 break;
                             }
@@ -306,6 +298,16 @@ public class GameFrame extends JFrame {
         BufferedImage bi = (BufferedImage) this.createImage(this.getSize().width, this.getSize().height);
         Graphics big = bi.getGraphics();
 
+        if(hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/win_GIF.gif");
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+
+        }
+        else if(!hasWon && isGameOver){
+            ImageIcon img = new ImageIcon("img/gameover.gif");
+            big.drawImage(img.getImage(), (this.window_width / 2) - (img.getIconWidth() / 2), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
+        }
+
         big.drawImage(bg.img, bg.x, bg.y, null);
         for (int i = 0; i < eneryList.size(); i++) {
             Enery e = eneryList.get(i);
@@ -319,18 +321,6 @@ public class GameFrame extends JFrame {
             big.drawImage(fock.img, fock.x, fock.y, fock.width, fock.height, null);
         }
 
-        if(hasWon && isGameOver){
-            // GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            // this.window_width = gd.getDisplayMode().getWidth();
-            // this.window_height = gd.getDisplayMode().getHeight();
-            ImageIcon img = new ImageIcon("img/win_GIF.gif");
-            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 4), (this.window_height / 2) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
-
-        }
-        else if(!hasWon && isGameOver){
-            ImageIcon img = new ImageIcon("img/gameover.png");
-            big.drawImage(img.getImage(), (this.window_width / 4) - (img.getIconWidth() / 2), (this.window_height / 4) - (img.getIconHeight() / 2), img.getIconWidth(), img.getIconHeight(), null);
-        }
         // 畫人物
         // big.drawImage(mario.img, mario.x, mario.y, mario.width, mario.height, null);
         // g.drawImage(bi, 0, 0, null);

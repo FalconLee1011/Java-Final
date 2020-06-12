@@ -1,11 +1,10 @@
 # Java-Final
 
-* Test ---------- package peekaboo;
+* peekaboo.Pkb__Test
 
 ## 選單介面 package peekaboo.menu;
 * PkbMenuFrame -- 
 * PkbMenuButton -
-* PkbMenu__Test -
 
 ## 角色 package peekaboo.role;
 * PkbHuman ------
@@ -16,7 +15,7 @@
     + import peekaboo.*;
 
 ## package peekaboo;
-* ModifyMap -----
+* CreateMaze -----
 * InitMap -------
 * BackgroundImage 
 * Music
