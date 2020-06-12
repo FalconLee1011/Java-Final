@@ -12,6 +12,11 @@ public class PkbMenuFrame extends JFrame{
     JPanel startPanel;
     PkbMenuButton startBtn;
     PkbMenuButton musicBtn;
+    PkbMenuButton descriptBtn;
+
+    JPanel instrucPanel;
+    JLabel instrucLabel;
+    PkbMenuButton instrucToStartBtn;
 
     JPanel modePanel;
     PkbMenuButton humanModeBtn;
@@ -68,19 +73,38 @@ public class PkbMenuFrame extends JFrame{
         startPanel= new JPanel();
         startPanel.setOpaque(false);
         startBtn= new PkbMenuButton("   START    ");//3 4
-        musicBtn= new PkbMenuButton("  MUSIC   ");//2 3
+        musicBtn= new PkbMenuButton("   MUSIC    ");//3 4
+        descriptBtn= new PkbMenuButton("Instrutions");
         
         startBtn.addActionListener(btnClick);
         musicBtn.addActionListener(btnClick);
+        descriptBtn.addActionListener(btnClick);
         
         startPanel.setLayout(new BoxLayout(startPanel, BoxLayout.Y_AXIS));
         startPanel.add(startBtn);
         startPanel.add(Box.createRigidArea(new Dimension(15, 25))); 
         startPanel.add(musicBtn);
+        startPanel.add(Box.createRigidArea(new Dimension(15, 25))); 
+        startPanel.add(descriptBtn);
 
         setModePanel();
+        setInstrucPanel();
         add(modePanel, btnPlace);
+        add(instrucPanel, btnPlace);
         modePanel.setVisible(false);
+        instrucPanel.setVisible(false);
+    }
+    private void setInstrucPanel(){
+        instrucLabel= new JLabel();
+        instrucLabel.setIcon(new ImageIcon("img/gameInstruction.png"));
+        instrucPanel.setOpaque(false);
+        instrucToStartBtn= new PkbMenuButton("   Back   ");//3 3
+
+        instrucToStartBtn.addActionListener(btnClick);
+        
+        instrucPanel.setLayout(new BorderLayout(4, 4));
+        instrucPanel.add(instrucLabel,BorderLayout.CENTER);
+        instrucPanel.add(instrucToStartBtn, BorderLayout.SOUTH);
     }
     private void setModePanel(){
         modePanel= new JPanel();
@@ -169,6 +193,14 @@ public class PkbMenuFrame extends JFrame{
                         music.stop();
                     }
                     
+                }
+                else if(e.getSource()== descriptBtn){
+                    //startPanel.setVisible(false);
+                    instrucPanel.setVisible(true);
+                }
+                else if(e.getSource()== instrucToStartBtn){
+                    instrucPanel.setVisible(false);
+                    startPanel.setVisible(true);
                 }
                 else if(e.getSource()== humanModeBtn){
                     modePanel.setVisible(false);
