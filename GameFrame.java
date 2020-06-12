@@ -47,7 +47,7 @@ public class GameFrame extends JFrame {
     public boolean kaboom = false;
     public boolean timeTrial = false;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
-    private static final Color color = new Color(194, 164, 109);
+    private static final Color color = new Color(197, 168, 111);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -58,7 +58,7 @@ public class GameFrame extends JFrame {
     public ArrayList<Barrier> brickList = new ArrayList<Barrier>();
     Random r = new Random();
 
-    // Music music = new Music("/MUSIC/gameMusic.wav");
+     Music music = new Music("/MUSIC/gameMusic.wav");
 
     public GameFrame() {// 初始化bgImg和player
         try { this.map = this.iMap.readMap(); } 
@@ -214,7 +214,7 @@ public class GameFrame extends JFrame {
             }
         }
         // 設置背景音樂
-        // music.loop();
+         music.loop();
 
         this.human = new PkbHuman(this);// player
         human.start();
