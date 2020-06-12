@@ -26,7 +26,7 @@ public class PkbHuman extends Thread {
     public int defaultSpeed = 12;
     public int xspeed = 12, yspeed = 12;
     public int turtleSpeed = 2;
-    public int camelSpeed = 30;
+    public int camelSpeed = 25;
 
     // DEBUG ONLY
     private boolean ignoreWalls = false;
@@ -400,8 +400,8 @@ public class PkbHuman extends Thread {
     public boolean hasBumpIntoWall(String directionString, Map<String, Map<String, Enery>> brickByPos) {
         Rectangle playerPoly;
 
-        int xtol = width - width / 5;
-        int ytol = height - height / 5;
+        int xtol = width - (width / 10);
+        int ytol = height - (height / 10);
 
         if (directionString.equals(Str_Up)) {
             playerPoly = new Rectangle(

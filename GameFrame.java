@@ -248,7 +248,7 @@ public class GameFrame extends JFrame {
                             }
                             
                             if (hp <= 0) {
-                                System.out.println("GAME OVER");
+                                // System.out.println("GAME OVER");
                                 hasWon = false;
                                 isGameOver = true;
                                 // test.timergame.cancel();////////計時賽的時間暫停
