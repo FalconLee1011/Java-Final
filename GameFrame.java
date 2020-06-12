@@ -135,7 +135,6 @@ public class GameFrame extends JFrame {
                         toolList.add(back);
                         toolList2.add(0);
                         rockList.add(back);
-                        rockList2.add(0);
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
@@ -150,7 +149,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/camel_GIF.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
-                        toolList2.add(2);
                         map_row.put(y_key, skates);
                         break;
                     case 3: // 畫烏龜
@@ -158,7 +156,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/quickSend_GIF_160.gif").getImage());
                         eneryList.add(turtle);
                         toolList.add(turtle);
-                        toolList2.add(3);
                         map_row.put(y_key, turtle);
                         break;
                     case 4:
@@ -166,7 +163,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);
-                        toolList2.add(4);
                         map_row.put(y_key, door);
                         doors.add(door);
                         doorSerial += 1;
@@ -176,7 +172,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/scorpion.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
-                        toolList2.add(5);
                         map_row.put(y_key, bewitch);
                         break;
                     case 6:
@@ -184,14 +179,12 @@ public class GameFrame extends JFrame {
                                 new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
-                        toolList2.add(6);
                         map_row.put(y_key, Fruit);
                         break;
                     case 7:
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
-                        rockList2.add(7);
                         // map_row.put(y_key, dig);
                         brick_row.put(y_key, dig);
                         break;
@@ -200,7 +193,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
-                        toolList2.add(8);
                         // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
