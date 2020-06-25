@@ -99,13 +99,14 @@ public class PkbMenuFrame extends JFrame{
 
         setModePanel();
         setInstrucPanel();
-        //setLoadingPanel();
+        setLoadingPanel();
     
         add(modePanel, btnPlace);
         add(instrucPanel, btnPlace);
+        add(loadingPanel, btnPlace);
         modePanel.setVisible(false);
         instrucPanel.setVisible(false);
-        //loadingPanel.setVisible(false);
+        loadingPanel.setVisible(false);
     }
     private void setInstrucPanel(){
         instrucPanel= new JPanel();
@@ -223,14 +224,13 @@ public class PkbMenuFrame extends JFrame{
 
     private void setLoadingPanel(){
         loadingPanel = new JPanel();
+        loadingPanel.setOpaque(false); 
         loadingLabel = new JLabel();
         logoLabel =  new JLabel();
         loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
-        logoLabel.setIcon(new ImageIcon("img/logo_GIF.gif"));
+        logoLabel.setIcon(new ImageIcon("img/PeeKaBoo_300.png"));
         
-        loadingPanel.setOpaque(false); 
-        
-        loadingPanel.setLayout(new BorderLayout());//可傳參數(間隙)
+        loadingPanel.setLayout(new BorderLayout(4, 4));//可傳參數(間隙)
         loadingPanel.add(loadingLabel, BorderLayout.CENTER);
         loadingPanel.add(logoLabel, BorderLayout.SOUTH);
     }
@@ -301,6 +301,13 @@ public class PkbMenuFrame extends JFrame{
             }
             else{//(in normal)
                 if(e.getSource() == levelOneBtn){//level 1
+                    // normalModePanel.setVisible(false);
+                    // loadingPanel.setVisible(true);
+                    // try{
+                    //     Thread.sleep(10000);
+                    // }catch(InterruptedException err){
+                    //     System.err.println(err);
+                    // }
                     gf = new GameFrame("MAPS/map.txt", 4);
                     gf.initGame();
                     gf.gameStart();
