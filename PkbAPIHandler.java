@@ -109,6 +109,7 @@ public class PkbAPIHandler {
     this.obj = new JSONObject(this.response);
     JSONObject game = obj.getJSONObject("game");
     int playerCount = game.getInt("playerCount");
+    if(playerCount == 0) return;
 
     ArrayList<PkbOnlinePlayer> onlinePlayers = new ArrayList<PkbOnlinePlayer>();
 
@@ -134,9 +135,12 @@ public class PkbAPIHandler {
     this.get("http://140.121.197.14:8756/invalid_game?game=" + this.gameID);
   }
   public static void main(String args[]) {
-    // PkbAPIHandler newOnlineGame = new PkbAPIHandler();
+    PkbAPIHandler newOnlineGame = new PkbAPIHandler();
     // String response = newOnlineGame.create_game();
-    // System.out.println(response);
+    // System.out.println(newOnlineGame.create_game());
+    // System.out.println(newOnlineGame.joinGame());
+    // System.out.println(newOnlineGame.joinGame());
+    // newOnlineGame.get_game();
     // System.out.println(newOnlineGame.gameID);
   }
 }

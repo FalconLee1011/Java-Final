@@ -70,6 +70,8 @@ public class PkbMenuFrame extends JFrame{
     String room;
     RoomPanel roomPanel;
 
+    GameFrame gf = new GameFrame();
+
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
         btnClick= new ButtonClick();
@@ -328,7 +330,6 @@ public class PkbMenuFrame extends JFrame{
     private class ButtonClick implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            GameFrame gf = new GameFrame();
             if(e.getSource()== startBtn){//start
                 startPanel.setVisible(false);
                 modePanel.setVisible(true);
@@ -383,9 +384,7 @@ public class PkbMenuFrame extends JFrame{
             }
 
             else if(e.getSource() == startGameBtn){
-                try {
-                    gf.Game();
-                }
+                try { gf.Game(); }
                 catch(Exception errrrr){}
             }
             
