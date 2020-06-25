@@ -358,12 +358,15 @@ public class GameFrame extends JFrame {
         }
 
         for (Enery op : onlinePlayers) {
-            // eneryList.add(op);              
-            big.drawImage(op.img, human.x + (human.x - op.x), human.y + (human.y - op.y), op.width, op.height, null);          
-            // System.out.printf("Player %d is at <%d, %d>%n", i, x, y);
+            // eneryList.add(op);          
+            int opx = human.x - (human.absoluteX - op.x);
+            int opy = human.y - (human.absoluteY - op.y);
+            big.drawImage(op.img, opx, opy, op.width, op.height, null);          
+            System.out.printf("Local is at <%d, %d>%n", human.x, human.y);
+            System.out.printf("Player is at <%d, %d>%n", opx, opy);
         }
+        System.out.printf("%n");
 
-        // System.out.printf("%n");
         if(hasWon && isGameOver){
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
             int m = 2;
