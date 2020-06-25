@@ -289,36 +289,30 @@ public class PkbMenuFrame extends JFrame{
             else if(e.getSource()== timeTrialBtn){//time trial
                 gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
                 gf.timeTrial=true;
-                gf.initGame();
-                gf.gameStart();
+                gf.Game();
                 music.close();
             }
             else if(e.getSource()== mazeBtn){//maze
                 gf = new GameFrame("maze", 4);
-                gf.initGame();
-                gf.gameStart();
+                gf.Game();
                 music.close();
             }
             else{//(in normal)
                 if(e.getSource() == levelOneBtn){//level 1
                     gf = new GameFrame("MAPS/map.txt", 4);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
                 else if(e.getSource() == levelTwoBtn){//level 2
                     gf = new GameFrame("MAPS/map1.txt", 8);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
                 else if(e.getSource()== levelThreeBtn){//level 3
                     gf = new GameFrame("MAPS/map2.txt", 12);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
                 else if(e.getSource() == levelFourBtn){//level 4
                     gf = new GameFrame("MAPS/mapPaceman.txt", 16);
-                    gf.initGame();    
-                    gf.gameStart();                
+                    gf.Game();             
                 }
                 music.close();
             }

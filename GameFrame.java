@@ -63,8 +63,6 @@ public class GameFrame extends JFrame {
 
     Music music = new Music("/MUSIC/gameMusic.wav");
 
-    boolean gameIsReady = false;
-
     public GameFrame() {// 初始化bgImg和player
         try { this.map = this.iMap.readMap(); } 
         catch (Exception e) {}
@@ -83,10 +81,10 @@ public class GameFrame extends JFrame {
         this.numOfGhost = numOfGhost;
     }
 
-    public void initGame() {
+    public void Game() {
         initFrame();
         loadGameProp();
-        gameIsReady = true;
+        gameStart();
     }
 
     public void initFrame() {
@@ -99,16 +97,19 @@ public class GameFrame extends JFrame {
         this.setVisible(true);
         KeyListener kl = new KeyListener(this);
         this.addKeyListener(kl);
+        // 設置背景音樂
+        music.loop();
     }
-    public void loadGameProp() {
-        // 直接追隨
-        // public PkbGhost ghost = new PkbGhost();
-        // 距離追隨
-        // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
-        // 距離追隨、會巡邏
-        // ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
 
+    public void loadGameProp() {
+        
         for (int i = 0; i < this.numOfGhost; i++) {
+            // 直接追隨
+            // public PkbGhost ghost = new PkbGhost();
+            // 距離追隨
+            // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
+            // 距離追隨、會巡邏
+            // ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
             PkbGhost ghost_add;
             int rndx = r.nextInt(this.window_width);
             int rndy = r.nextInt(this.window_height);
@@ -144,59 +145,52 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                        Barrier brick = new Barrier(j * 120, i * 120, 120, 120,
-                                new ImageIcon(cactusArr[r.nextInt(3)]).getImage());// (x軸，y軸，寬，高)
+                        Barrier brick = new Barrier(j * 120, i * 120, 120, 120,new ImageIcon(cactusArr[r.nextInt(3)]).getImage());// (x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brickList.add(brick);
                         brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
-                        Shoe skates = new Shoe(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/camel_GIF.gif").getImage());
+                        Shoe skates = new Shoe(j * 120, i * 120, 120, 120, new ImageIcon("img/camel_GIF.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
                         map_row.put(y_key, skates);
                         break;
                     case 3: // 畫烏龜
-                        Turtle turtle = new Turtle(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/quickSend_GIF_160.gif").getImage());
+                        Turtle turtle = new Turtle(j * 120, i * 120, 120, 120,new ImageIcon("img/quickSend_GIF_160.gif").getImage());
                         eneryList.add(turtle);
                         toolList.add(turtle);
                         map_row.put(y_key, turtle);
                         break;
-                    case 4:
-                        Door door = new Door(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
+                    case 4: // 畫任意門
+                        Door door = new Door(j * 120, i * 120, 120, 120,new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);
                         map_row.put(y_key, door);
                         doors.add(door);
                         doorSerial += 1;
                         break;
-                    case 5:
-                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/scorpion_GIF.gif").getImage());
+                    case 5: // 畫迷惑
+                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120,new ImageIcon("img/scorpion_GIF.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         map_row.put(y_key, bewitch);
                         break;
-                    case 6:
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,
-                                new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
+                    case 6: // 畫果實
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         map_row.put(y_key, Fruit);
                         break;
-                    case 7:
+                    case 7:  // 畫凹洞
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
                         // map_row.put(y_key, dig);
                         brick_row.put(y_key, dig);
                         break;
-                    case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/heartWithSend.png").getImage());
+                    case 8: // 畫心
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120,new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
                         // map_row.put(y_key, dig);
@@ -217,8 +211,6 @@ public class GameFrame extends JFrame {
                 rockEneryByPos.put(x_key, brick_row);
             }
         }
-        // 設置背景音樂
-         music.loop();
     }
 
     public void gameStart(){
