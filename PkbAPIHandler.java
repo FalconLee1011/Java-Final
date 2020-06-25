@@ -122,7 +122,7 @@ public class PkbAPIHandler {
     ArrayList<PkbOnlinePlayer> onlinePlayers = new ArrayList<PkbOnlinePlayer>();
 
     for (int i = 0; i < playerCount; i++){
-      // if(i == this.playerID) continue;
+      if(i == this.playerID) continue;
       Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
       int x = game.getJSONObject(Integer.toString(i)).getInt("x");
       int y = game.getJSONObject(Integer.toString(i)).getInt("y");
