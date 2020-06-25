@@ -49,6 +49,11 @@ public class PkbMenuFrame extends JFrame{
     PkbMenuButton startGameBtn;
     PkbMenuButton roomBackToMulBtn;
 
+    JPanel inputIDPanel;
+    JTextField enterIDText;
+    PkbMenuButton enterIDBtn;
+    PkbMenuButton inputBackToMulBtn;
+
     JPanel loadingPanel;
     JLabel loadingLabel;
     JLabel logoLabel;
@@ -76,18 +81,19 @@ public class PkbMenuFrame extends JFrame{
         btnPlace.fill= GridBagConstraints.BOTH;
 
         contentPane= getContentPane();
-        backGroundPane= getLayeredPane();
-        setBackGroundPane();
+        contentPane.setBackground(Color.PINK);
+        // backGroundPane= getLayeredPane();
+        // setBackGroundPane();
         
         setStartPanel();
         contentPane.add(startPanel, btnPlace);
         music.play();
     }
     private void setBackGroundPane(){
-        backGroundPane.setBackground(Color.PINK);
+        //backGroundPane.setBackground(Color.PINK);
         JLabel imglabel= new JLabel();
-        imglabel.setIcon(new ImageIcon("img/win_PNG.png"));
-        backGroundPane.add(imglabel);
+        // imglabel.setIcon(new ImageIcon("img/win_PNG.png"));
+        // backGroundPane.add(imglabel);
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
@@ -238,39 +244,72 @@ public class PkbMenuFrame extends JFrame{
         multiplePlayerPanel.add(multipleBackToModeBtn);
 
         setMultiplePanel();
+        setInputIDPanel();
         add(multiplePanel, btnPlace);
+        add(inputIDPanel, btnPlace);
         multiplePanel.setVisible(false);
+        inputIDPanel.setVisible(false);
     }
 
     private void setMultiplePanel(){
         multiplePanel= new JPanel();
+        multiplePanel.setOpaque(false);
         RoomPanel roomPanel= new RoomPanel("banana!", 4);
-        roomPanel.setOpaque(false);
         masterGuest= GUEST;//= 0
-        startGameBtn= new PkbMenuButton("  Start!  ");//2 2
-        roomBackToMulBtn= new PkbMenuButton("     Back     ");//5 5
+        startGameBtn= new PkbMenuButton("   Start !   ");//2 2
+        roomBackToMulBtn= new PkbMenuButton("   Back  ");//5 5
 
         startGameBtn.addActionListener(btnClick);
         roomBackToMulBtn.addActionListener(btnClick);
 
         if(masterGuest== MASTER){//= 1
-            startBtn.setEnabled(true);
+            startGameBtn.setEnabled(true);
         }
         else{//== GUEST= 0
-            startBtn.setEnabled(false);
+            startGameBtn.setEnabled(false);
         }
 
         JPanel littePanel= new JPanel();
+        littePanel.setOpaque(false);
         littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        littePanel.add(startGameBtn);
         littePanel.add(roomBackToMulBtn);
+        littePanel.add(startGameBtn);
         
-        multiplePanel.setLayout(new BoxLayout(multiplePlayerPanel, BoxLayout.Y_AXIS));
+        multiplePanel.setLayout(new BoxLayout(multiplePanel, BoxLayout.Y_AXIS));
         multiplePanel.add(roomPanel);
         multiplePanel.add(Box.createRigidArea (new Dimension(15, 25)));
         multiplePanel.add(littePanel);
     }
+    private void setInputIDPanel(){
+        inputIDPanel= new JPanel();
+        inputIDPanel.setOpaque(false);
+        enterIDBtn= new PkbMenuButton("   Enter   ");//2 2
+        inputBackToMulBtn= new PkbMenuButton("   Back   ");//4 4
 
+        Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
+        int myWidth= (int)(d.width/ 45);
+        JLabel enterIDLabel= new JLabel("Input Game ID: ");
+        enterIDLabel.setFont(new Font("SansSerif", Font.BOLD, myWidth));
+        enterIDLabel.setForeground(Color.GRAY);
+        enterIDText= new JTextField(12);
+        enterIDText.setFont(new Font("SansSerif", Font.BOLD+ 10, myWidth));
+        enterIDText.setForeground(Color.GRAY);
+
+        enterIDBtn.addActionListener(btnClick);
+        inputBackToMulBtn.addActionListener(btnClick);
+
+        JPanel littePanel= new JPanel();
+        littePanel.setOpaque(false);
+        littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        littePanel.add(inputBackToMulBtn);
+        littePanel.add(enterIDBtn);
+        
+        inputIDPanel.setLayout(new BoxLayout(inputIDPanel, BoxLayout.Y_AXIS));
+        inputIDPanel.add(enterIDLabel);
+        inputIDPanel.add(enterIDText);
+        inputIDPanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        inputIDPanel.add(littePanel);
+    }
     private void setLoadingPanel(){
         loadingPanel = new JPanel();
         loadingPanel.setOpaque(false); 
@@ -323,21 +362,36 @@ public class PkbMenuFrame extends JFrame{
                 multiplePlayerPanel.setVisible(false);
                 modePanel.setVisible(true);
             }
-            else if(e.getSource()== createRoomBtn){//start
+            else if(e.getSource()== createRoomBtn){//create room
                 multiplePlayerPanel.setVisible(false);
                 multiplePanel.setVisible(true);
                 masterGuest= MASTER;
-                startBtn.setEnabled(true);
+                startGameBtn.setEnabled(true);
             }
-            else if(e.getSource()== enterRoomBtn){//enter
+            else if(e.getSource()== enterRoomBtn){//enter room
                 multiplePlayerPanel.setVisible(false);
-                multiplePanel.setVisible(true);
+                inputIDPanel.setVisible(true);
                 masterGuest= GUEST;
-                startBtn.setEnabled(false);
+                startGameBtn.setEnabled(false);
+            }
+            else if(e.getSource()== roomBackToMulBtn){//back
+                multiplePanel.setVisible(false);
+                multiplePlayerPanel.setVisible(true);
+                masterGuest= GUEST;
+                startGameBtn.setEnabled(false);
+            }
+            else if(e.getSource()== enterIDBtn){//input+ enter
+                inputIDPanel.setVisible(false);
+                multiplePanel.setVisible(true);
+                System.out.println("input: "+ enterIDText.getText());
+            }
+            else if(e.getSource()== inputBackToMulBtn){//back
+                inputIDPanel.setVisible(false);
+                multiplePlayerPanel.setVisible(true);
             }
             else if(e.getSource()== backToStartBtn){//back
                 modePanel.setVisible(false);
-                startPanel.setVisible(true);
+                startGameBtn.setVisible(true);
             }
             else if(e.getSource()== specialBackToModeBtn){//back
                 specialModePanel.setVisible(false);
