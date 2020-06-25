@@ -24,7 +24,7 @@ import java.util.Random;
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg = new BackgroundImage(); // 背景圖片
-    public InitMap iMap = new InitMap("MAPS/map.txt");
+    public InitMap iMap;
     public int[][] map;
     public PkbHuman human;
     public PkbTimer timer = new PkbTimer();
@@ -47,10 +47,8 @@ public class GameFrame extends JFrame {
     public boolean save = false;
     public boolean kaboom = false;
     public boolean timeTrial = false;
-    
     private int breakTime = 0;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
-    private static final Color color = new Color(197, 168, 111);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -64,8 +62,6 @@ public class GameFrame extends JFrame {
     Random r = new Random();
 
     Music music = new Music("/MUSIC/gameMusic.wav");
-
-    boolean gameIsReady = false;
 
     public GameFrame() {// 初始化bgImg和player
         try { this.map = this.iMap.readMap(); } 
@@ -85,22 +81,35 @@ public class GameFrame extends JFrame {
         this.numOfGhost = numOfGhost;
     }
 
-    public void initGame() {
-        setBackground(color);
+    public void Game() {
         initFrame();
         loadGameProp();
-        gameIsReady = true;
+        gameStart();
+    }
+
+    public void initFrame() {
+        setBackground(new Color(197, 168, 111));
+        this.setSize(this.window_width, this.window_height);
+        this.setTitle("PeeKaBoo~");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(3);
+        this.setVisible(true);
+        KeyListener kl = new KeyListener(this);
+        this.addKeyListener(kl);
+        // 設置背景音樂
+        music.loop();
     }
 
     public void loadGameProp() {
-        // 直接追隨
-        // public PkbGhost ghost = new PkbGhost();
-        // 距離追隨
-        // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
-        // 距離追隨、會巡邏
-        // ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
-
+        
         for (int i = 0; i < this.numOfGhost; i++) {
+            // 直接追隨
+            // public PkbGhost ghost = new PkbGhost();
+            // 距離追隨
+            // public PkbGhost ghost = new PkbGhost(3120, 3120, 1, true, 1200);
+            // 距離追隨、會巡邏
+            // ghost_add = new PkbGhost(rndx, rndy, 1, true, 600, true, 300);
             PkbGhost ghost_add;
             int rndx = r.nextInt(this.window_width);
             int rndy = r.nextInt(this.window_height);
@@ -136,59 +145,52 @@ public class GameFrame extends JFrame {
                         rock_row.put(y_key, back);
                         break;
                     case 1: // 畫邊界
-                        Barrier brick = new Barrier(j * 120, i * 120, 120, 120,
-                                new ImageIcon(cactusArr[r.nextInt(3)]).getImage());// (x軸，y軸，寬，高)
+                        Barrier brick = new Barrier(j * 120, i * 120, 120, 120,new ImageIcon(cactusArr[r.nextInt(3)]).getImage());// (x軸，y軸，寬，高)
                         eneryList.add(brick);
                         brickList.add(brick);
                         brick_row.put(y_key, brick);
                         break;
                     case 2: // 畫skates
-                        Shoe skates = new Shoe(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/camel_GIF.gif").getImage());
+                        Shoe skates = new Shoe(j * 120, i * 120, 120, 120, new ImageIcon("img/camel_GIF.gif").getImage());
                         eneryList.add(skates);
                         toolList.add(skates);
                         map_row.put(y_key, skates);
                         break;
                     case 3: // 畫烏龜
-                        Turtle turtle = new Turtle(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/quickSend_GIF_160.gif").getImage());
+                        Turtle turtle = new Turtle(j * 120, i * 120, 120, 120,new ImageIcon("img/quickSend_GIF_160.gif").getImage());
                         eneryList.add(turtle);
                         toolList.add(turtle);
                         map_row.put(y_key, turtle);
                         break;
-                    case 4:
-                        Door door = new Door(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
+                    case 4: // 畫任意門
+                        Door door = new Door(j * 120, i * 120, 120, 120,new ImageIcon("img/rightCave_GIF.gif").getImage(), doorSerial);
                         eneryList.add(door);
                         toolList.add(door);
                         map_row.put(y_key, door);
                         doors.add(door);
                         doorSerial += 1;
                         break;
-                    case 5:
-                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/scorpion_GIF.gif").getImage());
+                    case 5: // 畫迷惑
+                        Bewitch bewitch = new Bewitch(j * 120, i * 120, 120, 120,new ImageIcon("img/scorpion_GIF.gif").getImage());
                         eneryList.add(bewitch);
                         toolList.add(bewitch);
                         map_row.put(y_key, bewitch);
                         break;
-                    case 6:
-                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,
-                                new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
+                    case 6: // 畫果實
+                        Fruit Fruit = new Fruit(j * 120, i * 120, 120, 120,new ImageIcon(fruitArr[r.nextInt(3)]).getImage());
                         eneryList.add(Fruit);
                         toolList.add(Fruit);
                         map_row.put(y_key, Fruit);
                         break;
-                    case 7:
+                    case 7:  // 畫凹洞
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
                         // map_row.put(y_key, dig);
                         brick_row.put(y_key, dig);
                         break;
-                    case 8:
-                        Heart heart = new Heart(j * 120, i * 120, 120, 120,
-                                new ImageIcon("img/heartWithSend.png").getImage());
+                    case 8: // 畫心
+                        Heart heart = new Heart(j * 120, i * 120, 120, 120,new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
                         // map_row.put(y_key, dig);
@@ -209,8 +211,6 @@ public class GameFrame extends JFrame {
                 rockEneryByPos.put(x_key, brick_row);
             }
         }
-        // 設置背景音樂
-         music.loop();
     }
 
     public void gameStart(){
@@ -270,16 +270,7 @@ public class GameFrame extends JFrame {
         }.start();
     }
 
-    public void initFrame() {
-        this.setSize(this.window_width, this.window_height);
-        this.setTitle("PeeKaBoo~");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(3);
-        this.setVisible(true);
-        KeyListener kl = new KeyListener(this);
-        this.addKeyListener(kl);
-    }
+    
 
     public void paint(Graphics g) {
 
@@ -311,13 +302,12 @@ public class GameFrame extends JFrame {
             strMin=(timer.countMin<10)?"0"+timer.countMin:""+timer.countMin;
         }
         strTime= "Time " +strMin+":"+strSec;
-        Font font = new Font("SansSerif", Font.BOLD, fontSize);
-        big.setFont(font);
+        big.setFont(new Font("SansSerif", Font.BOLD, fontSize));
         big.drawString(strTime, 500, 200);
+
         strHp = "HEALTH " + hp;
         big.setColor(new Color(238, 50, 86));
-        Font font2 = new Font("SansSerif", Font.BOLD, 50);
-        big.setFont(font2);
+        big.setFont(new Font("SansSerif", Font.BOLD, 50));
         big.drawString(strHp, 100, 200);
 
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
@@ -334,8 +324,6 @@ public class GameFrame extends JFrame {
             int m = 2;
             big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
         }
-
         g.drawImage(bi, 0, 0, null);
-
     }
 }
