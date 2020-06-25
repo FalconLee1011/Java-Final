@@ -126,7 +126,7 @@ public class PkbAPIHandler {
   public int getPlayerCount(){
     String response = this.get("http://140.121.197.14:8756/get_game?game=" + this.gameID);
     this.obj = new JSONObject(this.response);
-    int playerCount = obj.getJSONObject("game").game.getInt("playerCount");
+    int playerCount = obj.getJSONObject("game").getInt("playerCount");
     return playerCount;
   }
 

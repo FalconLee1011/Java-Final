@@ -67,6 +67,9 @@ public class PkbMenuFrame extends JFrame{
 
     Music music = new Music("/MUSIC/startmusic.wav");
 
+    String room;
+    RoomPanel roomPanel;
+
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
         btnClick= new ButtonClick();
@@ -254,7 +257,7 @@ public class PkbMenuFrame extends JFrame{
     private void setMultiplePanel(){
         multiplePanel= new JPanel();
         multiplePanel.setOpaque(false);
-        RoomPanel roomPanel= new RoomPanel("banana!", 4);
+        roomPanel = new RoomPanel("banana!", 4);
         masterGuest= GUEST;//= 0
         startGameBtn= new PkbMenuButton("   Start !   ");//2 2
         roomBackToMulBtn= new PkbMenuButton("   Back  ");//5 5
@@ -262,12 +265,12 @@ public class PkbMenuFrame extends JFrame{
         startGameBtn.addActionListener(btnClick);
         roomBackToMulBtn.addActionListener(btnClick);
 
-        if(masterGuest== MASTER){//= 1
+        // if(masterGuest== MASTER){//= 1
             startGameBtn.setEnabled(true);
-        }
-        else{//== GUEST= 0
-            startGameBtn.setEnabled(false);
-        }
+        // }
+        // else{//== GUEST= 0
+            // startGameBtn.setEnabled(false);
+        // }
 
         JPanel littePanel= new JPanel();
         littePanel.setOpaque(false);
@@ -325,7 +328,7 @@ public class PkbMenuFrame extends JFrame{
     private class ButtonClick implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            GameFrame gf;
+            GameFrame gf = new GameFrame();
             if(e.getSource()== startBtn){//start
                 startPanel.setVisible(false);
                 modePanel.setVisible(true);
@@ -362,29 +365,60 @@ public class PkbMenuFrame extends JFrame{
                 multiplePlayerPanel.setVisible(false);
                 modePanel.setVisible(true);
             }
+
             else if(e.getSource()== createRoomBtn){//create room
                 multiplePlayerPanel.setVisible(false);
                 multiplePanel.setVisible(true);
                 masterGuest= MASTER;
                 startGameBtn.setEnabled(true);
+                gf = new GameFrame("MAPS/map.txt", 4, true);
+                gf.isMaster = true;
+                PkbAPIHandler api = new PkbAPIHandler(gf);
+                room = api.create_game();
+                System.out.println(room);
+                roomPanel.setTitle(room);
+                int playerID = api.joinGame();
+                gf.playerID = playerID;
+                gf.api = api;
             }
+
+            else if(e.getSource() == startGameBtn){
+                try {
+                    gf.Game();
+                }
+                catch(Exception errrrr){}
+            }
+            
             else if(e.getSource()== enterRoomBtn){//enter room
                 multiplePlayerPanel.setVisible(false);
                 inputIDPanel.setVisible(true);
                 masterGuest= GUEST;
-                startGameBtn.setEnabled(false);
+                // startGameBtn.setEnabled(false);
             }
+
+
             else if(e.getSource()== roomBackToMulBtn){//back
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest= GUEST;
-                startGameBtn.setEnabled(false);
+                // startGameBtn.setEnabled(false);
             }
+            
             else if(e.getSource()== enterIDBtn){//input+ enter
                 inputIDPanel.setVisible(false);
                 multiplePanel.setVisible(true);
+                room = enterIDText.getText();
+                roomPanel.setTitle(room);
                 System.out.println("input: "+ enterIDText.getText());
+                gf = new GameFrame("MAPS/map.txt", 4, true);
+                PkbAPIHandler api = new PkbAPIHandler(gf);
+                api.gameID = room;
+                int playerID = api.joinGame();
+                gf.playerID = playerID;
+                gf.api = api;
             }
+
+
             else if(e.getSource()== inputBackToMulBtn){//back
                 inputIDPanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);

@@ -31,6 +31,7 @@ public class GameFrame extends JFrame {
 
     public PkbAPIHandler api;
     public boolean isOnline = false;
+    public boolean isMaster = false;
     public int playerID;
 
     public Map<String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
@@ -101,8 +102,8 @@ public class GameFrame extends JFrame {
     }
 
     public void Game() {
-        if(this.isOnline){
-            this.playerID = this.api.joinGame();
+        if(this.isOnline && isMaster){
+            // this.playerID = this.api.joinGame();
         }
         initFrame();
         loadGameProp();

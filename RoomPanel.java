@@ -5,10 +5,10 @@ import javax.swing.*;
 
 public class RoomPanel extends JPanel{
     JPanel playerPanel;
+    JLabel idLabel;
+    JTextField idText;
     
     public RoomPanel(String roomID, int playerCount){
-        JLabel idLabel;
-        JTextField idText;
         setOpaque(false);
         
         Dimension d= Toolkit.getDefaultToolkit().getScreenSize();
@@ -42,4 +42,7 @@ public class RoomPanel extends JPanel{
         }
         add(playerPanel);
     }    
+    public void setTitle(String roomID){
+        idText.setText(roomID);
+    }
 }
