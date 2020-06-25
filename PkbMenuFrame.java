@@ -71,9 +71,9 @@ public class PkbMenuFrame extends JFrame{
 
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
-        // JPanel contentPanel= new JPanel();
-        // contentPanel= (JPanel)(this.getContentPane());
-        // contentPanel.setOpaque(false);
+        JPanel contentPanel= new JPanel();
+        contentPanel= (JPanel)(this.getContentPane());
+        contentPanel.setOpaque(false);
         // contentPanel.setBackground(Color.PINK);
         setBackGroundPane();
 
@@ -93,38 +93,11 @@ public class PkbMenuFrame extends JFrame{
     }
     
     private void setBackGroundPane(){
-        Image img= null;
-        img= Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/background_PNG.png"));
-        BackGroundPanel bgPanel= new BackGroundPanel();
-        bgPanel.setImg(img);
-        setLayout(new BorderLayout());
-        add(bgPanel, BorderLayout.SOUTH);
-        // this.getLayeredPane().setBackground(Color.PINK);
-        // JLabel imglabel= new JLabel();
-        // imglabel.setIcon(new ImageIcon("img/background_PNG.png"));
-        // backGroundPane= getLayeredPane();
-        // backGroundPane.add(imglabel);
-        // this.getLayeredPane().add(imglabel, BorderLayout.SOUTH);
-    }
-    private class BackGroundPanel extends JPanel{
-        private Image img = null;
-        public BackGroundPanel(){
-            super();
-            this.setOpaque(false);// false:圖片變透明
-        }
-        public void setImg(Image img) { // 設置圖片來源
-            this.img = img;
-        }
-        @Override//可隨Panel大小而改變
-        protected void paintComponent(Graphics g) {// 繪製背景圖
-            super.paintComponent(g);
-            if (img != null) {
-                // System.out.println("(x,y)=" + bgPanel.getImgX() + "," + bgPanel.getImgY());
-                // System.out.println("******(x,y)="+ bgPanel.getWidth()+","+
-
-                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-            }
-        }
+        // this.setBackground(Color.PINK);
+        JLabel imglabel= new JLabel(new ImageIcon("img/background_PNG.png"));
+        // imglabel.setBounds(0, 0, this.getWidth(), this.getHeight());
+        JLabel testLabel= new JLabel("hiii");
+        this.getLayeredPane().add(testLabel, -128);
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
