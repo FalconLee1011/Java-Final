@@ -302,13 +302,11 @@ public class GameFrame extends JFrame {
             strMin=(timer.countMin<10)?"0"+timer.countMin:""+timer.countMin;
         }
         strTime= "Time " +strMin+":"+strSec;
-        Font font = new Font("SansSerif", Font.BOLD, fontSize);
-        big.setFont(font);
+        big.setFont(new Font("SansSerif", Font.BOLD, fontSize));
         big.drawString(strTime, 500, 200);
         strHp = "HEALTH " + hp;
         big.setColor(new Color(238, 50, 86));
-        Font font2 = new Font("SansSerif", Font.BOLD, 50);
-        big.setFont(font2);
+        big.setFont(new Font("SansSerif", Font.BOLD, 50));
         big.drawString(strHp, 100, 200);
 
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
