@@ -1,6 +1,7 @@
 # Java-Final
 
-* peekaboo.Pkb__Test
+## 程式進入點
+* peekaboo.Pkb
 
 ## 選單介面 package peekaboo.menu;
 * PkbMenuFrame -- 
