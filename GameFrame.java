@@ -107,6 +107,10 @@ public class GameFrame extends JFrame {
         }
         initFrame();
         loadGameProp();
+        for (Enery op : onlinePlayers) {
+            eneryList.add(op);
+            // big.drawImage(op.img, op.x, op.y, op.width, op.height, null);
+        }
         gameStart();
     }
 
