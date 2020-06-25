@@ -86,8 +86,8 @@ public class PkbMenuFrame extends JFrame{
 
         contentPane= getContentPane();
         contentPane.setBackground(Color.PINK);
-        // backGroundPane= getLayeredPane();
-        // setBackGroundPane();
+        backGroundPane= getLayeredPane();
+        setBackGroundPane();
         
         setStartPanel();
         contentPane.add(startPanel, btnPlace);
@@ -425,7 +425,7 @@ public class PkbMenuFrame extends JFrame{
             }
             else if(e.getSource()== backToStartBtn){//back
                 modePanel.setVisible(false);
-                startBtn.setVisible(true);
+                startPanel.setVisible(true);
             }
             else if(e.getSource()== specialBackToModeBtn){//back
                 specialModePanel.setVisible(false);
