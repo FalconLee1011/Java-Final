@@ -137,8 +137,8 @@ public class PkbAPIHandler {
   public static void main(String args[]) {
     PkbAPIHandler newOnlineGame = new PkbAPIHandler();
     // String response = newOnlineGame.create_game();
-    // System.out.println(newOnlineGame.create_game());
-    // System.out.println(newOnlineGame.joinGame());
+    System.out.println(newOnlineGame.create_game());
+    System.out.println(newOnlineGame.joinGame());
     // System.out.println(newOnlineGame.joinGame());
     // newOnlineGame.get_game();
     // System.out.println(newOnlineGame.gameID);
