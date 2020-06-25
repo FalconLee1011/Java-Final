@@ -29,7 +29,7 @@ public class PkbHuman extends Thread {
     public int camelSpeed = 25;
     public int absoluteY=1200,absoluteX=1560;
     // DEBUG ONLY
-    private boolean ignoreWalls = false;
+    private boolean ignoreWalls = true;
 
     public int sequence = 0;// 記錄誰最後
     public static final int width = 120, height = 120;// 角色的寬高
@@ -240,6 +240,9 @@ public class PkbHuman extends Thread {
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.y += this.yspeed;
             }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.y += this.yspeed;
+            }
         }
     }
 
@@ -263,6 +266,9 @@ public class PkbHuman extends Thread {
             }
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.y -= this.yspeed;
+            }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.y -= this.yspeed;
             }
         }
     }
@@ -288,6 +294,9 @@ public class PkbHuman extends Thread {
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.x += this.xspeed;
             }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.x += this.xspeed;
+            }
         }
     }
 
@@ -311,6 +320,9 @@ public class PkbHuman extends Thread {
             }
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.x -= this.xspeed;
+            }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.x -= this.xspeed;
             }
         }
     }
