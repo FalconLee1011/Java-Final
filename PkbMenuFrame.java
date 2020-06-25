@@ -253,6 +253,13 @@ public class PkbMenuFrame extends JFrame{
         startGameBtn.addActionListener(btnClick);
         roomBackToMulBtn.addActionListener(btnClick);
 
+        if(masterGuest== MASTER){//= 1
+            startBtn.setEnabled(true);
+        }
+        else{//== GUEST= 0
+            startBtn.setEnabled(false);
+        }
+
         JPanel littePanel= new JPanel();
         littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         littePanel.add(startGameBtn);
@@ -315,6 +322,18 @@ public class PkbMenuFrame extends JFrame{
             else if(e.getSource()== multipleBackToModeBtn){//back
                 multiplePlayerPanel.setVisible(false);
                 modePanel.setVisible(true);
+            }
+            else if(e.getSource()== createRoomBtn){//start
+                multiplePlayerPanel.setVisible(false);
+                multiplePanel.setVisible(true);
+                masterGuest= MASTER;
+                startBtn.setEnabled(true);
+            }
+            else if(e.getSource()== enterRoomBtn){//enter
+                multiplePlayerPanel.setVisible(false);
+                multiplePanel.setVisible(true);
+                masterGuest= GUEST;
+                startBtn.setEnabled(false);
             }
             else if(e.getSource()== backToStartBtn){//back
                 modePanel.setVisible(false);
