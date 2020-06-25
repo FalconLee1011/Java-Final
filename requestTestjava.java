@@ -12,12 +12,10 @@ import java.net.URL;
 import java.net.http.HttpRequest;
 
 //import net.sf.json.JSONObject;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.*;
 
 public class requestTestjava {
-    public static String httpRequestTest(String targetUrl) throws ClassTypeException {
+    public static String httpRequestTest(String targetUrl){
 		HttpURLConnection connection = null;
 		StringBuffer sb = new StringBuffer("");
 		
@@ -58,12 +56,12 @@ public class requestTestjava {
                     lines= new String(lines.getBytes(), "utf-8");
                     sb.append(lines);
                 }
-                JSONObject jsonText = JSONObject.fromObject(sb.toString());
-                System.out.println(jsonText.get("status"));
+                // JSONObject jsonText = JSONObject.fromObject(sb.toString());
+                // System.out.println(jsonText.get("status"));
             }
             
 			System.out.println(sb);
-			reader.close();
+			// reader.close();
 			connection.disconnect();//關閉連接
 		} catch (MalformedURLException e) {  
 			throw e;
