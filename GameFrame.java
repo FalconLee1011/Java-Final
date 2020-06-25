@@ -84,12 +84,22 @@ public class GameFrame extends JFrame {
     }
 
     public void initGame() {
-        setBackground(new Color(197, 168, 111));
         initFrame();
         loadGameProp();
         gameIsReady = true;
     }
 
+    public void initFrame() {
+        setBackground(new Color(197, 168, 111));
+        this.setSize(this.window_width, this.window_height);
+        this.setTitle("PeeKaBoo~");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(3);
+        this.setVisible(true);
+        KeyListener kl = new KeyListener(this);
+        this.addKeyListener(kl);
+    }
     public void loadGameProp() {
         // 直接追隨
         // public PkbGhost ghost = new PkbGhost();
@@ -268,16 +278,7 @@ public class GameFrame extends JFrame {
         }.start();
     }
 
-    public void initFrame() {
-        this.setSize(this.window_width, this.window_height);
-        this.setTitle("PeeKaBoo~");
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(3);
-        this.setVisible(true);
-        KeyListener kl = new KeyListener(this);
-        this.addKeyListener(kl);
-    }
+    
 
     public void paint(Graphics g) {
 
