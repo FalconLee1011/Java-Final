@@ -61,9 +61,6 @@ public class PkbMenuFrame extends JFrame{
     private JPanel btnJPanel= null;
     GridBagConstraints btnPlace= null;
     ButtonClick btnClick;
-    
-    Container contentPane= null;
-    Container backGroundPane= null;
 
     Music music = new Music("/MUSIC/startmusic.wav");
 
@@ -74,6 +71,12 @@ public class PkbMenuFrame extends JFrame{
 
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
+        // JPanel contentPanel= new JPanel();
+        // contentPanel= (JPanel)(this.getContentPane());
+        // contentPanel.setOpaque(false);
+        // contentPanel.setBackground(Color.PINK);
+        setBackGroundPane();
+
         btnClick= new ButtonClick();
         //讓按鈕Panel在中間
         setLayout(new GridBagLayout());
@@ -84,20 +87,44 @@ public class PkbMenuFrame extends JFrame{
         setGridBagAttr(btnPlace, 1, 1, 1, 2);
         btnPlace.fill= GridBagConstraints.BOTH;
 
-        contentPane= getContentPane();
-        contentPane.setBackground(Color.PINK);
-        backGroundPane= getLayeredPane();
-        setBackGroundPane();
-        
         setStartPanel();
-        contentPane.add(startPanel, btnPlace);
+        add(startPanel, btnPlace);
         music.play();
     }
+    
     private void setBackGroundPane(){
-        //backGroundPane.setBackground(Color.PINK);
-        JLabel imglabel= new JLabel();
-        imglabel.setIcon(new ImageIcon("img/background_PNG.png"));
-        backGroundPane.add(imglabel);
+        Image img= null;
+        img= Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/background_PNG.png"));
+        BackGroundPanel bgPanel= new BackGroundPanel();
+        bgPanel.setImg(img);
+        setLayout(new BorderLayout());
+        add(bgPanel, BorderLayout.SOUTH);
+        // this.getLayeredPane().setBackground(Color.PINK);
+        // JLabel imglabel= new JLabel();
+        // imglabel.setIcon(new ImageIcon("img/background_PNG.png"));
+        // backGroundPane= getLayeredPane();
+        // backGroundPane.add(imglabel);
+        // this.getLayeredPane().add(imglabel, BorderLayout.SOUTH);
+    }
+    private class BackGroundPanel extends JPanel{
+        private Image img = null;
+        public BackGroundPanel(){
+            super();
+            this.setOpaque(false);// false:圖片變透明
+        }
+        public void setImg(Image img) { // 設置圖片來源
+            this.img = img;
+        }
+        @Override//可隨Panel大小而改變
+        protected void paintComponent(Graphics g) {// 繪製背景圖
+            super.paintComponent(g);
+            if (img != null) {
+                // System.out.println("(x,y)=" + bgPanel.getImgX() + "," + bgPanel.getImgY());
+                // System.out.println("******(x,y)="+ bgPanel.getWidth()+","+
+
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        }
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
