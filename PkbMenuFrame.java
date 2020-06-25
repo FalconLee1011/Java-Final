@@ -75,7 +75,7 @@ public class PkbMenuFrame extends JFrame{
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
         btnClick= new ButtonClick();
-        Image image = new ImageIcon("img/background_PNG.png").getImage();// 這是背景圖片 .png .jpg .gif 等格式的圖片都可以
+        Image image = new ImageIcon("img//background_PNG.png").getImage();// 這是背景圖片 .png .jpg .gif 等格式的圖片都可以
         this.setIconImage(image);
         //讓按鈕Panel在中間
         setLayout(new GridBagLayout());

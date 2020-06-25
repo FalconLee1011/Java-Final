@@ -22,8 +22,10 @@ public class PkbMenuButton extends JButton{
         //setBorder(new RoundedBorder(myWidth));
         //setBorderPainted(false);//Button的框線消失
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//游標變小手手
+        MouseEnter mouser=new MouseEnter();
+        this.addMouseListener(mouser);
     }
-    private class ButtonEnter extends MouseAdapter{
+    private class MouseEnter extends MouseAdapter{
         @Override
         public void mouseEntered(MouseEvent e){
             setContentAreaFilled(true); //Button的背景
