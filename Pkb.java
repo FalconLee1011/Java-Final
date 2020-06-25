@@ -3,7 +3,7 @@ package peekaboo;
 import javax.swing.JFrame;
 import peekaboo.menu.*;
 
-public class Pkb__Test {
+public class Pkb {
     public static void main(String[] args) {
         PkbMenuFrame startFrame= new PkbMenuFrame("Peekaboo");
         startFrame.setLocationRelativeTo(null);//置中
