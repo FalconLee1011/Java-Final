@@ -7,7 +7,7 @@ import java.awt.Image;
  */
 public abstract class Enery {
 
-    public int x, y;// 位置
+    public int x, y;// 放大後的絕對位置
     public int arrRow, arrCol;// 分別對應到map[i][j]的i,j
     public int width, height;
     public Image img;
