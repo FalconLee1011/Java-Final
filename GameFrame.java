@@ -304,6 +304,7 @@ public class GameFrame extends JFrame {
         strTime= "Time " +strMin+":"+strSec;
         big.setFont(new Font("SansSerif", Font.BOLD, fontSize));
         big.drawString(strTime, 500, 200);
+
         strHp = "HEALTH " + hp;
         big.setColor(new Color(238, 50, 86));
         big.setFont(new Font("SansSerif", Font.BOLD, 50));
@@ -323,8 +324,6 @@ public class GameFrame extends JFrame {
             int m = 2;
             big.drawImage(img.getImage(), (this.window_width / m) - (img.getIconWidth() / m), (this.window_height / m) - (img.getIconHeight() / m), img.getIconWidth(), img.getIconHeight(), null);
         }
-
         g.drawImage(bi, 0, 0, null);
-
     }
 }
