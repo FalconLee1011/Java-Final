@@ -29,7 +29,6 @@ public class PkbMenuButton extends JButton{
         @Override
         public void mouseEntered(MouseEvent e){
             setContentAreaFilled(true); //Button的背景
-            // setBackground(new Color(234,40,60));
         }
         @Override
         public void mouseExited(MouseEvent e){
