@@ -1,5 +1,6 @@
 package peekaboo.menu;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.*;
 import javax.swing.*;
 public class PkbMenuButton extends JButton{
@@ -10,6 +11,7 @@ public class PkbMenuButton extends JButton{
         setMargin(new Insets(10, 10, 10, 10));//上左下右
         setFont(new Font("SansSerif", Font.BOLD, myWidth));
         //setBackground(Color.WHITE);//背景色
+        setBackground(new Color(234,40,60));
         setOpaque(false);
         setForeground(Color.WHITE);//前景色
         setFocusPainted(false);//字的框線消失
@@ -20,5 +22,16 @@ public class PkbMenuButton extends JButton{
         //setBorder(new RoundedBorder(myWidth));
         //setBorderPainted(false);//Button的框線消失
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));//游標變小手手
+    }
+    private class ButtonEnter extends MouseAdapter{
+        @Override
+        public void mouseEntered(MouseEvent e){
+            setContentAreaFilled(true); //Button的背景
+            // setBackground(new Color(234,40,60));
+        }
+        @Override
+        public void mouseExited(MouseEvent e){
+            setContentAreaFilled(false); //Button的背景消失，剩字和框線
+        }
     }
 }
