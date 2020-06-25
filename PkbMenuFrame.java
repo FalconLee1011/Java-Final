@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import peekaboo.Music;
+import peekaboo.menu.RoomPanel;
 import peekaboo.*;
 
 
@@ -41,6 +42,13 @@ public class PkbMenuFrame extends JFrame{
     PkbMenuButton enterRoomBtn;
     PkbMenuButton multipleBackToModeBtn;
 
+    JPanel multiplePanel;
+    private final int MASTER= 1;
+    private final int GUEST= 0;
+    private int masterGuest;
+    PkbMenuButton startGameBtn;
+    PkbMenuButton roomBackToMulBtn;
+
     JPanel loadingPanel;
     JLabel loadingLabel;
     JLabel logoLabel;
@@ -49,7 +57,8 @@ public class PkbMenuFrame extends JFrame{
     GridBagConstraints btnPlace= null;
     ButtonClick btnClick;
     
-    Container c= null;
+    Container contentPane= null;
+    Container backGroundPane= null;
 
     Music music = new Music("/MUSIC/startmusic.wav");
 
@@ -66,12 +75,19 @@ public class PkbMenuFrame extends JFrame{
         setGridBagAttr(btnPlace, 1, 1, 1, 2);
         btnPlace.fill= GridBagConstraints.BOTH;
 
-        c= getContentPane();
-        c.setBackground(Color.PINK);
+        contentPane= getContentPane();
+        backGroundPane= getLayeredPane();
+        setBackGroundPane();
         
         setStartPanel();
-        add(startPanel, btnPlace);
+        contentPane.add(startPanel, btnPlace);
         music.play();
+    }
+    private void setBackGroundPane(){
+        backGroundPane.setBackground(Color.PINK);
+        JLabel imglabel= new JLabel();
+        imglabel.setIcon(new ImageIcon("img/win_PNG.png"));
+        backGroundPane.add(imglabel);
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
@@ -220,6 +236,32 @@ public class PkbMenuFrame extends JFrame{
         multiplePlayerPanel.add(enterRoomBtn);
         multiplePlayerPanel.add(Box.createRigidArea (new Dimension(15, 25)));
         multiplePlayerPanel.add(multipleBackToModeBtn);
+
+        setMultiplePanel();
+        add(multiplePanel, btnPlace);
+        multiplePanel.setVisible(false);
+    }
+
+    private void setMultiplePanel(){
+        multiplePanel= new JPanel();
+        RoomPanel roomPanel= new RoomPanel("banana!", 4);
+        roomPanel.setOpaque(false);
+        masterGuest= GUEST;//= 0
+        startGameBtn= new PkbMenuButton("  Start!  ");//2 2
+        roomBackToMulBtn= new PkbMenuButton("     Back     ");//5 5
+
+        startGameBtn.addActionListener(btnClick);
+        roomBackToMulBtn.addActionListener(btnClick);
+
+        JPanel littePanel= new JPanel();
+        littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        littePanel.add(startGameBtn);
+        littePanel.add(roomBackToMulBtn);
+        
+        multiplePanel.setLayout(new BoxLayout(multiplePlayerPanel, BoxLayout.Y_AXIS));
+        multiplePanel.add(roomPanel);
+        multiplePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        multiplePanel.add(littePanel);
     }
 
     private void setLoadingPanel(){
