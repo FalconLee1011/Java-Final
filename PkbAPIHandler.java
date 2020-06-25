@@ -119,9 +119,11 @@ public class PkbAPIHandler {
       int x = game.getJSONObject(Integer.toString(i)).getInt("x");
       int y = game.getJSONObject(Integer.toString(i)).getInt("y");
       PkbOnlinePlayer op = new PkbOnlinePlayer(x, y, 120, 120, img);
+      // System.out.printf("Player %d is at <%d, %d>%n", i, x, y);
       onlinePlayers.add(op);
     }
     this.gameFrame.onlinePlayers = onlinePlayers;
+    // System.out.printf("%n");
   }
 
   public int getPlayerCount(){

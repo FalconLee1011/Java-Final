@@ -29,7 +29,7 @@ public class PkbHuman extends Thread {
     public int camelSpeed = 25;
     public int absoluteY=1200,absoluteX=1560;
     // DEBUG ONLY
-    private boolean ignoreWalls = false;
+    private boolean ignoreWalls = true;
 
     public int sequence = 0;// 記錄誰最後
     public static final int width = 120, height = 120;// 角色的寬高

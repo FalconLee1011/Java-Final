@@ -108,7 +108,7 @@ public class GameFrame extends JFrame {
         initFrame();
         loadGameProp();
         for (Enery op : onlinePlayers) {
-            eneryList.add(op);
+            // eneryList.add(op);
             // big.drawImage(op.img, op.x, op.y, op.width, op.height, null);
         }
         gameStart();
@@ -293,7 +293,7 @@ public class GameFrame extends JFrame {
                             
                             if (hp <= 0) {
                                 //System.out.println("GAME OVER");
-                                System.out.printf("MOVED TO: <%d, %d>  <%d, %d>%n%n ", ghost.x, ghost.y,human.absoluteX,human.absoluteY);
+                                // System.out.printf("MOVED TO: <%d, %d>  <%d, %d>%n%n ", ghost.x, ghost.y,human.absoluteX,human.absoluteY);
 
                                 hasWon = false;
                                 isGameOver = true;
@@ -357,10 +357,13 @@ public class GameFrame extends JFrame {
             big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         }
 
-        for (PkbOnlinePlayer op : onlinePlayers) {
-            big.drawImage(op.img, op.x, op.y, op.width, op.height, null);
+        for (Enery op : onlinePlayers) {
+            // eneryList.add(op);              
+            big.drawImage(op.img, human.x + (human.x - op.x), human.y + (human.y - op.y), op.width, op.height, null);          
+            // System.out.printf("Player %d is at <%d, %d>%n", i, x, y);
         }
 
+        // System.out.printf("%n");
         if(hasWon && isGameOver){
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
             int m = 2;
