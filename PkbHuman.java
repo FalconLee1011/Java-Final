@@ -186,7 +186,7 @@ public class PkbHuman extends Thread {
     }
 
     public void move() {
-        System.out.printf("MOVED TO:絕對: <%d, %d> ?: <%d, %d>%n%n ", (this.absoluteY/120+1), this.absoluteX/120+1, this.x, this.y);
+        // System.out.printf("MOVED TO:絕對: <%d, %d> ?: <%d, %d>%n%n ", (this.absoluteY/120+1), this.absoluteX/120+1, this.x, this.y);
         
         if (!isWitch && up || isWitch && down) {
             this.lastDirection = Str_Up;

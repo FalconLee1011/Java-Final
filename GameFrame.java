@@ -29,11 +29,16 @@ public class GameFrame extends JFrame {
     public PkbHuman human;
     public PkbTimer timer = new PkbTimer();
 
+    public PkbAPIHandler api;
+    public boolean isOnline = false;
+    public int playerID;
+
     public Map<String, Map<String, Enery>> mapEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map<String, Map<String, Enery>> backEneryByPos = new HashMap<String, Map<String, Enery>>();
     public Map<String, Map<String, Enery>> rockEneryByPos = new HashMap<String, Map<String, Enery>>();
     public ArrayList<PkbFlyingRock> flyingRocks = new ArrayList<PkbFlyingRock>();
     public ArrayList<PkbGhost> ghosts = new ArrayList<PkbGhost>();
+    public ArrayList<PkbOnlinePlayer> onlinePlayers = new ArrayList<PkbOnlinePlayer>();
 
     public ArrayList<Door> doors = new ArrayList<Door>();
     public int doorSerial = 0;
@@ -81,7 +86,24 @@ public class GameFrame extends JFrame {
         this.numOfGhost = numOfGhost;
     }
 
+    public GameFrame(String fileName, int numOfGhost, boolean isOnline) {// 初始化bgImg和player
+        if(fileName.equals("maze")){ this.map = new CreateMaze().getMaze(); }
+        else{
+            this.iMap = new InitMap(fileName);
+            try { this.map = this.iMap.readMap(); } 
+            catch (Exception e) {}
+            if(numOfGhost >= 20){
+                this.numOfGhost = 20;
+            }
+        }
+        this.numOfGhost = numOfGhost;
+        this.isOnline = isOnline;
+    }
+
     public void Game() {
+        if(this.isOnline){
+            this.playerID = this.api.joinGame();
+        }
         initFrame();
         loadGameProp();
         gameStart();
@@ -216,6 +238,15 @@ public class GameFrame extends JFrame {
     public void gameStart(){
         this.human = new PkbHuman(this);// player
         human.start();
+        new Thread(){
+            public void run(){
+                while (true) {
+                    api.update_game(human.absoluteX, human.absoluteY);
+                    // absoluteY absoluteX
+                    api.get_game();
+                }
+            }
+        }.start();
         new Thread() {
             public void run() {
                 while (true) {
@@ -314,10 +345,17 @@ public class GameFrame extends JFrame {
         big.setFont(new Font("SansSerif", Font.BOLD, 50));
         big.drawString(strHp, 100, 200);
 
+
         big.drawImage(human.img, human.x, human.y, human.width, human.height, null);
+
         for (PkbGhost ghost : ghosts) {
             big.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height, null);
         }
+
+        for (PkbOnlinePlayer op : onlinePlayers) {
+            big.drawImage(op.img, op.x, op.y, op.width, op.height, null);
+        }
+
         if(hasWon && isGameOver){
             ImageIcon img = new ImageIcon("img/win_GIF.gif");
             int m = 2;
