@@ -332,8 +332,8 @@ public class PkbHuman extends Thread {
                 Time(12000, 2);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
+                        .remove(String.valueOf(bumpedEnery.arrCol * 120));
 
             } else if (bumpedEnery instanceof Turtle) {
                 this.activeImgSet = this.turtleImgSet;
@@ -344,8 +344,8 @@ public class PkbHuman extends Thread {
                 quickSend = true;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
+                        .remove(String.valueOf(bumpedEnery.arrCol * 120));
             } else if (bumpedEnery instanceof Door) {
                 // 若是 Door
                 if(!this.portalIsCooldown){
@@ -374,8 +374,8 @@ public class PkbHuman extends Thread {
                 Time(10000, 6);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
+                        .remove(String.valueOf(bumpedEnery.arrCol * 120));
 
                 // backpack.add(bumpedEnery);
             } else if (bumpedEnery instanceof Bewitch) {
@@ -385,16 +385,16 @@ public class PkbHuman extends Thread {
                 Time(10000, 5);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
+                        .remove(String.valueOf(bumpedEnery.arrCol * 120));
 
                 // backpack.add(bumpedEnery);
             } else if (bumpedEnery instanceof Heart) {
                 this.gameFrame.hp++;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
-                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.raw_x * 120))
-                        .remove(String.valueOf(bumpedEnery.raw_y * 120));
+                this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
+                        .remove(String.valueOf(bumpedEnery.arrCol * 120));
 
                 // backpack.add(bumpedEnery);
             }
@@ -416,8 +416,8 @@ public class PkbHuman extends Thread {
         if (this.pick && isDiggable()) {
             Enery diggableEnery = bump(this.gameFrame.backEneryByPos);
             diggableEnery.img = new ImageIcon("img/dig.png").getImage();
-            this.gameFrame.backEneryByPos.get(String.valueOf(diggableEnery.raw_x * 120))
-                    .remove(String.valueOf(diggableEnery.raw_y * 120));
+            this.gameFrame.backEneryByPos.get(String.valueOf(diggableEnery.arrRow * 120))
+                    .remove(String.valueOf(diggableEnery.arrCol * 120));
             this.backpack.add(diggableEnery);
         }
 

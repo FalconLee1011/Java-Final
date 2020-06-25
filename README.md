@@ -1,6 +1,7 @@
 # Java-Final
 
-* peekaboo.Pkb__Test
+## 程式進入點
+* peekaboo.Pkb
 
 ## 選單介面 package peekaboo.menu;
 * PkbMenuFrame -- 
@@ -15,7 +16,7 @@
     + import peekaboo.*;
 
 ## package peekaboo;
-* CreateMaze -----
+* CreateMaze ----
 * InitMap -------
 * BackgroundImage 
 * Music
@@ -39,3 +40,7 @@
 * Turtle -------- 烏龜
 * Shoe ---------- 跑鞋
 * Stone --------- 地板
+
+
++ 放大:120
++ private static final int BIG=120;

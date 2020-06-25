@@ -21,6 +21,7 @@ public class PkbMenuFrame extends JFrame{
     JPanel modePanel;
     PkbMenuButton specialModeBtn;
     PkbMenuButton normalModeBtn;
+    PkbMenuButton multiplePlayerBtn;
     PkbMenuButton backToStartBtn;
 
     JPanel specialModePanel;
@@ -34,6 +35,11 @@ public class PkbMenuFrame extends JFrame{
     PkbMenuButton levelThreeBtn;
     PkbMenuButton levelFourBtn;
     PkbMenuButton normalBackToModeBtn;
+
+    JPanel multiplePlayerPanel;
+    PkbMenuButton createRoomBtn;
+    PkbMenuButton enterRoomBtn;
+    PkbMenuButton multipleBackToModeBtn;
 
     JPanel loadingPanel;
     JLabel loadingLabel;
@@ -93,13 +99,14 @@ public class PkbMenuFrame extends JFrame{
 
         setModePanel();
         setInstrucPanel();
-        //setLoadingPanel();
+        setLoadingPanel();
     
         add(modePanel, btnPlace);
         add(instrucPanel, btnPlace);
+        add(loadingPanel, btnPlace);
         modePanel.setVisible(false);
         instrucPanel.setVisible(false);
-        //loadingPanel.setVisible(false);
+        loadingPanel.setVisible(false);
     }
     private void setInstrucPanel(){
         instrucPanel= new JPanel();
@@ -118,12 +125,14 @@ public class PkbMenuFrame extends JFrame{
     private void setModePanel(){
         modePanel= new JPanel();
         modePanel.setOpaque(false);
-        specialModeBtn= new PkbMenuButton("  special Mode  ");//1 1
-        normalModeBtn= new PkbMenuButton("  normal Mode  ");//2 2
-        backToStartBtn= new PkbMenuButton("         Back         ");//8 8
+        specialModeBtn= new PkbMenuButton("  special Mode   ");//1 2
+        normalModeBtn= new PkbMenuButton("  normal Mode   ");//2 3
+        multiplePlayerBtn= new PkbMenuButton(" Multiple Player ");
+        backToStartBtn= new PkbMenuButton("         Back         ");//9 9
 
         specialModeBtn.addActionListener(btnClick);
         normalModeBtn.addActionListener(btnClick);
+        multiplePlayerBtn.addActionListener(btnClick);
         backToStartBtn.addActionListener(btnClick);
         
         modePanel.setLayout(new BoxLayout(modePanel, BoxLayout.Y_AXIS));
@@ -131,15 +140,20 @@ public class PkbMenuFrame extends JFrame{
         modePanel.add(Box.createRigidArea (new Dimension(15, 25))); 
         modePanel.add(specialModeBtn);
         modePanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        modePanel.add(multiplePlayerBtn);
+        modePanel.add(Box.createRigidArea (new Dimension(15, 25)));
         modePanel.add(backToStartBtn);
 
         setspecialModePanel();
         setnormalModePanel();
+        setMultiplePlayerPanel();
         
         add(specialModePanel, btnPlace);
         add(normalModePanel, btnPlace);
+        add(multiplePlayerPanel, btnPlace);
         specialModePanel.setVisible(false);
         normalModePanel.setVisible(false);
+        multiplePlayerPanel.setVisible(false);
     }
 
     private void setspecialModePanel(){
@@ -164,11 +178,11 @@ public class PkbMenuFrame extends JFrame{
     private void setnormalModePanel(){
         normalModePanel= new JPanel();
         normalModePanel.setOpaque(false);
-        levelOneBtn= new PkbMenuButton("  Level 1  ");//2 2
-        levelTwoBtn= new PkbMenuButton("  Level 2  ");//1 1
-        levelThreeBtn= new PkbMenuButton("  Level 3  ");//1 1
-        levelFourBtn= new PkbMenuButton("  Level 4  ");//1 1
-        normalBackToModeBtn= new PkbMenuButton("    Back    ");//4 5
+        levelOneBtn= new PkbMenuButton("    Level 1    ");//4 4
+        levelTwoBtn= new PkbMenuButton("    Level 2    ");//4 4
+        levelThreeBtn= new PkbMenuButton("    Level 3    ");//4 4
+        levelFourBtn= new PkbMenuButton("    Level 4    ");//4 4
+        normalBackToModeBtn= new PkbMenuButton("      Back      ");//6 6
 
         levelOneBtn.addActionListener(btnClick);
         levelTwoBtn.addActionListener(btnClick);
@@ -188,16 +202,35 @@ public class PkbMenuFrame extends JFrame{
         
         normalModePanel.add(normalBackToModeBtn);
     }
+
+    private void setMultiplePlayerPanel(){
+        multiplePlayerPanel= new JPanel();
+        multiplePlayerPanel.setOpaque(false);
+        createRoomBtn= new PkbMenuButton(" Create Room ");//創建房間1 1
+        enterRoomBtn= new PkbMenuButton("  Enter Room  ");//進入房間2 2
+        multipleBackToModeBtn= new PkbMenuButton("       Back        ");//8 8
+
+        createRoomBtn.addActionListener(btnClick);
+        enterRoomBtn.addActionListener(btnClick);
+        multipleBackToModeBtn.addActionListener(btnClick);
+        
+        multiplePlayerPanel.setLayout(new BoxLayout(multiplePlayerPanel, BoxLayout.Y_AXIS));
+        multiplePlayerPanel.add(createRoomBtn);
+        multiplePlayerPanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        multiplePlayerPanel.add(enterRoomBtn);
+        multiplePlayerPanel.add(Box.createRigidArea (new Dimension(15, 25)));
+        multiplePlayerPanel.add(multipleBackToModeBtn);
+    }
+
     private void setLoadingPanel(){
         loadingPanel = new JPanel();
+        loadingPanel.setOpaque(false); 
         loadingLabel = new JLabel();
         logoLabel =  new JLabel();
         loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
-        logoLabel.setIcon(new ImageIcon("img/logo_GIF.gif"));
+        logoLabel.setIcon(new ImageIcon("img/PeeKaBoo_300.png"));
         
-        loadingPanel.setOpaque(false); 
-        
-        loadingPanel.setLayout(new BorderLayout());//可傳參數(間隙)
+        loadingPanel.setLayout(new BorderLayout(4, 4));//可傳參數(間隙)
         loadingPanel.add(loadingLabel, BorderLayout.CENTER);
         loadingPanel.add(logoLabel, BorderLayout.SOUTH);
     }
@@ -205,81 +238,88 @@ public class PkbMenuFrame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             GameFrame gf;
-            if(e.getSource()== startBtn){
+            if(e.getSource()== startBtn){//start
                 startPanel.setVisible(false);
                 modePanel.setVisible(true);
             }
-            else if(e.getSource()== musicBtn){
-                
+            else if(e.getSource()== musicBtn){//music
                 if(music.isPlaying()==false){
                     music.play();
                 }
                 else{
                     music.stop();
                 }
-                
             }
-            else if(e.getSource()== descriptBtn){
+            else if(e.getSource()== descriptBtn){//Instrution
                 startPanel.setVisible(false);
                 instrucPanel.setVisible(true);
             }
-            else if(e.getSource()== instrucToStartBtn){
+            else if(e.getSource()== instrucToStartBtn){//Back
                 instrucPanel.setVisible(false);
                 startPanel.setVisible(true);
             }
-            else if(e.getSource()== specialModeBtn){
+            else if(e.getSource()== specialModeBtn){//special mode
                 modePanel.setVisible(false);
                 specialModePanel.setVisible(true);
             }
-            else if(e.getSource()== normalModeBtn){
+            else if(e.getSource()== normalModeBtn){//mormal mode
                 modePanel.setVisible(false);
                 normalModePanel.setVisible(true);
             }
-            else if(e.getSource()== backToStartBtn){
+            else if(e.getSource()== multiplePlayerBtn){//multiple player
+                modePanel.setVisible(false);
+                multiplePlayerPanel.setVisible(true);
+            }
+            else if(e.getSource()== multipleBackToModeBtn){//back
+                multiplePlayerPanel.setVisible(false);
+                modePanel.setVisible(true);
+            }
+            else if(e.getSource()== backToStartBtn){//back
                 modePanel.setVisible(false);
                 startPanel.setVisible(true);
             }
-            else if(e.getSource()== specialBackToModeBtn){
+            else if(e.getSource()== specialBackToModeBtn){//back
                 specialModePanel.setVisible(false);
                 modePanel.setVisible(true);
             }
-            else if(e.getSource()== normalBackToModeBtn){
+            else if(e.getSource()== normalBackToModeBtn){//back
                 normalModePanel.setVisible(false);
                 modePanel.setVisible(true);
             }
-            else if(e.getSource()== timeTrialBtn){
+            else if(e.getSource()== timeTrialBtn){//time trial
                 gf = new GameFrame("MAPS/mapTimeTrail.txt", 20);
                 gf.timeTrial=true;
-                gf.initGame();
-                gf.gameStart();
+                gf.Game();
                 music.close();
             }
-            else if(e.getSource()== mazeBtn){
+            else if(e.getSource()== mazeBtn){//maze
                 gf = new GameFrame("maze", 4);
-                gf.initGame();
-                gf.gameStart();
+                gf.Game();
                 music.close();
             }
-            else{
-                if(e.getSource() == levelOneBtn){
+            else{//(in normal)
+                if(e.getSource() == levelOneBtn){//level 1
+                    // normalModePanel.setVisible(false);
+                    // loadingPanel.setVisible(true);
+                    // try{
+                    //     Thread.sleep(10000);
+                    // }catch(InterruptedException err){
+                    //     System.err.println(err);
+                    // }
                     gf = new GameFrame("MAPS/map.txt", 4);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
-                else if(e.getSource() == levelTwoBtn){
+                else if(e.getSource() == levelTwoBtn){//level 2
                     gf = new GameFrame("MAPS/map1.txt", 8);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
-                else if(e.getSource()== levelThreeBtn){
+                else if(e.getSource()== levelThreeBtn){//level 3
                     gf = new GameFrame("MAPS/map2.txt", 12);
-                    gf.initGame();
-                    gf.gameStart();
+                    gf.Game();
                 }
-                else if(e.getSource() == levelFourBtn){
+                else if(e.getSource() == levelFourBtn){//level 4
                     gf = new GameFrame("MAPS/mapPaceman.txt", 16);
-                    gf.initGame();    
-                    gf.gameStart();                
+                    gf.Game();             
                 }
                 music.close();
             }
