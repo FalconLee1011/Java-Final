@@ -47,10 +47,8 @@ public class GameFrame extends JFrame {
     public boolean save = false;
     public boolean kaboom = false;
     public boolean timeTrial = false;
-    
     private int breakTime = 0;
     private static final String[] cactusArr = { "img/cactus1.png", "img/cactus2.png", "img/cactus3.png" };
-    private static final Color color = new Color(197, 168, 111);
     private static final String[] fruitArr = { "img/devilFruit_golden_GIF.gif", "img/devilFruit_grape_GIF.gif", "img/devilFruit_heart_GIF.gif" };
 
     public ArrayList<Enery> eneryList = new ArrayList<Enery>();// 裝道具+石頭
@@ -86,7 +84,7 @@ public class GameFrame extends JFrame {
     }
 
     public void initGame() {
-        setBackground(color);
+        setBackground(new Color(197, 168, 111));
         initFrame();
         loadGameProp();
         gameIsReady = true;
