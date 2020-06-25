@@ -24,7 +24,7 @@ import java.util.Random;
 public class GameFrame extends JFrame {
 
     public BackgroundImage bg = new BackgroundImage(); // 背景圖片
-    public InitMap iMap = new InitMap("MAPS/map.txt");
+    public InitMap iMap;
     public int[][] map;
     public PkbHuman human;
     public PkbTimer timer = new PkbTimer();
