@@ -12,9 +12,11 @@ public abstract class Enery {
     public int width, height;
     public Image img;
 
+    private static final int BIG=120;
+
     public Enery(int x, int y, int width, int height, Image img) {
-        this.arrRow = y / 120;
-        this.arrCol = x / 120;
+        this.arrRow = y / BIG;
+        this.arrCol = x / BIG;
         this.x = x;
         this.y = y;
         this.width = width;
