@@ -11,7 +11,7 @@ public class PkbMenuButton extends JButton{
         setMargin(new Insets(10, 10, 10, 10));//上左下右
         setFont(new Font("SansSerif", Font.BOLD, myWidth));
         //setBackground(Color.WHITE);//背景色
-        setBackground(new Color(234,40,60));
+        setBackground(new Color(255, 115, 115));
         setOpaque(false);
         setForeground(Color.WHITE);//前景色
         setFocusPainted(false);//字的框線消失

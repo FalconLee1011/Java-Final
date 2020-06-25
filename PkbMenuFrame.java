@@ -75,8 +75,6 @@ public class PkbMenuFrame extends JFrame{
     public PkbMenuFrame(String frameTitle){//constructor
         super(frameTitle);
         btnClick= new ButtonClick();
-        Image image = new ImageIcon("img//background_PNG.png").getImage();// 這是背景圖片 .png .jpg .gif 等格式的圖片都可以
-        this.setIconImage(image);
         //讓按鈕Panel在中間
         setLayout(new GridBagLayout());
         GridBagConstraints space= new GridBagConstraints();
@@ -88,8 +86,8 @@ public class PkbMenuFrame extends JFrame{
 
         contentPane= getContentPane();
         contentPane.setBackground(Color.PINK);
-        // backGroundPane= getLayeredPane();
-        // setBackGroundPane();
+        backGroundPane= getLayeredPane();
+        setBackGroundPane();
         
         setStartPanel();
         contentPane.add(startPanel, btnPlace);
@@ -98,8 +96,8 @@ public class PkbMenuFrame extends JFrame{
     private void setBackGroundPane(){
         //backGroundPane.setBackground(Color.PINK);
         JLabel imglabel= new JLabel();
-        // imglabel.setIcon(new ImageIcon("img/win_PNG.png"));
-        // backGroundPane.add(imglabel);
+        imglabel.setIcon(new ImageIcon("img/background_PNG.png"));
+        backGroundPane.add(imglabel);
     }
     public void setGridBagAttr(GridBagConstraints gridBag, int x, int y, int w, int h){
         gridBag.gridx= x;
@@ -427,7 +425,7 @@ public class PkbMenuFrame extends JFrame{
             }
             else if(e.getSource()== backToStartBtn){//back
                 modePanel.setVisible(false);
-                startGameBtn.setVisible(true);
+                startPanel.setVisible(true);
             }
             else if(e.getSource()== specialBackToModeBtn){//back
                 specialModePanel.setVisible(false);
