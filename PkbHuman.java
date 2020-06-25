@@ -240,6 +240,9 @@ public class PkbHuman extends Thread {
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.y += this.yspeed;
             }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.y += this.yspeed;
+            }
         }
     }
 
@@ -263,6 +266,9 @@ public class PkbHuman extends Thread {
             }
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.y -= this.yspeed;
+            }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.y -= this.yspeed;
             }
         }
     }
@@ -288,6 +294,9 @@ public class PkbHuman extends Thread {
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.x += this.xspeed;
             }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.x += this.xspeed;
+            }
         }
     }
 
@@ -311,6 +320,9 @@ public class PkbHuman extends Thread {
             }
             for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
                 fock.x -= this.xspeed;
+            }
+            for (PkbOnlinePlayer op : this.gameFrame.onlinePlayers) {
+                op.x -= this.xspeed;
             }
         }
     }
