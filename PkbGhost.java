@@ -224,6 +224,8 @@ public class PkbGhost extends Thread{
   }
 
   private boolean isInRange(PkbHuman player){
+   //System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
+
     Rectangle ghostPoly = new Rectangle(this.x - ((width + this.range) / 2) , this.y  - ((height + this.range) / 2), width + range, height + range);
     Rectangle playerPoly = new Rectangle(player.x, player.y, player.width, player.height);
     if (ghostPoly.intersects(playerPoly)) { return true; }
@@ -231,6 +233,8 @@ public class PkbGhost extends Thread{
   }
 
   private boolean hasCapturedPlayer(PkbHuman player){
+   // System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
+
     Rectangle ghostPoly = new Rectangle(this.x - ((width - tolerance) / 2), this.y - ((height - tolerance) / 2), width - tolerance, height - tolerance);
     Rectangle playerPoly = new Rectangle(player.x - ((player.width - tolerance) / 2), player.y - ((player.height - tolerance) / 2), player.width - tolerance, player.height - tolerance);
     if (ghostPoly.intersects(playerPoly)) { return true; }
@@ -238,6 +242,8 @@ public class PkbGhost extends Thread{
   }
 
   private boolean hasBumpedIntoRock(PkbHuman player){
+   // System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
+
     GameFrame g = player.gameFrame;
     Rectangle ghostPoly = new Rectangle(this.x - (this.width / 2) , this.y  - (this.height / 2), width, height);
     for (PkbFlyingRock fock : g.flyingRocks) {

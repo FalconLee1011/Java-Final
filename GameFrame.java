@@ -249,12 +249,16 @@ public class GameFrame extends JFrame {
                             {
                                 hp--;
                                 save=true;
-                                // System.out.println("save");
+                                
+                               // System.out.println("save");
+
                                 human.Time(2000, 100);
                             }
                             
                             if (hp <= 0) {
-                                // System.out.println("GAME OVER");
+                                //System.out.println("GAME OVER");
+                                System.out.printf("MOVED TO: <%d, %d>  <%d, %d>%n%n ", ghost.x, ghost.y,human.absoluteX,human.absoluteY);
+
                                 hasWon = false;
                                 isGameOver = true;
                                 // timer.timergame.cancel();////////計時賽的時間暫停

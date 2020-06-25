@@ -27,7 +27,7 @@ public class PkbHuman extends Thread {
     public int xspeed = 12, yspeed = 12;
     public int turtleSpeed = 2;
     public int camelSpeed = 25;
-
+    public int absoluteY=1200,absoluteX=1560;
     // DEBUG ONLY
     private boolean ignoreWalls = false;
 
@@ -100,6 +100,7 @@ public class PkbHuman extends Thread {
         this.xspeed = this.defaultSpeed;
         this.yspeed = this.defaultSpeed;
         teleport(1200, 1560); // 10, 13
+
         // teleport(900, 900);
     }
 
@@ -164,6 +165,7 @@ public class PkbHuman extends Thread {
 
     public void run() {
         this.bagList.add(0);
+        //System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
 
         while (true) {
             // if (isWitch == true)
@@ -184,6 +186,8 @@ public class PkbHuman extends Thread {
     }
 
     public void move() {
+        System.out.printf("MOVED TO:絕對: <%d, %d> ?: <%d, %d>%n%n ", (this.absoluteY/120+1), this.absoluteX/120+1, this.x, this.y);
+        
         if (!isWitch && up || isWitch && down) {
             this.lastDirection = Str_Up;
             // this.img = this.activeImgSet[0];
@@ -216,10 +220,16 @@ public class PkbHuman extends Thread {
     }
 
     private void moveUp(){
+        //System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
+
         this.img = this.activeImgSet[0];
-        if (this.y >= 500 && this.y <= bound_y) { this.y -= this.yspeed; } 
+        if (this.y >= 500 && this.y <= bound_y) {
+             this.y -= this.yspeed;
+             this.absoluteY-=this.yspeed;
+             } 
         else if (this.y > bound_y || this.y < 500) {
             gameFrame.bg.y += this.yspeed;// 背景向下移動
+            this.absoluteY-=this.yspeed;
             // 障礙物項左移動
             for (Enery enery : this.gameFrame.eneryList) {
                 enery.y += this.yspeed;
@@ -234,10 +244,16 @@ public class PkbHuman extends Thread {
     }
 
     private void moveDown(){
+        //System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
+
         this.img = this.activeImgSet[1];
-        if (this.y < bound_y) { this.y += this.yspeed; } 
+        if (this.y < bound_y) { 
+            this.y += this.yspeed;
+            this.absoluteY+=this.yspeed;
+         } 
         else if (this.y >= bound_y) {
             gameFrame.bg.y -= this.yspeed;// 背景向上移動
+            this.absoluteY+=this.yspeed;
             // 障礙物項左移動
             for (Enery enery : this.gameFrame.eneryList) {
                 enery.y -= this.yspeed;
@@ -252,10 +268,16 @@ public class PkbHuman extends Thread {
     }
 
     private void moveLeft(){
+        //System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
+
         this.img = this.activeImgSet[2];
-        if (this.x >= bound_x) { this.x -= this.xspeed; } 
+        if (this.x >= bound_x) { 
+            this.x -= this.xspeed;
+            this.absoluteX-=this.xspeed;
+         } 
         else if (this.x < bound_x) {
             gameFrame.bg.x += this.xspeed;// 背景向右移動
+            this.absoluteX-=this.xspeed;
             // 障礙物項右移動
             for (Enery enery : this.gameFrame.eneryList) {
                 enery.x += this.xspeed;
@@ -270,10 +292,16 @@ public class PkbHuman extends Thread {
     }
 
     private void moveRight(){
+        //System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
+
         this.img = this.activeImgSet[3];
-        if (this.x <= bound_x) { this.x += this.xspeed; } 
+        if (this.x <= bound_x) {
+            this.x += this.xspeed;
+            this.absoluteX+=this.xspeed; } 
         else if (this.x > bound_x) {
             gameFrame.bg.x -= this.xspeed;// 背景向左移動
+            this.absoluteX+=this.xspeed; 
+
             // 障礙物項左移動
             for (Enery enery : this.gameFrame.eneryList) {
                 enery.x -= this.xspeed;
@@ -323,7 +351,12 @@ public class PkbHuman extends Thread {
                 if(!this.portalIsCooldown){
                     int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
                     Door door = this.gameFrame.doors.get(rnd_door);
+                    // System.out.printf("MOVED TO:DOOR: <%d, %d>%n%n ",door.y, door.x + 120);
+
+                    this.absoluteY=door.absoluteY;
+                    this.absoluteX=door.absoluteX+120;
                     teleport(door.y, door.x + 120);
+
                     this.portalIsCooldown= true;
                     this.portalCooldownSince = Calendar.getInstance().getTimeInMillis();
                 }
