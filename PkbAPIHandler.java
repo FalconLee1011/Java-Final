@@ -112,7 +112,7 @@ public class PkbAPIHandler {
     JSONObject game;
     int playerCount;
     try {
-      System.out.println(this.response);
+      // System.out.println(this.response);
       this.obj = new JSONObject(this.response);
       game = obj.getJSONObject("game");
       playerCount = game.getInt("playerCount");
@@ -127,7 +127,7 @@ public class PkbAPIHandler {
     for (int i = 0; i < playerCount; i++) {
       if (i == this.playerID)
         continue;
-      Image img = new ImageIcon("img/human_downMove_gif_160.gif").getImage();// 角色圖片
+      Image img = new ImageIcon("img/downMove_gif_160_"+i+".gif").getImage();// 角色圖片
       int x = game.getJSONObject(Integer.toString(i)).getInt("x");
       int y = game.getJSONObject(Integer.toString(i)).getInt("y");
       PkbOnlinePlayer op = new PkbOnlinePlayer(x, y, 120, 120, img);
@@ -152,8 +152,8 @@ public class PkbAPIHandler {
   public static void main(String args[]) {
     PkbAPIHandler newOnlineGame = new PkbAPIHandler();
     // String response = newOnlineGame.create_game();
-    System.out.println(newOnlineGame.create_game());
-    System.out.println(newOnlineGame.joinGame());
+    // System.out.println(newOnlineGame.create_game());
+    // System.out.println(newOnlineGame.joinGame());
     // System.out.println(newOnlineGame.joinGame());
     // newOnlineGame.get_game();
     // System.out.println(newOnlineGame.gameID);

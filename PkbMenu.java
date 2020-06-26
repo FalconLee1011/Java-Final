@@ -231,7 +231,7 @@ public class PkbMenu extends JFrame {
                 multiplePanel.setVisible(true);
                 room = inputIDPanel.enterIDText.getText();
                 roomPanel.setTitle(room);
-                System.out.println("input: " + inputIDPanel.enterIDText.getText());
+                // System.out.println("input: " + inputIDPanel.enterIDText.getText());
                 gf = new GameFrame("MAPS/map.txt", 4, true);
                 PkbAPIHandler api = new PkbAPIHandler(gf);
                 api.gameID = room;

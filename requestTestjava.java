@@ -55,7 +55,7 @@ public class requestTestjava {
 				// System.out.println(jsonText.get("status"));
 			}
 
-			System.out.println(sb);
+			// System.out.println(sb);
 			// reader.close();
 			connection.disconnect();// 關閉連接
 		} catch (MalformedURLException e) {
@@ -71,7 +71,7 @@ public class requestTestjava {
 
 	public static void main(String args[]) {
 		try {
-			System.out.println(httpRequestTest("http://140.121.197.14:8756/create_game"));
+			// System.out.println(httpRequestTest("http://140.121.197.14:8756/create_game"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
