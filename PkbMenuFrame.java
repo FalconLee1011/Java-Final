@@ -260,7 +260,7 @@ public class PkbMenuFrame extends JFrame{
     private void setMultiplePanel(){
         multiplePanel= new JPanel();
         multiplePanel.setOpaque(false);
-        roomPanel = new RoomPanel("banana!", 4);
+        roomPanel = new RoomPanel("banana!", 1);
         masterGuest= GUEST;//= 0
         startGameBtn= new PkbMenuButton("   Start !   ");//2 2
         roomBackToMulBtn= new PkbMenuButton("   Back  ");//5 5
