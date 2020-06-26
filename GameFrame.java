@@ -361,8 +361,8 @@ public class GameFrame extends JFrame {
             int opx = human.x - (human.absoluteX - op.x);
             int opy = human.y - (human.absoluteY - op.y);
             big.drawImage(op.img, opx, opy, op.width, op.height, null);
-            System.out.printf("Local is at <%d, %d>%n", human.x, human.y);
-            System.out.printf("Player is at <%d, %d>%n", opx, opy);
+            // System.out.printf("Local is at <%d, %d>%n", human.x, human.y);
+            // System.out.printf("Player is at <%d, %d>%n", opx, opy);
         }
         System.out.printf("%n");
 
