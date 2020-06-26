@@ -9,13 +9,13 @@ import peekaboo.menu.*;
 import peekaboo.*;
 
 public class PkbMenu extends JFrame {
-    StartPanel startPanel = new StartPanel();
-    InstrucPanel instrucPanel = new InstrucPanel();
-    ModePanel modePanel = new ModePanel();
+    private final StartPanel startPanel = new StartPanel();
+    private final InstrucPanel instrucPanel = new InstrucPanel();
+    private final ModePanel modePanel = new ModePanel();
 
-    NormalModePanel normalModePanel = new NormalModePanel();
-    SpecialModePanel specialModePanel = new SpecialModePanel();
-    MultiplePlayerPanel multiplePlayerPanel = new MultiplePlayerPanel();
+    private final NormalModePanel normalModePanel = new NormalModePanel();
+    private final SpecialModePanel specialModePanel = new SpecialModePanel();
+    private final MultiplePlayerPanel multiplePlayerPanel = new MultiplePlayerPanel();
 
     JPanel multiplePanel;
     private final int MASTER = 1;
@@ -29,7 +29,7 @@ public class PkbMenu extends JFrame {
     PkbButton enterIDBtn;
     PkbButton inputBackToMulBtn;
 
-    LoadingPanel loadingPanel = new LoadingPanel();
+    private final LoadingPanel loadingPanel = new LoadingPanel();
 
     GridBagConstraints btnPlace = null;
     ButtonClick btnClick;
@@ -46,7 +46,6 @@ public class PkbMenu extends JFrame {
         JPanel contentPanel = new JPanel();
         contentPanel = (JPanel) (this.getContentPane());
         contentPanel.setOpaque(false);
-        // contentPanel.setBackground(Color.PINK);
         setBackGroundPane();
 
         btnClick = new ButtonClick();
@@ -107,8 +106,8 @@ public class PkbMenu extends JFrame {
         modePanel.multiplePlayerBtn.addActionListener(btnClick);
         modePanel.backToStartBtn.addActionListener(btnClick);
 
-        setspecialModePanel();
-        setnormalModePanel();
+        setNormalModePanel();
+        setSpecialModePanel();
         setMultiplePlayerPanel();
 
         add(specialModePanel, btnPlace);
@@ -118,19 +117,19 @@ public class PkbMenu extends JFrame {
         normalModePanel.setVisible(false);
         multiplePlayerPanel.setVisible(false);
     }
-
-    private void setspecialModePanel() {
-        specialModePanel.timeTrialBtn.addActionListener(btnClick);
-        specialModePanel.mazeBtn.addActionListener(btnClick);
-        specialModePanel.specialBackToModeBtn.addActionListener(btnClick);
-    }
-
-    private void setnormalModePanel() {
+    
+    private void setNormalModePanel() {
         normalModePanel.levelOneBtn.addActionListener(btnClick);
         normalModePanel.levelTwoBtn.addActionListener(btnClick);
         normalModePanel.levelThreeBtn.addActionListener(btnClick);
         normalModePanel.levelFourBtn.addActionListener(btnClick);
         normalModePanel.normalBackToModeBtn.addActionListener(btnClick);
+    }
+
+    private void setSpecialModePanel() {
+        specialModePanel.timeTrialBtn.addActionListener(btnClick);
+        specialModePanel.mazeBtn.addActionListener(btnClick);
+        specialModePanel.specialBackToModeBtn.addActionListener(btnClick);
     }
 
     private void setMultiplePlayerPanel() {
@@ -238,7 +237,6 @@ public class PkbMenu extends JFrame {
                 multiplePlayerPanel.setVisible(false);
                 modePanel.setVisible(true);
             }
-
             else if (e.getSource() == multiplePlayerPanel.createRoomBtn) {// create room
                 multiplePlayerPanel.setVisible(false);
                 multiplePanel.setVisible(true);
@@ -255,28 +253,25 @@ public class PkbMenu extends JFrame {
                 gf.playerID = playerID;
                 gf.api = api;
             }
-
             else if (e.getSource() == startGameBtn) {
                 try {
                     gf.Game();
                 } catch (Exception errrrr) {
+                    errrrr.printStackTrace();
                 }
             }
-
             else if (e.getSource() == multiplePlayerPanel.enterRoomBtn) {// enter room
                 multiplePlayerPanel.setVisible(false);
                 inputIDPanel.setVisible(true);
                 masterGuest = GUEST;
                 // startGameBtn.setEnabled(false);
             }
-
             else if (e.getSource() == roomBackToMulBtn) {// back
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
                 // startGameBtn.setEnabled(false);
             }
-
             else if (e.getSource() == enterIDBtn) {// input+ enter
                 inputIDPanel.setVisible(false);
                 multiplePanel.setVisible(true);
