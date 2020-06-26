@@ -200,7 +200,7 @@ public class PkbMenu extends JFrame {
                 room = api.create_game();
                 System.out.println(room);
                 roomPanel.setTitle(room);
-                roomPanel.setCamelImgs(api.getPlayerCount());// 目前房間的玩家人數
+                roomPanel.setCamelImgs(api.getPlayerCount()+1);// 目前房間的玩家人數
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
