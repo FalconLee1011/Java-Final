@@ -14,8 +14,12 @@ public class InitMap {
     public ArrayList<String> list = new ArrayList<String>();
     public int[][] map = null;
 
-    public InitMap(){}
-    public InitMap(String mapFile){ this.fileName = mapFile; }
+    public InitMap() {
+    }
+
+    public InitMap(String mapFile) {
+        this.fileName = mapFile;
+    }
 
     public int[][] readMap() throws Exception {// return 2D-array
 

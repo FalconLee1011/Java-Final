@@ -8,16 +8,16 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 //import sun.tools.asm.CatchData;
 
-
-
 //鍵盤按下監聽類
- 
+
 public class KeyListener extends KeyAdapter {
     Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     public GameFrame gf;
+
     public KeyListener(GameFrame gf) {
         this.gf = gf;
     }
+
     // 鍵盤監聽
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -36,16 +36,17 @@ public class KeyListener extends KeyAdapter {
                 gf.human.down = true;
                 break;
             case 65:
-                gf.human.pick=true;
+                gf.human.pick = true;
                 break;
             case 87:
-                gf.human.use=true;
+                gf.human.use = true;
                 break;
             case 81:
                 gf.kaboom = true;
                 break;
         }
     }
+
     // 鍵盤釋放監聽
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
@@ -65,10 +66,10 @@ public class KeyListener extends KeyAdapter {
             case 65:
                 gf.human.pick = false;
                 break;
-             case 87:
+            case 87:
                 gf.human.use = false;
-        
-             break;
+
+                break;
         }
     }
 }

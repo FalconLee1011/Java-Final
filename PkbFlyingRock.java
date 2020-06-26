@@ -45,48 +45,40 @@ public class PkbFlyingRock extends Thread {
 
     try {
       Thread.sleep(200);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       // TODO: handle exception
     }
 
     if (this.direction == "Up") {
       img = new ImageIcon("img/bullet_up.png").getImage();
-    } 
-    else if (this.direction == "Down") {
+    } else if (this.direction == "Down") {
       img = new ImageIcon("img/bullet_down.png").getImage();
-    }
-    else if (this.direction == "Left") {
+    } else if (this.direction == "Left") {
       img = new ImageIcon("img/bullet_left.png").getImage();
-    } 
-    else if (this.direction == "Right") {
+    } else if (this.direction == "Right") {
       img = new ImageIcon("img/bullet_right.png").getImage();
     }
 
     while (true) {
       if (this.direction == "Up") {
         this.y -= this.speed;
-      } 
-      else if (this.direction == "Down") {
+      } else if (this.direction == "Down") {
         this.y += this.speed;
-      } 
-      else if (this.direction == "Left") {
+      } else if (this.direction == "Left") {
         this.x -= this.speed;
-      } 
-      else if (this.direction == "Right") {
+      } else if (this.direction == "Right") {
         this.x += this.speed;
       }
-      if (this.hasMoved > 500){
+      if (this.hasMoved > 500) {
         this.valid = false;
         break;
       }
-      
-        this.hasMoved += this.speed;
-      
+
+      this.hasMoved += this.speed;
+
       try {
         Thread.sleep(2);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         // TODO: handle exception
       }
     }

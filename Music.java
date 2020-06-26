@@ -23,9 +23,11 @@ public class Music {
 		}
 
 	}
-    public void loop(){
+
+	public void loop() {
 		clip.loop(clip.LOOP_CONTINUOUSLY);
 	}
+
 	public void play() {
 		if (clip == null)
 			return;

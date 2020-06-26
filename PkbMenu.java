@@ -22,7 +22,7 @@ public class PkbMenu extends JFrame {
     private final int GUEST = 0;
     private int masterGuest;
 
-    private final InputIDPanel inputIDPanel =new InputIDPanel();
+    private final InputIDPanel inputIDPanel = new InputIDPanel();
 
     private final LoadingPanel loadingPanel = new LoadingPanel();
 
@@ -112,7 +112,7 @@ public class PkbMenu extends JFrame {
         normalModePanel.setVisible(false);
         multiplePlayerPanel.setVisible(false);
     }
-    
+
     private void setNormalModePanel() {
         normalModePanel.levelOneBtn.addActionListener(btnClick);
         normalModePanel.levelTwoBtn.addActionListener(btnClick);
@@ -145,7 +145,7 @@ public class PkbMenu extends JFrame {
 
         multiplePanel.startGameBtn.addActionListener(btnClick);
         multiplePanel.roomBackToMulBtn.addActionListener(btnClick);
-     
+
         JPanel littePanel = new JPanel();
         littePanel.setOpaque(false);
         littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -192,8 +192,7 @@ public class PkbMenu extends JFrame {
             } else if (e.getSource() == multiplePlayerPanel.multipleBackToModeBtn) {// back
                 multiplePlayerPanel.setVisible(false);
                 modePanel.setVisible(true);
-            }
-            else if (e.getSource() == multiplePlayerPanel.createRoomBtn) {// create room
+            } else if (e.getSource() == multiplePlayerPanel.createRoomBtn) {// create room
                 multiplePlayerPanel.setVisible(false);
                 multiplePanel.setVisible(true);
                 masterGuest = MASTER;
@@ -208,25 +207,21 @@ public class PkbMenu extends JFrame {
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
-            }
-            else if (e.getSource() == multiplePanel.startGameBtn) {
+            } else if (e.getSource() == multiplePanel.startGameBtn) {
                 try {
                     gf.Game();
                 } catch (Exception errrrr) {
                     errrrr.printStackTrace();
                 }
-            }
-            else if (e.getSource() == multiplePlayerPanel.enterRoomBtn) {// enter room
+            } else if (e.getSource() == multiplePlayerPanel.enterRoomBtn) {// enter room
                 multiplePlayerPanel.setVisible(false);
                 inputIDPanel.setVisible(true);
                 masterGuest = GUEST;
-            }
-            else if (e.getSource() == multiplePanel.roomBackToMulBtn) {// back
+            } else if (e.getSource() == multiplePanel.roomBackToMulBtn) {// back
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
-            }
-            else if (e.getSource() == inputIDPanel.enterIDBtn) {// input+ enter
+            } else if (e.getSource() == inputIDPanel.enterIDBtn) {// input+ enter
                 inputIDPanel.setVisible(false);
                 multiplePanel.setVisible(true);
                 room = inputIDPanel.enterIDText.getText();

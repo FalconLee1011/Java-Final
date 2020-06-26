@@ -16,8 +16,6 @@ public class SpecialModePanel extends JPanel {
         mazeBtn = new PkbButton("        Maze       ");
         specialBackToModeBtn = new PkbButton("        Back       ");
 
-
-
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(timeTrialBtn);
         add(Box.createRigidArea(new Dimension(15, 25)));

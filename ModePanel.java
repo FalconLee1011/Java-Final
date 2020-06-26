@@ -15,7 +15,7 @@ public class ModePanel extends JPanel {
         normalModeBtn = new PkbButton("  normal Mode   ");
         multiplePlayerBtn = new PkbButton(" Multiple Player ");
         backToStartBtn = new PkbButton("         Back         ");
-        
+
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(normalModeBtn);
         add(Box.createRigidArea(new Dimension(15, 25)));

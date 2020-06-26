@@ -3,7 +3,7 @@ package peekaboo.menu;
 import java.awt.*;
 import javax.swing.*;
 
-public class RoomPanel extends JPanel{
+public class RoomPanel extends JPanel {
     private JPanel playerPanel;
     private JLabel idLabel;
     private JTextField idText;
@@ -59,7 +59,8 @@ public class RoomPanel extends JPanel{
         }
         layout.layoutContainer(playerPanel); // 佈置內容窗格
     }
-    public void setTitle(String roomID){
+
+    public void setTitle(String roomID) {
         idText.setText(roomID);
     }
 }
