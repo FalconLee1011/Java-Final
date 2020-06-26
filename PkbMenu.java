@@ -16,6 +16,7 @@ public class PkbMenu extends JFrame {
     private final MultiplePlayerPanel multiplePlayerPanel = new MultiplePlayerPanel();
 
     private final MultiplePanel multiplePanel = new MultiplePanel();
+    Thread serverThr= new Thread();
     private final int MASTER = 1;
     private final int GUEST = 0;
     private int masterGuest;
@@ -200,19 +201,19 @@ public class PkbMenu extends JFrame {
                 room = api.create_game();
                 System.out.println(room);
                 roomPanel.setTitle(room);
-                new Thread() {
+                serverThr = new Thread() {
                     public void run() {
                         while (true) {
                             roomPanel.setCamelImgs(api.getPlayerCount());// 目前房間的玩家人數
                         }
                     }
-                }.start();
-                
-                
+                };
+                serverThr.start();
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
             } else if (e.getSource() == multiplePanel.startGameBtn) {
+                serverThr.interrupt();
                 try {
                     gf.Game();
                 } catch (Exception errrrr) {
@@ -223,6 +224,7 @@ public class PkbMenu extends JFrame {
                 inputIDPanel.setVisible(true);
                 masterGuest = GUEST;
             } else if (e.getSource() == multiplePanel.roomBackToMulBtn) {// back
+                serverThr.interrupt();
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
@@ -238,14 +240,17 @@ public class PkbMenu extends JFrame {
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
-                new Thread() {
+                serverThr = new Thread() {
                     public void run() {
                         while (true) {
                             roomPanel.setCamelImgs(api.getPlayerCount());// 目前房間的玩家人數
                         }
                     }
-                }.start();
+                };
+                serverThr.start();
+
             } else if (e.getSource() == inputIDPanel.inputBackToMulBtn) {// back
+
                 inputIDPanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
             } else if (e.getSource() == modePanel.backToStartBtn) {// back
