@@ -4,8 +4,8 @@
 * peekaboo.Pkb
 
 ## 選單介面 package peekaboo.menu;
-* PkbMenuFrame -- 
-* PkbMenuButton -
+* PkbMenu -- 
+* PkbButton -
 
 ## 角色 package peekaboo.role;
 * PkbHuman ------
