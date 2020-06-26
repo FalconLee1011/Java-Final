@@ -260,7 +260,7 @@ public class PkbMenuFrame extends JFrame{
     private void setMultiplePanel(){
         multiplePanel= new JPanel();
         multiplePanel.setOpaque(false);
-        roomPanel = new RoomPanel("banana!", 1);
+        roomPanel = new RoomPanel("banana!", 4);
         masterGuest= GUEST;//= 0
         startGameBtn= new PkbMenuButton("   Start !   ");//2 2
         roomBackToMulBtn= new PkbMenuButton("   Back  ");//5 5
@@ -379,6 +379,7 @@ public class PkbMenuFrame extends JFrame{
                 room = api.create_game();
                 System.out.println(room);
                 roomPanel.setTitle(room);
+                roomPanel.setCamelImgs(1);//目前房間的玩家人數
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
@@ -416,9 +417,8 @@ public class PkbMenuFrame extends JFrame{
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
+                roomPanel.setCamelImgs(1);// 更新目前房間的玩家人數
             }
-
-
             else if(e.getSource()== inputBackToMulBtn){//back
                 inputIDPanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
