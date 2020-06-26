@@ -45,10 +45,8 @@
     + import peekaboo.*;
 
 * Enery --------- 以下class的父類
-
 * PkbOnlinePlayer
 * MazeExit
-
 * Door ---------- 任意門
 * Hole ---------- 坑洞
 * Barrier ------- 障礙物
@@ -58,7 +56,6 @@
 * Stone --------- 地板
 * Heart --------- 加hp
 * Fruit --------- 惡魔果實
-
 
 ## 連線
 * requestTestjava
