@@ -3,8 +3,9 @@ package peekaboo.props;
 import java.awt.Image;
 
 /**
- * 任意門 從某地順移到某地
+ * 任意門:從A地順移到B地(隨機換)
  */
+
 public class Door extends Enery {
 
     public int doorID;
@@ -16,5 +17,4 @@ public class Door extends Enery {
         this.absoluteY = y;
         this.doorID = doorID;
     }
-
 }

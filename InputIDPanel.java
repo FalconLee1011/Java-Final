@@ -10,8 +10,8 @@ public class InputIDPanel extends JPanel {
 
     public InputIDPanel() {
         setOpaque(false);
-        enterIDBtn = new PkbButton("   Enter   ");
-        inputBackToMulBtn = new PkbButton("   Back   ");
+        enterIDBtn = new PkbButton("   Enter   ");// 進入房間
+        inputBackToMulBtn = new PkbButton("   Back   ");// 回到上一頁(選擇 進入/創建房間)
 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         int myWidth = (int) (d.width / 45);

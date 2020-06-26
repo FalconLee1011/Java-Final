@@ -24,11 +24,11 @@ public class Music {
 
 	}
 
-	public void loop() {
+	public void loop() {// 循環撥放
 		clip.loop(clip.LOOP_CONTINUOUSLY);
 	}
 
-	public void play() {
+	public void play() {// 撥放
 		if (clip == null)
 			return;
 		stop();
@@ -36,18 +36,18 @@ public class Music {
 		clip.start();
 	}
 
-	public void close() {
+	public void close() {// 關閉
 		stop();
 		clip.close();
 	}
 
-	public void stop() {
+	public void stop() {// 暫停
 		if (clip.isRunning())
 			clip.stop();
 
 	}
 
-	public void setVolume(int volume) {
+	public void setVolume(int volume) {// 設定音量大小
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		double gain = (double) volume / 100;
 		float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);

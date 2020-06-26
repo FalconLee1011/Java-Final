@@ -3,8 +3,7 @@ package peekaboo.props;
 import java.awt.Image;
 
 /*
- * 烏龜
- * 速度變2，維持10秒 
+ * 烏龜:速度變2，維持10秒 
  */
 
 public class Turtle extends Enery {

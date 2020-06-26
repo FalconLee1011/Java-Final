@@ -2,25 +2,22 @@ package peekaboo.role;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
+import java.util.Calendar;
 import java.util.ArrayList;
+import java.security.SecureRandom;
+import peekaboo.*;
 import peekaboo.props.*;
 import peekaboo.role.PkbHuman;
-import peekaboo.*;
-
-import java.security.SecureRandom;
-import java.util.Calendar;
-
-import java.awt.Point;
 
 public class PkbGhost extends Thread {
 
   public GameFrame gameFrame;
   public int x = 360, y = 360;
   public int rndx = 0, rndy = 360;
-
   private int range = 1; // Will pursue if player within range, only when isRangedTrigger is set true
   private int patrolRange = 0;
   public int speed = 1;
@@ -33,15 +30,12 @@ public class PkbGhost extends Thread {
   public boolean speedHasBeenSet = false;
   private long patrolInterval = 7000;
   private long lastMoved = 0;
-
   private boolean isShocked = false;
   private long timeShocked = 0;
   private long shockInterval = 5000;
-
   public boolean rageActivated = false;
   private long rageSince = 0;
   private long rageInterval = 10000;
-
   private int tolerance = 20;
 
   public PkbGhost() {
@@ -88,7 +82,6 @@ public class PkbGhost extends Thread {
       pursueIsNotRangedTrigger(player);
     }
     if (hasBumpedIntoRock(player)) {
-      // System.out.println("Socked!!!");
       this.isShocked = true;
       this.timeShocked = Calendar.getInstance().getTimeInMillis();
       this.speed += 2;
@@ -219,8 +212,6 @@ public class PkbGhost extends Thread {
   }
 
   private boolean isInRange(PkbHuman player) {
-    // System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
-
     Rectangle ghostPoly = new Rectangle(this.x - ((width + this.range) / 2), this.y - ((height + this.range) / 2),
         width + range, height + range);
     Rectangle playerPoly = new Rectangle(player.x, player.y, player.width, player.height);
@@ -231,8 +222,6 @@ public class PkbGhost extends Thread {
   }
 
   private boolean hasCapturedPlayer(PkbHuman player) {
-    // System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
-
     Rectangle ghostPoly = new Rectangle(this.x - ((width - tolerance) / 2), this.y - ((height - tolerance) / 2),
         width - tolerance, height - tolerance);
     Rectangle playerPoly = new Rectangle(player.x - ((player.width - tolerance) / 2),
@@ -244,8 +233,6 @@ public class PkbGhost extends Thread {
   }
 
   private boolean hasBumpedIntoRock(PkbHuman player) {
-    // System.out.printf("GMOVED TO: <%d, %d>%n%n ", this.x, this.y);
-
     GameFrame g = player.gameFrame;
     Rectangle ghostPoly = new Rectangle(this.x - (this.width / 2), this.y - (this.height / 2), width, height);
     for (PkbFlyingRock fock : g.flyingRocks) {
@@ -257,5 +244,4 @@ public class PkbGhost extends Thread {
     }
     return false;
   }
-
 }

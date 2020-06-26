@@ -2,16 +2,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-
 import java.io.OutputStream;
-
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 
 import java.net.URL;
 import java.net.http.HttpRequest;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 
-//import net.sf.json.JSONObject;
 import org.json.*;
 
 public class requestTestjava {

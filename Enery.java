@@ -3,7 +3,7 @@ package peekaboo.props;
 import java.awt.Image;
 
 /**
- * 物品的抽象父類
+ * Enery:物品的抽象父類
  */
 public abstract class Enery {
 
@@ -11,7 +11,6 @@ public abstract class Enery {
     public int arrRow, arrCol;// 分別對應到map[i][j]的i,j
     public int width, height;
     public Image img;
-
     private static final int BIG = 120;
 
     public Enery(int x, int y, int width, int height, Image img) {

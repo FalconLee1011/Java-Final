@@ -36,13 +36,19 @@
 * GameFrame ----- 
     + import peekaboo.props.*;
     + import peekaboo.role.*;
+* PkbAPIHandler
 
 ## 道具 package peekaboo.props;
 * PkbFlyingRock - 撿起來的地板
     + import peekaboo.props.*;
     + import peekaboo.role.PkbHuman;
-    
+    + import peekaboo.*;
+
 * Enery --------- 以下class的父類
+
+* PkbOnlinePlayer
+* MazeExit
+
 * Door ---------- 任意門
 * Hole ---------- 坑洞
 * Barrier ------- 障礙物
@@ -50,7 +56,9 @@
 * Turtle -------- 烏龜
 * Shoe ---------- 跑鞋
 * Stone --------- 地板
+* Heart --------- 加hp
+* Fruit --------- 惡魔果實
 
 
-+ 放大:120
-+ private static final int BIG=120;
+## 連線
+* requestTestjava

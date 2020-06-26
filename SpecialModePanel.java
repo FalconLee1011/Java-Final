@@ -11,10 +11,9 @@ public class SpecialModePanel extends JPanel {
     public SpecialModePanel() {
         setOpaque(false);
 
-        // specialModePanel.add(image);
-        timeTrialBtn = new PkbButton("    Time Trial   ");// 可存活的時間
-        mazeBtn = new PkbButton("        Maze       ");
-        specialBackToModeBtn = new PkbButton("        Back       ");
+        timeTrialBtn = new PkbButton("    Time Trial   ");// 計時賽
+        mazeBtn = new PkbButton("        Maze       ");// 迷宮
+        specialBackToModeBtn = new PkbButton("        Back       ");// 回到上一頁(選擇遊戲模式)
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(timeTrialBtn);

@@ -1,12 +1,9 @@
 package peekaboo;
 
-import java.awt.event.KeyAdapter;
-
-import java.awt.event.KeyEvent;
-
-import javax.swing.ImageIcon;
 import java.awt.*;
-//import sun.tools.asm.CatchData;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
+import javax.swing.ImageIcon;
 
 //鍵盤按下監聽類
 
@@ -21,7 +18,6 @@ public class KeyListener extends KeyAdapter {
     // 鍵盤監聽
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
-        // System.out.printf("CODE -> %d%n", code);
         switch (code) {
             case 37:// 向左走
                 gf.human.left = true;
@@ -68,7 +64,6 @@ public class KeyListener extends KeyAdapter {
                 break;
             case 87:
                 gf.human.use = false;
-
                 break;
         }
     }

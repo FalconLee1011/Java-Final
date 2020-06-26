@@ -1,9 +1,9 @@
 package peekaboo;
 
-import peekaboo.props.*;
+import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.awt.Toolkit;
+import peekaboo.props.*;
 
 /*
  * 創建計時器
@@ -13,7 +13,7 @@ public class PkbTimer {
     private Timer timergame = new Timer();
     private int count = 0;
     private boolean isRun = true;
-    public long midTime = 3000;// ?
+    public long midTime = 3000;// !
     public long countMin = 0, countSec = 0, countMSec = 0;
     public long MapMin = 0, MapSec = 0, MapMSec = 0;
 
@@ -24,7 +24,7 @@ public class PkbTimer {
                 if (midTime > 0) {
                     midTime--;
                     count++;
-                    // 計時賽的時間
+                    // 計時賽的時間---計時器
                     countMin = midTime / 20 / 60 % 60;
                     countSec = midTime / 20 % 60;
                     countMSec = midTime % 100;

@@ -1,26 +1,27 @@
 package peekaboo.role;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
-import peekaboo.props.*;
-import peekaboo.*;
-import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
-import java.awt.Toolkit;
 import java.util.Map;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Set;
+import java.security.SecureRandom;
+import peekaboo.*;
+import peekaboo.props.*;
 
 public class PkbHuman extends Thread {
-    // ArrayList<Integer> arrlist = new ArrayList<Integer<(8);
-    public KeyListener key;
 
+    private boolean ignoreWalls = false;// DEBUG ONLY
+
+    public KeyListener key;
     public GameFrame gameFrame;// 遊戲地圖
     public int x = 120, y = 360;// 角色的坐標(一開始在左下角)
     public int defaultSpeed = 12;
@@ -28,8 +29,6 @@ public class PkbHuman extends Thread {
     public int turtleSpeed = 2;
     public int camelSpeed = 25;
     public int absoluteY = 1200, absoluteX = 1560;
-    // DEBUG ONLY
-    private boolean ignoreWalls = false;
 
     public int sequence = 0;// 記錄誰最後
     public static final int width = 120, height = 120;// 角色的寬高
@@ -88,11 +87,6 @@ public class PkbHuman extends Thread {
             camel = false;
     public int num = 0;
 
-    // 如果吃到鞋子//另一個計時
-    /*
-     * public boolean camel = false; public long timeSinceCamel = 0; public long
-     * camelInterval = 120000;
-     */
     public PkbHuman(GameFrame g) {
         this.gameFrame = g;
         this.activeImgSet = this.defaultImgSet;
@@ -100,8 +94,6 @@ public class PkbHuman extends Thread {
         this.xspeed = this.defaultSpeed;
         this.yspeed = this.defaultSpeed;
         teleport(1200, 1560); // 10, 13
-
-        // teleport(900, 900);
     }
 
     public int getX() {
@@ -116,7 +108,6 @@ public class PkbHuman extends Thread {
         TimerTask test = new TimerTask() {
             @Override
             public void run() {
-
                 switch (tool) {
                     case 2:
                         camel = false;
@@ -165,12 +156,7 @@ public class PkbHuman extends Thread {
 
     public void run() {
         this.bagList.add(0);
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
-
         while (true) {
-            // if (isWitch == true)
-            // Witch();
-            // else
             move();
             try {
                 this.sleep(20);
@@ -178,20 +164,12 @@ public class PkbHuman extends Thread {
                 e.printStackTrace();
             }
             eneryInteract();
-            /*
-             * //另一個計時 if (camel && Calendar.getInstance().getTimeInMillis() -
-             * timeSinceCamel >= camelInterval) { camel = false; xspeed = 8; yspeed = 8; }
-             */
         }
     }
 
     public void move() {
-        // System.out.printf("MOVED TO:絕對: <%d, %d> ?: <%d, %d>%n%n ",
-        // (this.absoluteY/120+1), this.absoluteX/120+1, this.x, this.y);
-
         if (!isWitch && up || isWitch && down) {
             this.lastDirection = Str_Up;
-            // this.img = this.activeImgSet[0];
             if (!hasBumpIntoWall(Str_Up, this.gameFrame.rockEneryByPos) || ignoreWalls)
                 moveUp();
         }
@@ -221,8 +199,6 @@ public class PkbHuman extends Thread {
     }
 
     private void moveUp() {
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
-
         this.img = this.activeImgSet[0];
         if (this.y >= 500 && this.y <= bound_y) {
             this.y -= this.yspeed;
@@ -247,8 +223,6 @@ public class PkbHuman extends Thread {
     }
 
     private void moveDown() {
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
-
         this.img = this.activeImgSet[1];
         if (this.y < bound_y) {
             this.y += this.yspeed;
@@ -273,8 +247,6 @@ public class PkbHuman extends Thread {
     }
 
     private void moveLeft() {
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
-
         this.img = this.activeImgSet[2];
         if (this.x >= bound_x) {
             this.x -= this.xspeed;
@@ -299,8 +271,6 @@ public class PkbHuman extends Thread {
     }
 
     private void moveRight() {
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.absoluteX, this.absoluteY);
-
         this.img = this.activeImgSet[3];
         if (this.x <= bound_x) {
             this.x += this.xspeed;
@@ -329,7 +299,6 @@ public class PkbHuman extends Thread {
         // 檢查是否碰撞到道具
         Enery bumpedEnery = bump(this.gameFrame.mapEneryByPos);
         if (bumpedEnery != null) {
-            // System.out.println(bumpedEnery.getClass());
             if (bumpedEnery instanceof Shoe) {
                 camel = true;
                 // timeSinceCamel = Calendar.getInstance().getTimeInMillis();//另一個計時
@@ -338,7 +307,6 @@ public class PkbHuman extends Thread {
                 imgSetQueue.add(this.activeImgSet);
                 xspeed = camelSpeed;
                 yspeed = camelSpeed;
-                // System.out.println("shoe");
                 Time(12000, 2);
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
@@ -361,8 +329,6 @@ public class PkbHuman extends Thread {
                 if (!this.portalIsCooldown) {
                     int rnd_door = rnd.nextInt(this.gameFrame.doors.size());
                     Door door = this.gameFrame.doors.get(rnd_door);
-                    // System.out.printf("MOVED TO:DOOR: <%d, %d>%n%n ",door.y, door.x + 120);
-
                     this.absoluteY = door.absoluteY;
                     this.absoluteX = door.absoluteX + 120;
                     teleport(door.y, door.x + 120);
@@ -373,7 +339,6 @@ public class PkbHuman extends Thread {
                     this.portalIsCooldown = false;
                 }
             } else if (bumpedEnery instanceof Fruit) {
-                // img = new ImageIcon("img/camelHuman_downMove_GIF.gif").getImage();
                 this.activeImgSet = this.tracherImgSet;
                 imgSetQueue.add(this.activeImgSet);
                 teacher = true;
@@ -385,8 +350,6 @@ public class PkbHuman extends Thread {
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
                         .remove(String.valueOf(bumpedEnery.arrCol * 120));
-
-                // backpack.add(bumpedEnery);
             } else if (bumpedEnery instanceof Bewitch) {
                 this.activeImgSet = this.dizzyImgSet;
                 imgSetQueue.add(this.activeImgSet);
@@ -396,22 +359,16 @@ public class PkbHuman extends Thread {
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
                         .remove(String.valueOf(bumpedEnery.arrCol * 120));
-
-                // backpack.add(bumpedEnery);
             } else if (bumpedEnery instanceof Heart) {
                 this.gameFrame.hp++;
                 // 從 bump 判定的字典中將碰撞到的物件移除
                 bumpedEnery.img = new ImageIcon("img/back.png").getImage();
                 this.gameFrame.mapEneryByPos.get(String.valueOf(bumpedEnery.arrRow * 120))
                         .remove(String.valueOf(bumpedEnery.arrCol * 120));
-
-                // backpack.add(bumpedEnery);
-            } else if (bumpedEnery instanceof MazeExit) {
-                // System.out.println("EXIT!");
+            } else if (bumpedEnery instanceof MazeExit) {//成功逃出
                 this.gameFrame.hasWon = true;
                 this.gameFrame.isGameOver = true;
             }
-
         }
         if (this.use) {
             if (this.backpack.size() != 0) {
@@ -432,8 +389,6 @@ public class PkbHuman extends Thread {
     }
 
     public Enery bump(Map<String, Map<String, Enery>> eneryByPos) {
-        // Rectangle playerScanPoly = new Rectangle( this.x - width, this.y - height,
-        // width * 2, height * 2 );
         Rectangle playerPoly = new Rectangle(this.x - (width / 2), this.y - (height / 2), width, height);
         Map<String, Map<String, Enery>> mapEneryByPos = eneryByPos;
         Set<String> keys = mapEneryByPos.keySet();
@@ -500,11 +455,6 @@ public class PkbHuman extends Thread {
         // MOVE Y
         int var_y = this.y - target_y;
         int var_x = this.x - target_x;
-
-        // System.out.printf("CURRENT: <%d, %d> | MOVE TO <%d, %d> ", this.x, this.y,
-        // target_x, target_y);
-        // System.out.printf("VAR: <%d, %d>%n", var_x, var_y);
-
         gameFrame.bg.y += var_y;
         for (Enery enery : gameFrame.eneryList) {
             enery.y += var_y;
@@ -526,8 +476,5 @@ public class PkbHuman extends Thread {
         for (PkbFlyingRock fock : this.gameFrame.flyingRocks) {
             fock.x += var_x;
         }
-
-        // System.out.printf("MOVED TO: <%d, %d>%n%n ", this.x, this.y);
     }
-
 }

@@ -10,9 +10,9 @@ public class StartPanel extends JPanel {
 
     public StartPanel() {
         setOpaque(false);
-        startBtn = new PkbButton("     START    ");
-        musicBtn = new PkbButton("     MUSIC    ");
-        descriptBtn = new PkbButton(" Instrutions ");
+        startBtn = new PkbButton("     START    ");// 進入選單
+        musicBtn = new PkbButton("     MUSIC    ");// 音樂控制
+        descriptBtn = new PkbButton(" Instrutions ");// 操作說明
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(startBtn);

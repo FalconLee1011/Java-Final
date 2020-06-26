@@ -4,9 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import peekaboo.Music;
-import peekaboo.menu.*;
 import peekaboo.*;
+import peekaboo.menu.*;
 
 public class PkbMenu extends JFrame {
     private final StartPanel startPanel = new StartPanel();
@@ -95,7 +94,6 @@ public class PkbMenu extends JFrame {
     }
 
     private void setModePanel() {
-
         modePanel.specialModeBtn.addActionListener(btnClick);
         modePanel.normalModeBtn.addActionListener(btnClick);
         modePanel.multiplePlayerBtn.addActionListener(btnClick);

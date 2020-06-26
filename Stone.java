@@ -3,7 +3,7 @@ package peekaboo.props;
 import java.awt.Image;
 
 /**
- * 地板
+ * 地板:可挖掘
  */
 
 public class Stone extends Enery {
@@ -11,7 +11,5 @@ public class Stone extends Enery {
     public Stone(int x, int y, int width, int height, Image img) {
 
         super(x, y, width, height, img);
-
     }
-
 }

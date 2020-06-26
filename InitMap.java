@@ -1,4 +1,3 @@
-//地圖配置
 package peekaboo;
 
 import java.io.BufferedReader;
@@ -7,9 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+//地圖配置
+
 public class InitMap {
 
-    // 數據容器
     public String fileName = "MAPS/map.txt";
     public ArrayList<String> list = new ArrayList<String>();
     public int[][] map = null;

@@ -2,23 +2,18 @@
 
 package peekaboo;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import peekaboo.props.*;
-import peekaboo.role.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
+import peekaboo.props.*;
+import peekaboo.role.*;
 //screen width: 1536, height: 864
 
 public class GameFrame extends JFrame {
@@ -232,7 +227,6 @@ public class GameFrame extends JFrame {
                         Hole dig = new Hole(j * 120, i * 120, 120, 120, new ImageIcon("img/dig.png").getImage());
                         eneryList.add(dig);
                         rockList.add(dig);
-                        // map_row.put(y_key, dig);
                         brick_row.put(y_key, dig);
                         break;
                     case 8: // 畫心
@@ -240,7 +234,6 @@ public class GameFrame extends JFrame {
                                 new ImageIcon("img/heartWithSend.png").getImage());
                         eneryList.add(heart);
                         toolList.add(heart);
-                        // map_row.put(y_key, dig);
                         map_row.put(y_key, heart);
                         break;
                     case 9: // 畫地板
@@ -268,7 +261,6 @@ public class GameFrame extends JFrame {
             public void run() {
                 while (true) {
                     api.update_game(human.absoluteX, human.absoluteY);
-                    // absoluteY absoluteX
                     api.get_game();
                 }
             }
@@ -278,15 +270,11 @@ public class GameFrame extends JFrame {
                 while (true) {
                     repaint();
                     if (isGameOver) {
-                        // if(breakTime > 75) break;
                         breakTime += 1;
                     }
-                    if (timer.midTime <= 0) {// 時間<=0，會結束
-                        // System.out.println("GAME OVER");
+                    if (timer.midTime <= 0) {// 時間<=0，結束遊戲GAME OVER
                         hasWon = true;
                         isGameOver = true;
-                        // test.timergame.cancel();////////計時賽的時間暫停
-                        // repaint();
                         break;
                     }
                     if (kaboom) {
@@ -296,26 +284,17 @@ public class GameFrame extends JFrame {
                             e.img = new ImageIcon("img/Back.png").getImage();
                         }
                         kaboom = false;
-                        // System.out.println("BanBooZoled!");
                         continue;
                     }
                     for (PkbGhost ghost : ghosts) {
-
                         if (ghost.pursue(human)) {
                             if (save == false) {
                                 hp--;
                                 save = true;
-
                                 // System.out.println("save");
-
                                 human.Time(2000, 100);
                             }
-
-                            if (hp <= 0) {
-                                // System.out.println("GAME OVER");
-                                // System.out.printf("MOVED TO: <%d, %d> <%d, %d>%n%n ", ghost.x,
-                                // ghost.y,human.absoluteX,human.absoluteY);
-
+                            if (hp <= 0) {// 生命值<=0，結束遊戲GAME OVER
                                 hasWon = false;
                                 isGameOver = true;
                                 // timer.timergame.cancel();////////計時賽的時間暫停
@@ -379,7 +358,6 @@ public class GameFrame extends JFrame {
         }
 
         for (Enery op : onlinePlayers) {
-            // eneryList.add(op);
             int opx = human.x - (human.absoluteX - op.x);
             int opy = human.y - (human.absoluteY - op.y);
             big.drawImage(op.img, opx, opy, op.width, op.height, null);
