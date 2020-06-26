@@ -10,6 +10,7 @@
             * NormalModePanel
             * SpecialModePanel
             * MultiplePlayerPanel
+                * RoomPanel
         * InstrucPanel
 * LoadingPanel
 * PkbButton -

@@ -37,7 +37,7 @@ public class PkbMenu extends JFrame {
     Music music = new Music("/MUSIC/startmusic.wav");
 
     String room;
-    RoomPanel roomPanel;
+    RoomPanel roomPanel = new RoomPanel("banana!", 4);;
 
     GameFrame gf = new GameFrame();
 
@@ -148,7 +148,6 @@ public class PkbMenu extends JFrame {
     private void setMultiplePanel() {
         multiplePanel = new JPanel();
         multiplePanel.setOpaque(false);
-        roomPanel = new RoomPanel("banana!", 4);
         masterGuest = GUEST;// = 0
         startGameBtn = new PkbButton("   Start !   ");// 2 2
         roomBackToMulBtn = new PkbButton("   Back  ");// 5 5
