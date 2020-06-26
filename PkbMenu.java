@@ -18,12 +18,9 @@ public class PkbMenu extends JFrame {
     private final MultiplePlayerPanel multiplePlayerPanel = new MultiplePlayerPanel();
 
     private final MultiplePanel multiplePanel = new MultiplePanel();
-    // JPanel multiplePanel;
     private final int MASTER = 1;
     private final int GUEST = 0;
     private int masterGuest;
-    // PkbButton startGameBtn;
-    // PkbButton roomBackToMulBtn;
 
     JPanel inputIDPanel;
     JTextField enterIDText;
@@ -147,27 +144,11 @@ public class PkbMenu extends JFrame {
     }
 
     private void setMultiplePanel() {
-        // multiplePanel = new JPanel();
-        // multiplePanel.setOpaque(false);
         masterGuest = GUEST;// = 0
-        // startGameBtn = new PkbButton("   Start !   ");// 2 2
-        // roomBackToMulBtn = new PkbButton("   Back  ");// 5 5
 
         multiplePanel.startGameBtn.addActionListener(btnClick);
         multiplePanel.roomBackToMulBtn.addActionListener(btnClick);
-
-        // if(masterGuest== MASTER){//= 1
-        // }
-        // else{//== GUEST= 0
-        // startGameBtn.setEnabled(false);
-        // }
-        // if(masterGuest== MASTER){//= 1********************
-        // startGameBtn.setEnabled(true);
-        // }***************
-        // else{//== GUEST= 0**************
-        // startGameBtn.setEnabled(false);*********************
-        // }************************
-
+     
         JPanel littePanel = new JPanel();
         littePanel.setOpaque(false);
         littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -268,13 +249,11 @@ public class PkbMenu extends JFrame {
                 multiplePlayerPanel.setVisible(false);
                 inputIDPanel.setVisible(true);
                 masterGuest = GUEST;
-                // startGameBtn.setEnabled(false);
             }
             else if (e.getSource() == multiplePanel.roomBackToMulBtn) {// back
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
-                // startGameBtn.setEnabled(false);
             }
             else if (e.getSource() == enterIDBtn) {// input+ enter
                 inputIDPanel.setVisible(false);
