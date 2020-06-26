@@ -10,6 +10,8 @@
             * NormalModePanel
             * SpecialModePanel
             * MultiplePlayerPanel
+                * MultiplePanel
+                * InputIDPanel
                 * RoomPanel
         * InstrucPanel
 * LoadingPanel

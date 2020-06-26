@@ -17,12 +17,13 @@ public class PkbMenu extends JFrame {
     private final SpecialModePanel specialModePanel = new SpecialModePanel();
     private final MultiplePlayerPanel multiplePlayerPanel = new MultiplePlayerPanel();
 
-    JPanel multiplePanel;
+    private final MultiplePanel multiplePanel = new MultiplePanel();
+    // JPanel multiplePanel;
     private final int MASTER = 1;
     private final int GUEST = 0;
     private int masterGuest;
-    PkbButton startGameBtn;
-    PkbButton roomBackToMulBtn;
+    // PkbButton startGameBtn;
+    // PkbButton roomBackToMulBtn;
 
     JPanel inputIDPanel;
     JTextField enterIDText;
@@ -146,29 +147,33 @@ public class PkbMenu extends JFrame {
     }
 
     private void setMultiplePanel() {
-        multiplePanel = new JPanel();
-        multiplePanel.setOpaque(false);
+        // multiplePanel = new JPanel();
+        // multiplePanel.setOpaque(false);
         masterGuest = GUEST;// = 0
-        startGameBtn = new PkbButton("   Start !   ");// 2 2
-        roomBackToMulBtn = new PkbButton("   Back  ");// 5 5
+        // startGameBtn = new PkbButton("   Start !   ");// 2 2
+        // roomBackToMulBtn = new PkbButton("   Back  ");// 5 5
 
-        startGameBtn.addActionListener(btnClick);
-        roomBackToMulBtn.addActionListener(btnClick);
+        multiplePanel.startGameBtn.addActionListener(btnClick);
+        multiplePanel.roomBackToMulBtn.addActionListener(btnClick);
 
         // if(masterGuest== MASTER){//= 1
-        startGameBtn.setEnabled(true);
         // }
         // else{//== GUEST= 0
         // startGameBtn.setEnabled(false);
         // }
+        // if(masterGuest== MASTER){//= 1********************
+        // startGameBtn.setEnabled(true);
+        // }***************
+        // else{//== GUEST= 0**************
+        // startGameBtn.setEnabled(false);*********************
+        // }************************
 
         JPanel littePanel = new JPanel();
         littePanel.setOpaque(false);
         littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        littePanel.add(roomBackToMulBtn);
-        littePanel.add(startGameBtn);
+        littePanel.add(multiplePanel.roomBackToMulBtn);
+        littePanel.add(multiplePanel.startGameBtn);
 
-        multiplePanel.setLayout(new BoxLayout(multiplePanel, BoxLayout.Y_AXIS));
         multiplePanel.add(roomPanel);
         multiplePanel.add(Box.createRigidArea(new Dimension(15, 25)));
         multiplePanel.add(littePanel);
@@ -240,7 +245,7 @@ public class PkbMenu extends JFrame {
                 multiplePlayerPanel.setVisible(false);
                 multiplePanel.setVisible(true);
                 masterGuest = MASTER;
-                startGameBtn.setEnabled(true);
+                multiplePanel.startGameBtn.setEnabled(true);
                 gf = new GameFrame("MAPS/map.txt", 4, true);
                 gf.isMaster = true;
                 PkbAPIHandler api = new PkbAPIHandler(gf);
@@ -252,7 +257,7 @@ public class PkbMenu extends JFrame {
                 gf.playerID = playerID;
                 gf.api = api;
             }
-            else if (e.getSource() == startGameBtn) {
+            else if (e.getSource() == multiplePanel.startGameBtn) {
                 try {
                     gf.Game();
                 } catch (Exception errrrr) {
@@ -265,7 +270,7 @@ public class PkbMenu extends JFrame {
                 masterGuest = GUEST;
                 // startGameBtn.setEnabled(false);
             }
-            else if (e.getSource() == roomBackToMulBtn) {// back
+            else if (e.getSource() == multiplePanel.roomBackToMulBtn) {// back
                 multiplePanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
