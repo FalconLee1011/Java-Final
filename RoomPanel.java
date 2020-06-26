@@ -52,7 +52,7 @@ public class RoomPanel extends JPanel {
 
     public void setCamelImgs(int playerCount) {
         for (int i = 0; i < maxPlayerCount; i++) {
-            if (i > playerCount)
+            if (i >= playerCount)
                 icons[i].setVisible(false);
             else
                 icons[i].setVisible(true);
