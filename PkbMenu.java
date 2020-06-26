@@ -31,7 +31,6 @@ public class PkbMenu extends JFrame {
 
     LoadingPanel loadingPanel = new LoadingPanel();
 
-    private JPanel btnJPanel = null;
     GridBagConstraints btnPlace = null;
     ButtonClick btnClick;
 
@@ -207,7 +206,7 @@ public class PkbMenu extends JFrame {
         inputIDPanel.add(Box.createRigidArea(new Dimension(15, 25)));
         inputIDPanel.add(littePanel);
     }
-    
+
     private class ButtonClick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
