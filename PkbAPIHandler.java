@@ -11,8 +11,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.http.HttpRequest;
 
-import org.json.*;
-
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -27,12 +25,10 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.json.*;
 import javax.swing.ImageIcon;
-
 import java.security.SecureRandom;
-
 import peekaboo.props.*;
-import peekaboo.*;
 
 public class PkbAPIHandler {
 

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.security.SecureRandom;
 import peekaboo.*;
 import peekaboo.props.*;
-import peekaboo.role.PkbHuman;
 
 public class PkbGhost extends Thread {
 

@@ -5,7 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import peekaboo.*;
-import peekaboo.menu.*;
 
 public class PkbMenu extends JFrame {
     private final StartPanel startPanel = new StartPanel();

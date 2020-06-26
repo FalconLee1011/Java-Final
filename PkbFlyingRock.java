@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.security.SecureRandom;
 import peekaboo.*;
-import peekaboo.props.*;
 import peekaboo.role.PkbHuman;
 
 /**
