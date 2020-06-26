@@ -22,19 +22,19 @@ public class PkbMenu extends JFrame {
     private final int GUEST = 0;
     private int masterGuest;
 
-    private InputIDPanel inputIDPanel =new InputIDPanel();
+    private final InputIDPanel inputIDPanel =new InputIDPanel();
 
     private final LoadingPanel loadingPanel = new LoadingPanel();
 
-    GridBagConstraints btnPlace = null;
-    ButtonClick btnClick;
+    private GridBagConstraints btnPlace = null;
+    private ButtonClick btnClick;
 
-    Music music = new Music("/MUSIC/startmusic.wav");
+    private Music music = new Music("/MUSIC/startmusic.wav");
 
-    String room;
-    RoomPanel roomPanel = new RoomPanel("banana!", 4);;
+    private String room;
+    private RoomPanel roomPanel = new RoomPanel("banana!", 4);;
 
-    GameFrame gf = new GameFrame();
+    private GameFrame gf = new GameFrame();
 
     public PkbMenu(String frameTitle) {// constructor
         super(frameTitle);
