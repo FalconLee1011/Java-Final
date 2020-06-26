@@ -200,7 +200,7 @@ public class PkbMenu extends JFrame {
                 room = api.create_game();
                 System.out.println(room);
                 roomPanel.setTitle(room);
-                roomPanel.setCamelImgs(4);// 目前房間的玩家人數
+                roomPanel.setCamelImgs(api.getPlayerCount());// 目前房間的玩家人數
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
@@ -230,7 +230,7 @@ public class PkbMenu extends JFrame {
                 int playerID = api.joinGame();
                 gf.playerID = playerID;
                 gf.api = api;
-                roomPanel.setCamelImgs(1);// 更新目前房間的玩家人數
+                roomPanel.setCamelImgs(api.getPlayerCount());// 更新目前房間的玩家人數
             } else if (e.getSource() == inputIDPanel.inputBackToMulBtn) {// back
                 inputIDPanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
