@@ -44,7 +44,7 @@ public class RoomPanel extends JPanel {
         icons = new JLabel[maxPlayerCount];
         for (int i = 0; i < maxPlayerCount; i++) {
             icons[i] = new JLabel();
-            icons[i].setIcon(new ImageIcon("img/camel.png"));
+            icons[i].setIcon(new ImageIcon("img/user"+ (i+ 1)+ "_160.png"));
             playerPanel.add(icons[i]);
         }
         add(playerPanel);
