@@ -11,6 +11,7 @@
             * SpecialModePanel
             * MultiplePlayerPanel
         * InstrucPanel
+* LoadingPanel
 * PkbButton -
 
 ## 角色 package peekaboo.role;

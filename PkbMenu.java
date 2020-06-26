@@ -29,9 +29,7 @@ public class PkbMenu extends JFrame {
     PkbButton enterIDBtn;
     PkbButton inputBackToMulBtn;
 
-    JPanel loadingPanel;
-    JLabel loadingLabel;
-    JLabel logoLabel;
+    LoadingPanel loadingPanel = new LoadingPanel();
 
     private JPanel btnJPanel = null;
     GridBagConstraints btnPlace = null;
@@ -90,7 +88,6 @@ public class PkbMenu extends JFrame {
 
         setModePanel();
         setInstrucPanel();
-        setLoadingPanel();
 
         add(modePanel, btnPlace);
         add(instrucPanel, btnPlace);
@@ -210,20 +207,7 @@ public class PkbMenu extends JFrame {
         inputIDPanel.add(Box.createRigidArea(new Dimension(15, 25)));
         inputIDPanel.add(littePanel);
     }
-
-    private void setLoadingPanel() {
-        loadingPanel = new JPanel();
-        loadingPanel.setOpaque(false);
-        loadingLabel = new JLabel();
-        logoLabel = new JLabel();
-        loadingLabel.setIcon(new ImageIcon("img/loading.gif"));
-        logoLabel.setIcon(new ImageIcon("img/PeeKaBoo_300.png"));
-
-        loadingPanel.setLayout(new BorderLayout(4, 4));// 可傳參數(間隙)
-        loadingPanel.add(loadingLabel, BorderLayout.CENTER);
-        loadingPanel.add(logoLabel, BorderLayout.SOUTH);
-    }
-
+    
     private class ButtonClick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
