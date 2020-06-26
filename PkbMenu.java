@@ -22,10 +22,7 @@ public class PkbMenu extends JFrame {
     private final int GUEST = 0;
     private int masterGuest;
 
-    JPanel inputIDPanel;
-    JTextField enterIDText;
-    PkbButton enterIDBtn;
-    PkbButton inputBackToMulBtn;
+    private InputIDPanel inputIDPanel =new InputIDPanel();
 
     private final LoadingPanel loadingPanel = new LoadingPanel();
 
@@ -161,34 +158,8 @@ public class PkbMenu extends JFrame {
     }
 
     private void setInputIDPanel() {
-        inputIDPanel = new JPanel();
-        inputIDPanel.setOpaque(false);
-        enterIDBtn = new PkbButton("   Enter   ");// 2 2
-        inputBackToMulBtn = new PkbButton("   Back   ");// 4 4
-
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        int myWidth = (int) (d.width / 45);
-        JLabel enterIDLabel = new JLabel("Input Game ID: ");
-        enterIDLabel.setFont(new Font("SansSerif", Font.BOLD, myWidth));
-        enterIDLabel.setForeground(Color.GRAY);
-        enterIDText = new JTextField(12);
-        enterIDText.setFont(new Font("SansSerif", Font.BOLD + 10, myWidth));
-        enterIDText.setForeground(Color.GRAY);
-
-        enterIDBtn.addActionListener(btnClick);
-        inputBackToMulBtn.addActionListener(btnClick);
-
-        JPanel littePanel = new JPanel();
-        littePanel.setOpaque(false);
-        littePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        littePanel.add(inputBackToMulBtn);
-        littePanel.add(enterIDBtn);
-
-        inputIDPanel.setLayout(new BoxLayout(inputIDPanel, BoxLayout.Y_AXIS));
-        inputIDPanel.add(enterIDLabel);
-        inputIDPanel.add(enterIDText);
-        inputIDPanel.add(Box.createRigidArea(new Dimension(15, 25)));
-        inputIDPanel.add(littePanel);
+        inputIDPanel.enterIDBtn.addActionListener(btnClick);
+        inputIDPanel.inputBackToMulBtn.addActionListener(btnClick);
     }
 
     private class ButtonClick implements ActionListener {
@@ -255,12 +226,12 @@ public class PkbMenu extends JFrame {
                 multiplePlayerPanel.setVisible(true);
                 masterGuest = GUEST;
             }
-            else if (e.getSource() == enterIDBtn) {// input+ enter
+            else if (e.getSource() == inputIDPanel.enterIDBtn) {// input+ enter
                 inputIDPanel.setVisible(false);
                 multiplePanel.setVisible(true);
-                room = enterIDText.getText();
+                room = inputIDPanel.enterIDText.getText();
                 roomPanel.setTitle(room);
-                System.out.println("input: " + enterIDText.getText());
+                System.out.println("input: " + inputIDPanel.enterIDText.getText());
                 gf = new GameFrame("MAPS/map.txt", 4, true);
                 PkbAPIHandler api = new PkbAPIHandler(gf);
                 api.gameID = room;
@@ -268,7 +239,7 @@ public class PkbMenu extends JFrame {
                 gf.playerID = playerID;
                 gf.api = api;
                 roomPanel.setCamelImgs(1);// 更新目前房間的玩家人數
-            } else if (e.getSource() == inputBackToMulBtn) {// back
+            } else if (e.getSource() == inputIDPanel.inputBackToMulBtn) {// back
                 inputIDPanel.setVisible(false);
                 multiplePlayerPanel.setVisible(true);
             } else if (e.getSource() == modePanel.backToStartBtn) {// back
