@@ -93,7 +93,7 @@ public class PkbMenuFrame extends JFrame{
     }
     
     private void setBackGroundPane(){
-         this.setBackground(Color.PINK);
+        this.setBackground(Color.PINK);
         JLabel imglabel= new JLabel(new ImageIcon("img/background_PNG.png"));
         // imglabel.setBounds(0, 0, this.getWidth(), this.getHeight());
         JLabel testLabel= new JLabel("hiii");
